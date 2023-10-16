@@ -1,4 +1,4 @@
-package com.felintro.leonard.model;
+package com.felintro.leonard.model.operacao;
 
 public abstract class Operacao {
 }
