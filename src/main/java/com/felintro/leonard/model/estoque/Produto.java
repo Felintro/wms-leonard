@@ -39,4 +39,5 @@ public class Produto {
         this.nrDun14 = nrDun14;
         this.fatorCaixa = fatorCaixa;
     }
+
 }
