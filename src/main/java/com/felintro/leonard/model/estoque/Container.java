@@ -1,5 +1,6 @@
 package com.felintro.leonard.model.estoque;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class Container {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "container")
+    @OneToMany(mappedBy = "container", cascade = CascadeType.ALL)
     private List<ContainerProduto> produtos = new ArrayList<>();
 
     public void adicionarProduto(ContainerProduto produto) {
