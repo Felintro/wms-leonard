@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,14 +33,17 @@ public class Endereco {
     @Column(name = "nr_apartamento", nullable = false)
     private int numeroApartamento;
 
+    @OneToOne
+    @JoinColumn(nullable = false)
+    private Container container;
+
     public Endereco(int numeroRua, int numeroPredio, int numeroApartamento) {
         this.numeroRua = numeroRua;
         this.numeroPredio = numeroPredio;
         this.numeroApartamento = numeroApartamento;
     }
 
-    @Override
-    public String toString() {
+    public String getEnderecoCompleto() {
         StringBuilder sb = new StringBuilder();
 
         sb.append(this.numeroRua)
@@ -49,4 +54,9 @@ public class Endereco {
 
         return sb.toString();
     }
+
+    public boolean isVazio() {
+        return this.container == null;
+    }
+
 }
