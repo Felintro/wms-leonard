@@ -1,6 +1,5 @@
 package com.felintro.leonard.model.estoque;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
