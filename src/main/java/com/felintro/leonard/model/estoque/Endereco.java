@@ -20,7 +20,6 @@ import lombok.Setter;
 public class Endereco {
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

@@ -23,9 +23,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue
-    @Column(name = "uuid")
     private UUID uuid;
-
 
     @Column(name = "nome_usuario", nullable = false)
     private String nomeUsuario;
