@@ -7,7 +7,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,7 +17,6 @@ import java.util.UUID;
 @Table(name = "usuario")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Usuario {
 
     @Id
@@ -36,5 +34,12 @@ public class Usuario {
 
     @ManyToMany
     private List<Permissao> permissoes;
+
+    public Usuario(String nomeUsuario, String senha, String nome, List<Permissao> permissoes) {
+        this.nomeUsuario = nomeUsuario;
+        this.senha = senha;
+        this.nome = nome;
+        this.permissoes = permissoes;
+    }
 
 }

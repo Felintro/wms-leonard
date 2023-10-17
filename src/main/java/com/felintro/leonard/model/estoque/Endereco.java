@@ -16,7 +16,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Endereco {
 
     @Id
@@ -31,6 +30,12 @@ public class Endereco {
 
     @Column(name = "nr_apartamento", nullable = false)
     private int numeroApartamento;
+
+    public Endereco(int numeroRua, int numeroPredio, int numeroApartamento) {
+        this.numeroRua = numeroRua;
+        this.numeroPredio = numeroPredio;
+        this.numeroApartamento = numeroApartamento;
+    }
 
     @Override
     public String toString() {
