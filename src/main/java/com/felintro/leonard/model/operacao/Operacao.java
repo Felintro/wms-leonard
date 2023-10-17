@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 import java.util.Date;
 
@@ -16,7 +18,7 @@ public abstract class Operacao {
     private Long id;
 
     @Column(name = "dt_hr_realizacao")
+    @Temporal(TemporalType.DATE)
     private Date dataHoraRealizacao;
-
 
 }
