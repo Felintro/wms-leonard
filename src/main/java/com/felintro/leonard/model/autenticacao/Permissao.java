@@ -24,7 +24,7 @@ public class Permissao {
     @Column(name = "uuid")
     private UUID uuid;
 
-    @Column(name = "ds_nome_permissao")
+    @Column(name = "ds_nome_permissao", nullable = false)
     private String nome;
 
     public Permissao(UUID uuid) {
