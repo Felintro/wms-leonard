@@ -7,10 +7,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
 @MappedSuperclass
+@Getter
+@Setter
+@NoArgsConstructor
 public abstract class Operacao {
 
     @Id
