@@ -24,15 +24,15 @@ public class Movimentacao extends Operacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "endereco_origem_id", nullable = false)
+    @JoinColumn(name = "id_endereco_origem", nullable = false)
     @OneToOne
     private Endereco enderecoOrigem;
 
-    @JoinColumn(name = "endereco_destino_id", nullable = false)
+    @JoinColumn(name = "id_endereco_destino", nullable = false)
     @OneToOne
     private Endereco enderecoDestino;
 
-    @JoinColumn(name = "container_id", nullable = false)
+    @JoinColumn(name = "id_container", nullable = false)
     @OneToOne
     private Container container;
 
