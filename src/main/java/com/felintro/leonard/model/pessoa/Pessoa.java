@@ -20,7 +20,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Pessoa extends Empresa {
+public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
