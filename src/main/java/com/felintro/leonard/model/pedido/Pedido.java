@@ -1,14 +1,15 @@
 package com.felintro.leonard.model.pedido;
 
-import com.felintro.leonard.model.estoque.ContainerProduto;
+import com.felintro.leonard.model.pessoa.Empresa;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,6 +43,10 @@ public class Pedido {
 
     @Column(name = "tipo_pedido", nullable = false)
     private char tipoPedido;
+
+    @JoinColumn(name = "id_empresa", nullable = false)
+    @OneToOne
+    private Empresa empresa;
 
     public void adicionarProduto(PedidoProduto produto) {
         produto.setPedido(this);
