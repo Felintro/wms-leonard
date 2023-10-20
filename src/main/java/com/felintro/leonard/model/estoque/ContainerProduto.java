@@ -1,5 +1,6 @@
 package com.felintro.leonard.model.estoque;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,13 +24,19 @@ public class ContainerProduto {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_container")
+    @JoinColumn(name = "nr_container")
     private Container container;
 
     @ManyToOne
     @JoinColumn(name = "id_produto")
     private Produto produto;
 
+    @Column(name = "quantidade", nullable = false)
     private int quantidade;
 
+    public ContainerProduto(Container container, Produto produto, int quantidade) {
+        this.container = container;
+        this.produto = produto;
+        this.quantidade = quantidade;
+    }
 }

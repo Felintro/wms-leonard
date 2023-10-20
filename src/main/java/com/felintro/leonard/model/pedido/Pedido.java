@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,4 +48,9 @@ public class Pedido {
         this.produtos.add(produto);
     }
 
+    public Pedido(Date dtEmissao, List<PedidoProduto> produtos, char tipoPedido) {
+        this.dtEmissao = dtEmissao;
+        this.produtos = produtos;
+        this.tipoPedido = tipoPedido;
+    }
 }

@@ -39,4 +39,9 @@ public class PedidoProduto {
     @Column(name = "quantidade", nullable = false)
     private int quantidade;
 
+    public PedidoProduto(Pedido pedido, Produto produto, int quantidade) {
+        this.pedido = pedido;
+        this.produto = produto;
+        this.quantidade = quantidade;
+    }
 }
