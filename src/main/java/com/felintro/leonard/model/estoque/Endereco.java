@@ -33,7 +33,7 @@ public class Endereco {
     private int numeroApartamento;
 
     @OneToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "nr_container")
     private Container container;
 
     public Endereco(int numeroRua, int numeroPredio, int numeroApartamento) {
