@@ -24,10 +24,10 @@ public class Produto {
     @Column(name = "ds_descricao", nullable = false)
     private String descricao;
 
-    @Column(name = "nr_ean13", nullable = false, length = 13)
+    @Column(name = "nr_ean13", nullable = false, length = 13, unique = true)
     private String nrEan13;
 
-    @Column(name = "nr_dun14", nullable = false, length = 14)
+    @Column(name = "nr_dun14", nullable = false, length = 14, unique = true)
     private String nrDun14;
 
     @Column(name = "fator_caixa", nullable = false)
