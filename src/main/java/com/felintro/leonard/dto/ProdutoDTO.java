@@ -1,8 +1,11 @@
 package com.felintro.leonard.dto;
 
 import com.felintro.leonard.model.estoque.Produto;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -12,6 +15,7 @@ import java.io.Serializable;
 
 @AllArgsConstructor
 @Getter
+@Setter
 public class ProdutoDTO implements Serializable {
 
     private final String descricao;
