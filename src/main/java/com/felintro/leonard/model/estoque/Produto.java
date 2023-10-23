@@ -1,5 +1,6 @@
 package com.felintro.leonard.model.estoque;
 
+import com.felintro.leonard.dto.ProdutoDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,6 +39,13 @@ public class Produto {
         this.nrEan13 = nrEan13;
         this.nrDun14 = nrDun14;
         this.fatorCaixa = fatorCaixa;
+    }
+
+    public Produto (ProdutoDTO produtoDTO) {
+        this.descricao = produtoDTO.getDescricao();
+        this.nrEan13 = produtoDTO.getNrEan13();
+        this.nrDun14 = produtoDTO.getNrDun14();
+        this.fatorCaixa = produtoDTO.getFatorCaixa();
     }
 
 }
