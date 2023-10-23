@@ -40,6 +40,7 @@ public class Endereco {
         this.numeroRua = numeroRua;
         this.numeroPredio = numeroPredio;
         this.numeroApartamento = numeroApartamento;
+        this.container = null;
     }
 
     public String getEnderecoCompleto() {
