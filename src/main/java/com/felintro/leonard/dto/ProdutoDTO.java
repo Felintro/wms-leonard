@@ -3,7 +3,6 @@ package com.felintro.leonard.dto;
 import com.felintro.leonard.model.estoque.Produto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.ToString;
 
 import java.io.Serializable;
 
