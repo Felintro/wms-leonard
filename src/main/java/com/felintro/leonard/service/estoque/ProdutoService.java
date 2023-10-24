@@ -23,13 +23,14 @@ public class ProdutoService {
         List<Produto> produtos = produtoRepository.findAll();
         List<ProdutoDTO> retorno = new ArrayList<>();
         produtos.forEach(produto -> {
-            retorno.add(new ProdutoDTO(produto));
+            retorno.add(produto.toDTO());
         });
 
         return retorno;
     }
 
-    public void cadastrarProduto(Produto produto) {
+    public void cadastrarProduto(ProdutoDTO produtoDTO) {
+        var produto = produtoDTO.toEntity();
         produtoRepository.save(produto);
     }
 

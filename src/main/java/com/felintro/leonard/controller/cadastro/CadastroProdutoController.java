@@ -1,7 +1,6 @@
 package com.felintro.leonard.controller.cadastro;
 
 import com.felintro.leonard.dto.ProdutoDTO;
-import com.felintro.leonard.model.estoque.Produto;
 import com.felintro.leonard.service.estoque.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,17 +29,15 @@ public class CadastroProdutoController {
 
     @PostMapping("/cadastrar")
     public String cadastrarProduto(ProdutoDTO produtoDTO) {
-        var produto = new Produto(produtoDTO);
-        produtoService.cadastrarProduto(produto);
-        System.out.println(produto.toString());
-        return "view/view-produtos";
+        produtoService.cadastrarProduto(produtoDTO);
+        return "redirect:/cadastro/produto/visualizar";
     }
 
     @GetMapping("/visualizar")
     public String listarProdutos(Model model) {
         List<ProdutoDTO> listaDTO = produtoService.listarProdutos();
         model.addAttribute("listaDTO", listaDTO);
-        return "view/view-produtos";
+        return "view/view-produto";
     }
 
 }
