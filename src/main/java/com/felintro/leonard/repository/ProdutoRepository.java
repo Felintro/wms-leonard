@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
+    boolean existsByNrEan13AndNrDun14(String nrEan13, String nrDun14);
+
 }

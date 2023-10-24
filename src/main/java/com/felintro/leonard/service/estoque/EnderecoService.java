@@ -35,10 +35,7 @@ public class EnderecoService {
     public List<EnderecoDTO> listarEnderecos() {
         List<Endereco> enderecos = enderecoRepository.findAll();
         List<EnderecoDTO> retorno = new ArrayList<>();
-        enderecos.forEach(endereco -> {
-            retorno.add(endereco.toDTO());
-        });
-
+        enderecos.forEach(endereco -> retorno.add(endereco.toDTO()));
         return retorno;
     }
 
