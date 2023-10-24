@@ -22,9 +22,14 @@ public class EnderecoService {
     private EnderecoRepository enderecoRepository;
 
     public void cadastrarEndereco(EnderecoDTO enderecoDTO) {
-        var endereco = enderecoDTO.toEntity();
-        enderecoRepository.save(endereco);
-
+        var IsCadastrado = enderecoRepository.existsByNrRuaAndNrPredioAndNrApartamento(enderecoDTO.getNrRua(), enderecoDTO.getNrPredio(), enderecoDTO.getNrApartamento());
+        if(!IsCadastrado) {
+            var endereco = enderecoDTO.toEntity();
+            enderecoRepository.save(endereco);
+            System.out.println("O endereço foi cadastrado com sucesso:");
+            return;
+        }
+        System.out.println("O endereço já existe!");
     }
 
     public List<EnderecoDTO> listarEnderecos() {
@@ -35,6 +40,25 @@ public class EnderecoService {
         });
 
         return retorno;
+    }
+
+    public EnderecoDTO buscaPorId(Long id) {
+        Endereco endereco = enderecoRepository.findById(id).get();
+        return endereco.toDTO();
+    }
+
+    public void cadastraVariosEnderecos(int qtdeRuas, int qtdePredios, int qtdeApartamentos) {
+        List<EnderecoDTO> listaEnderecos = new ArrayList<>();
+
+        for(int i=1; i<=qtdeRuas; i++) {
+            for(int j=1; j<=qtdePredios; j++) {
+                for(int k=1; k<=qtdeApartamentos; k++) {
+                    listaEnderecos.add(new EnderecoDTO(i, j, k));
+                }
+            }
+        }
+
+        listaEnderecos.forEach(enderecoDTO -> cadastrarEndereco(enderecoDTO));
     }
 
 }
