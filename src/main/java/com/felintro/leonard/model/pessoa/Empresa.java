@@ -1,5 +1,6 @@
 package com.felintro.leonard.model.pessoa;
 
+import com.felintro.leonard.dto.pessoa.EmpresaDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,10 +42,15 @@ public class Empresa {
         this.nrTelefone = nrTelefone;
         this.nrCnpj = nrCnpj;
         this.razaoSocial = razaoSocial;
+        this.status = true;
     }
 
     public boolean isAtivo() {
         return this.status;
+    }
+
+    public EmpresaDTO toDTO() {
+        return new EmpresaDTO(this.email, this.nrTelefone, this.nrCnpj, this.razaoSocial, this.status);
     }
 
 }
