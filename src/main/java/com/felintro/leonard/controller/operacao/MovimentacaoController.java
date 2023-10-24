@@ -16,5 +16,4 @@ public class MovimentacaoController {
     @Autowired
     private MovimentacaoService movimentacaoService;
 
-
 }

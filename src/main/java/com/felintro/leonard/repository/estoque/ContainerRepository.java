@@ -1,4 +1,4 @@
-package com.felintro.leonard.repository;
+package com.felintro.leonard.repository.estoque;
 
 import com.felintro.leonard.model.estoque.Container;
 import org.springframework.data.jpa.repository.JpaRepository;

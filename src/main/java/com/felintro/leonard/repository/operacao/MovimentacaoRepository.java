@@ -1,4 +1,4 @@
-package com.felintro.leonard.repository;
+package com.felintro.leonard.repository.operacao;
 
 import com.felintro.leonard.model.operacao.Movimentacao;
 import org.springframework.data.jpa.repository.JpaRepository;
