@@ -41,11 +41,8 @@ public class Produto {
         this.fatorCaixa = fatorCaixa;
     }
 
-    public Produto (ProdutoDTO produtoDTO) {
-        this.descricao = produtoDTO.getDescricao();
-        this.nrEan13 = produtoDTO.getNrEan13();
-        this.nrDun14 = produtoDTO.getNrDun14();
-        this.fatorCaixa = produtoDTO.getFatorCaixa();
+    public ProdutoDTO toDTO() {
+        return new ProdutoDTO(descricao, nrEan13, nrDun14, fatorCaixa);
     }
 
 }
