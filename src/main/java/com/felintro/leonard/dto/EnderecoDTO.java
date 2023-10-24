@@ -13,12 +13,12 @@ import java.io.Serializable;
 @Getter
 public class EnderecoDTO implements Serializable {
 
-    private final int numeroRua;
-    private final int numeroPredio;
-    private final int numeroApartamento;
+    private final int nrRua;
+    private final int nrPredio;
+    private final int nrApartamento;
 
     public Endereco toEntity() {
-        return new Endereco(numeroRua, numeroPredio, numeroApartamento);
+        return new Endereco(nrRua, nrPredio, nrApartamento);
     }
 
 }

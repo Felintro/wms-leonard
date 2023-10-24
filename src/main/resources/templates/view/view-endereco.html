@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Leonard</title>
+    </head>
+    <body>
+        <h1>Lista de endereços</h1>
+        <br />
+        <form method="get" th:action="@{/endereco/formulario}">
+            <table>
+                <thead>
+                <tr>
+                    <th>Rua</th>
+                    <th>Prédio</th>
+                    <th>Apartamento</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="produto : ${listaDTO}">
+                    <td th:text="${produto.nrEan13}"></td>
+                    <td th:text="${produto.nrDun14}"></td>
+                    <td th:text="${produto.fatorCaixa}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <input type="submit" value="Retornar" />
+
+        </form>
+    </body>
+</html>
