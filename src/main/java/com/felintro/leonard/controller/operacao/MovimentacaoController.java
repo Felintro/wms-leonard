@@ -1,6 +1,6 @@
 package com.felintro.leonard.controller.operacao;
 
-import com.felintro.leonard.service.operacao.MovimentacaoService;
+import com.felintro.leonard.business.operacao.MovimentacaoBusiness;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MovimentacaoController {
 
     @Autowired
-    private MovimentacaoService movimentacaoService;
+    private MovimentacaoBusiness movimentacaoService;
 
 }
