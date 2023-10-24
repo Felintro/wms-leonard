@@ -17,7 +17,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/endereco")
-public class CadastroEnderecoController {
+public class EnderecoController {
 
     @Autowired
     private EnderecoService enderecoService;
