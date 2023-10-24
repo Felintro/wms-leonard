@@ -1,4 +1,4 @@
-package com.felintro.leonard.dto;
+package com.felintro.leonard.dto.estoque;
 
 import com.felintro.leonard.model.estoque.Produto;
 import lombok.AllArgsConstructor;
