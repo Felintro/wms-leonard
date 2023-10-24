@@ -2,7 +2,7 @@ package com.felintro.leonard.service.estoque;
 
 import com.felintro.leonard.dto.ProdutoDTO;
 import com.felintro.leonard.model.estoque.Produto;
-import com.felintro.leonard.repository.ProdutoRepository;
+import com.felintro.leonard.repository.estoque.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

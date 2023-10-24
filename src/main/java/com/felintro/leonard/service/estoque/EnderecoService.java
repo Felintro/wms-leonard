@@ -2,10 +2,9 @@ package com.felintro.leonard.service.estoque;
 
 import com.felintro.leonard.dto.EnderecoDTO;
 import com.felintro.leonard.model.estoque.Endereco;
-import com.felintro.leonard.repository.EnderecoRepository;
+import com.felintro.leonard.repository.estoque.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.List;
  **/
 
 @Service
-@RequestMapping("/endereco")
 public class EnderecoService {
 
     @Autowired
