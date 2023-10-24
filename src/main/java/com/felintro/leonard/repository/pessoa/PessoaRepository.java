@@ -9,4 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
 
+    boolean existsByNrCpf(String nrCpf);
+
+    Pessoa findByNrCpf(String nrCpf);
+
 }

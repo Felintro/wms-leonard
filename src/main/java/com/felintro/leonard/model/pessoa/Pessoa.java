@@ -30,6 +30,7 @@ public class Pessoa {
     @Column(name = "nr_cpf", nullable = false, unique = true, length = 11)
     private String nrCpf;
 
+    /* TODO - Corrigir formatação e processamento das datas */
     @Column(name = "dt_nascimento", nullable = false)
     private Date dtNascimento;
 
