@@ -16,7 +16,7 @@ import java.util.List;
  **/
 
 @Controller
-@RequestMapping("/cadastro/produto")
+@RequestMapping("/produto")
 public class CadastroProdutoController {
 
     @Autowired
