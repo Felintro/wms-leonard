@@ -1,6 +1,6 @@
 package com.felintro.leonard.controller.estoque;
 
-import com.felintro.leonard.dto.ProdutoDTO;
+import com.felintro.leonard.dto.estoque.ProdutoDTO;
 import com.felintro.leonard.service.estoque.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

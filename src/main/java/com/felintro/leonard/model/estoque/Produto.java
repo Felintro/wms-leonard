@@ -1,6 +1,6 @@
 package com.felintro.leonard.model.estoque;
 
-import com.felintro.leonard.dto.ProdutoDTO;
+import com.felintro.leonard.dto.estoque.ProdutoDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
