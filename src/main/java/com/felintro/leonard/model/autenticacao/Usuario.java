@@ -4,6 +4,7 @@ package com.felintro.leonard.model.autenticacao;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
@@ -20,8 +21,8 @@ import java.util.UUID;
 public class Usuario {
 
     @Id
-    @GeneratedValue
-    private UUID uuid;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "nome_usuario", nullable = false)
     private String nomeUsuario;
