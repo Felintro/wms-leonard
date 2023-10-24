@@ -30,7 +30,7 @@ public class ProdutoController {
     @PostMapping("/cadastrar")
     public String cadastrarProduto(ProdutoDTO produtoDTO) {
         produtoService.cadastrarProduto(produtoDTO);
-        return "redirect:/cadastro/produto/visualizar";
+        return "redirect:/produto/visualizar";
     }
 
     @GetMapping("/visualizar")
