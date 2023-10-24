@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-br"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://wwww.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+
     <head>
-        <meta charset="UTF-8">
-        <title>Leonard</title>
     </head>
+
     <body>
-        <h1>Lista de empresas</h1>
-        <br />
-        <form method="get" th:action="@{/empresa/formulario}">
-            <table>
-                <thead>
-                <tr>
-                    <th>CNPJ</th>
-                    <th>Razão Social</th>
-                    <th>E-mail</th>
-                    <th>Telefone</th>
-                    <th>Está ativa?</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="empresa : ${listaDTO}">
-                    <td th:text="${empresa.nrCnpj}"></td>
-                    <td th:text="${empresa.razaoSocial}"></td>
-                    <td th:text="${empresa.email}"></td>
-                    <td th:text="${empresa.nrTelefone}"></td>
-                    <td th:text="${empresa.status}"></td>
-                </tr>
-                </tbody>
-            </table>
-
-            <input type="submit" value="Retornar" />
-
-        </form>
+        <div layout:fragment="conteudo">
+            <h1>Lista de empresas</h1>
+            <br />
+            <form method="get" th:action="@{/empresa/formulario}">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>CNPJ</th>
+                        <th>Razão Social</th>
+                        <th>E-mail</th>
+                        <th>Telefone</th>
+                        <th>Está ativa?</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="empresa : ${listaDTO}">
+                        <td th:text="${empresa.nrCnpj}"></td>
+                        <td th:text="${empresa.razaoSocial}"></td>
+                        <td th:text="${empresa.email}"></td>
+                        <td th:text="${empresa.nrTelefone}"></td>
+                        <td th:text="${empresa.status}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <input type="submit" value="Retornar" />
+            </form>
+        </div>
     </body>
 </html>

@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-br"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Leonard</title>
-</head>
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://wwww.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+
+    <head>
+    </head>
+
     <body>
-        <h1>Lista de produtos</h1>
-        <br />
-        <form method="get" th:action="@{/produto/formulario}">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Descrição</th>
-                        <th>EAN13</th>
-                        <th>DUN14</th>
-                        <th>Fator de caixa</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="produto : ${listaDTO}">
-                        <td th:text="${produto.descricao}"></td>
-                        <td th:text="${produto.nrEan13}"></td>
-                        <td th:text="${produto.nrDun14}"></td>
-                        <td th:text="${produto.fatorCaixa}"></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div layout:fragment="conteudo">
+            <h1>Lista de produtos</h1>
+            <br />
+            <form method="get" th:action="@{/produto/formulario}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>EAN13</th>
+                            <th>DUN14</th>
+                            <th>Fator de caixa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="produto : ${listaDTO}">
+                            <td th:text="${produto.descricao}"></td>
+                            <td th:text="${produto.nrEan13}"></td>
+                            <td th:text="${produto.nrDun14}"></td>
+                            <td th:text="${produto.fatorCaixa}"></td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <input type="submit" value="Retornar" />
-
-        </form>
+                <input type="submit" value="Retornar" />
+            </form>
+        </div>
     </body>
 </html>
