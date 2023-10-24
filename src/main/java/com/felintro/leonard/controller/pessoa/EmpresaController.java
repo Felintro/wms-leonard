@@ -1,9 +1,15 @@
 package com.felintro.leonard.controller.pessoa;
 
-import com.felintro.leonard.repository.pessoa.EmpresaRepository;
+import com.felintro.leonard.dto.pessoa.EmpresaDTO;
+import com.felintro.leonard.service.pessoa.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * @author allan
@@ -13,6 +19,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class EmpresaController {
 
     @Autowired
-    private EmpresaRepository empresaRepository;
+    private EmpresaService empresaService;
+
+    @GetMapping("/formulario")
+    public String abrirFormularioCadastro() {
+        return "cadastro/cadastro-empresa";
+    }
+
+    @PostMapping("/cadastrar")
+    public String cadastrarEmpresa(EmpresaDTO empresaDTO) {
+        empresaService.cadastrarEmpresa(empresaDTO);
+        return "redirect:/empresa/visualizar";
+    }
+
+    @GetMapping("/visualizar")
+    public String listarEnderecos(Model model) {
+        List<EmpresaDTO> listaDTO = empresaService.listarEmpresas();
+        model.addAttribute("listaDTO", listaDTO);
+        return "view/view-empresa";
+    }
 
 }
