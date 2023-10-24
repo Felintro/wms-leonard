@@ -1,4 +1,4 @@
-package com.felintro.leonard.controller.cadastro;
+package com.felintro.leonard.controller.estoque;
 
 import com.felintro.leonard.dto.EnderecoDTO;
 import com.felintro.leonard.service.estoque.EnderecoService;
