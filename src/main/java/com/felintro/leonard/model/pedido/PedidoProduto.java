@@ -1,5 +1,6 @@
-package com.felintro.leonard.model.estoque;
+package com.felintro.leonard.model.pedido;
 
+import com.felintro.leonard.model.estoque.Produto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,20 +13,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * @author allan
+ **/
+
 @Entity
-@Table(name = "container_produto")
+@Table(name = "pedido_produto")
 @Getter
 @Setter
 @NoArgsConstructor
-public class ContainerProduto {
+public class PedidoProduto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "nr_container")
-    private Container container;
+    @JoinColumn(name = "nr_pedido", nullable = false)
+    private Pedido pedido;
 
     @ManyToOne
     @JoinColumn(name = "id_produto")
@@ -34,8 +39,8 @@ public class ContainerProduto {
     @Column(name = "quantidade", nullable = false)
     private int quantidade;
 
-    public ContainerProduto(Container container, Produto produto, int quantidade) {
-        this.container = container;
+    public PedidoProduto(Pedido pedido, Produto produto, int quantidade) {
+        this.pedido = pedido;
         this.produto = produto;
         this.quantidade = quantidade;
     }

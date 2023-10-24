@@ -1,12 +1,14 @@
 package com.felintro.leonard.model.estoque;
 
+import com.felintro.leonard.dto.EnderecoDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,30 +25,43 @@ public class Endereco {
     private Long id;
 
     @Column(name = "nr_rua", nullable = false)
-    private int numeroRua;
+    private int nrRua;
 
     @Column(name = "nr_predio", nullable = false)
-    private int numeroPredio;
+    private int nrPredio;
 
     @Column(name = "nr_apartamento", nullable = false)
-    private int numeroApartamento;
+    private int nrApartamento;
 
-    public Endereco(int numeroRua, int numeroPredio, int numeroApartamento) {
-        this.numeroRua = numeroRua;
-        this.numeroPredio = numeroPredio;
-        this.numeroApartamento = numeroApartamento;
+    @OneToOne
+    @JoinColumn(name = "nr_container")
+    private Container container;
+
+    public Endereco(int numeroRua, int nrPredio, int numeroApartamento) {
+        this.nrRua = numeroRua;
+        this.nrPredio = nrPredio;
+        this.nrApartamento = numeroApartamento;
+        this.container = null;
     }
 
-    @Override
-    public String toString() {
+    public String getEnderecoCompleto() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(this.numeroRua)
+        sb.append(this.nrRua)
             .append(".")
-            .append(this.numeroPredio)
+            .append(this.nrPredio)
             .append(".")
-            .append(this.numeroApartamento);
+            .append(this.nrApartamento);
 
         return sb.toString();
     }
+
+    public boolean isVazio() {
+        return this.container == null;
+    }
+
+    public EnderecoDTO toDTO() {
+        return new EnderecoDTO(this.nrRua, this.nrPredio, this.nrApartamento);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.felintro.leonard.model.estoque;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +24,8 @@ public class Container {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "nr_container")
+    private Long nrContainer;
 
     @OneToMany(mappedBy = "container", cascade = CascadeType.ALL)
     private List<ContainerProduto> produtos = new ArrayList<>();
@@ -33,4 +35,7 @@ public class Container {
         this.produtos.add(produto);
     }
 
+    public Container(List<ContainerProduto> produtos) {
+        this.produtos = produtos;
+    }
 }
