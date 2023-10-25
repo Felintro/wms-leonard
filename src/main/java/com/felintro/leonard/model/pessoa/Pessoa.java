@@ -57,7 +57,5 @@ public class Pessoa {
         this.dtNascimento = pessoaDTO.getDtNascimento();
         this.email = pessoaDTO.getEmail();
         this.nrTelefone = pessoaDTO.getNrTelefone();
-
-
     }
 }
