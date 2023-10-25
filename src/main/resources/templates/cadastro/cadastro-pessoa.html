@@ -41,7 +41,9 @@
                     <input type="tel" id="nrTelefone" maxlength="11" minlength="11" name="nrTelefone" class="form-control" th:value="${pessoaDTO?.nrTelefone}"/>
                 </div>
 
-                <input type="submit" class="btn btn-primary" value="Cadastrar" />
+                <input type="submit" class="btn btn-primary" value="Cadastrar" th:if="${pessoaDTO == null}" />
+                <input type="submit" class="btn btn-primary" value="Salvar" th:if="${pessoaDTO != null}" />
+
             </form>
         </div>
     </body>
