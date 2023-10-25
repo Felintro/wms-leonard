@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * DTO for {@link com.felintro.leonard.model.pessoa.Pessoa}
@@ -14,9 +14,10 @@ import java.util.Date;
 @Getter
 public class PessoaDTO implements Serializable {
 
+    private final Long id;
     private final String nome;
     private final String nrCpf;
-    private final Date dtNascimento;
+    private final LocalDate dtNascimento;
     private final String email;
     private final String nrTelefone;
 
