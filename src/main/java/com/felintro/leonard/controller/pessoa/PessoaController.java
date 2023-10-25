@@ -50,7 +50,7 @@ public class PessoaController {
     @PutMapping("/cadastrar")
     @Transactional
     public String alterarPessoa(PessoaDTO pessoaDTO) {
-        pessoaService.alteraPessoa(pessoaDTO);
+        pessoaService.alterarPessoa(pessoaDTO);
         return "redirect:/pessoa/visualizar";
     }
 

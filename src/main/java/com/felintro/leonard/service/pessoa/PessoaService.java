@@ -29,7 +29,7 @@ public class PessoaService {
         System.out.println("A pessoa já existe!");
     }
 
-    public void alteraPessoa(PessoaDTO pessoaDTO) {
+    public void alterarPessoa(PessoaDTO pessoaDTO) {
         var pessoa = pessoaRepository.getReferenceById(pessoaDTO.getId());
         pessoa.atualizarDados(pessoaDTO);
         pessoaRepository.save(pessoa);
