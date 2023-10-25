@@ -40,4 +40,8 @@ public class PessoaService {
         return pessoaRepository.findByNrCpf(nrCpf).toDTO();
     }
 
+    public PessoaDTO buscaPorId(Long id) {
+        return pessoaRepository.getReferenceById(id).toDTO();
+    }
+
 }

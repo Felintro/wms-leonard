@@ -11,27 +11,32 @@
         <div layout:fragment="conteudo">
             <h1>Pessoas cadastradas</h1>
             <br />
-            <form method="get" th:action="@{/produto/formulario}">
-                <table>
-                    <thead>
+
+            <table>
+                <thead>
                     <tr>
                         <th>Nome completo</th>
                         <th>CPF</th>
                         <th>Data de Nascimento</th>
                         <th>E-mail</th>
                         <th>Telefone</th>
+                        <th>Ações</th>
                     </tr>
-                    </thead>
-                    <tbody>
+                </thead>
+                <tbody>
                     <tr th:each="pessoa : ${listaDTO}">
                         <td th:text="${pessoa.nome}"></td>
                         <td th:text="${pessoa.nrCpf}"></td>
                         <td th:text="${pessoa.dtNascimento}"></td>
                         <td th:text="${pessoa.email}"></td>
                         <td th:text="${pessoa.nrTelefone}"></td>
+                        <td>
+                            <a th:href="@{/pessoa/formulario?id={id}(id=${pessoa.id}) }">Editar</a>
+                        </td>
                     </tr>
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
+            <form method="get" th:action="@{/pessoa/formulario}">
                 <input type="submit" value="Retornar" />
             </form>
         </div>
