@@ -13,6 +13,7 @@ import java.io.Serializable;
 @Getter
 public class EmpresaDTO implements Serializable {
 
+    private final Long id;
     private final String email;
     private final String nrTelefone;
     private final String nrCnpj;
@@ -20,7 +21,7 @@ public class EmpresaDTO implements Serializable {
     private final boolean status;
 
     public Empresa toEntity() {
-        return new Empresa(email, nrTelefone, nrCnpj, razaoSocial);
+        return new Empresa(razaoSocial, nrCnpj, email, nrTelefone, status);
     }
 
 }

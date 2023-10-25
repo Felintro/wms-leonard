@@ -22,27 +22,27 @@ public class Empresa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "razao_social", nullable = false)
+    private String razaoSocial;
+
+    @Column(name = "nr_cnpj", nullable = false, unique = true)
+    private String nrCnpj;
+
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "nr_telefone", unique = true, nullable = false, length = 11)
     private String nrTelefone;
 
-    @Column(name = "nr_cnpj", nullable = false, unique = true)
-    private String nrCnpj;
-
-    @Column(name = "razao_social", nullable = false)
-    private String razaoSocial;
-
     @Column(name = "status")
     private boolean status;
 
-    public Empresa(String email, String nrTelefone, String nrCnpj, String razaoSocial) {
+    public Empresa(String razaoSocial, String nrCnpj, String email, String nrTelefone, boolean status) {
+        this.razaoSocial = razaoSocial;
+        this.nrCnpj = nrCnpj;
         this.email = email;
         this.nrTelefone = nrTelefone;
-        this.nrCnpj = nrCnpj;
-        this.razaoSocial = razaoSocial;
-        this.status = true;
+        this.status = status;
     }
 
     public boolean isAtivo() {
@@ -50,7 +50,15 @@ public class Empresa {
     }
 
     public EmpresaDTO toDTO() {
-        return new EmpresaDTO(this.email, this.nrTelefone, this.nrCnpj, this.razaoSocial, this.status);
+        return new EmpresaDTO(this.id, this.email, this.nrTelefone, this.nrCnpj, this.razaoSocial, this.status);
     }
 
+    public void atualizarDados(EmpresaDTO empresaDTO) {
+        this.razaoSocial = empresaDTO.getRazaoSocial();
+        this.nrCnpj = empresaDTO.getNrCnpj();
+        this.email = empresaDTO.getEmail();
+        this.nrTelefone = empresaDTO.getNrTelefone();
+        this.status = empresaDTO.isStatus();
+
+    }
 }
