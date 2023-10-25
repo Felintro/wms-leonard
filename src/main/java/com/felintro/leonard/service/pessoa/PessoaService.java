@@ -29,6 +29,12 @@ public class PessoaService {
         System.out.println("A pessoa já existe!");
     }
 
+    public void alteraPessoa(PessoaDTO pessoaDTO) {
+        var pessoa = pessoaRepository.getReferenceById(pessoaDTO.getId());
+        pessoa.atualizarDados(pessoaDTO);
+        pessoaRepository.save(pessoa);
+    }
+
     public List<PessoaDTO> listarPessoas() {
         List<Pessoa> pessoas = pessoaRepository.findAll();
         List<PessoaDTO> retorno = new ArrayList<>();
@@ -39,6 +45,7 @@ public class PessoaService {
     public PessoaDTO buscarPorNrCpf(String nrCpf) {
         return pessoaRepository.findByNrCpf(nrCpf).toDTO();
     }
+
 
     public PessoaDTO buscaPorId(Long id) {
         return pessoaRepository.getReferenceById(id).toDTO();

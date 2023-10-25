@@ -11,10 +11,10 @@
     <body>
         <div layout:fragment="conteudo">
             <h1>Cadastro de pessoas</h1>
-            <form method="post" th:action="@{/pessoa/cadastrar}">
+            <form method="post" action="/pessoa/cadastrar">
 
-                <input type="hidden" name="_method" value="put" th:if="${pessoaDTO != null}" />
                 <input type="hidden" name="id" th:value="${pessoaDTO?.id}" />
+                <input type="hidden" name="_method" value="put" th:if="${pessoaDTO != null}">
 
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome Completo:</label>

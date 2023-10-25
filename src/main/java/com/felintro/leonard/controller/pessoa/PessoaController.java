@@ -4,6 +4,7 @@ import com.felintro.leonard.dto.pessoa.PessoaDTO;
 import com.felintro.leonard.service.pessoa.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +34,7 @@ public class PessoaController {
     }
 
     @PostMapping("/cadastrar")
+    @Transactional
     public String cadastrarPessoa(PessoaDTO pessoaDTO) {
         pessoaService.cadastrarPessoa(pessoaDTO);
         return "redirect:/pessoa/visualizar";
@@ -45,9 +47,10 @@ public class PessoaController {
         return "view/view-pessoa";
     }
 
-    @PutMapping
-    public String alterarPessoa() {
-
+    @PutMapping("/cadastrar")
+    @Transactional
+    public String alterarPessoa(PessoaDTO pessoaDTO) {
+        pessoaService.alteraPessoa(pessoaDTO);
         return "redirect:/pessoa/visualizar";
     }
 

@@ -50,4 +50,14 @@ public class Pessoa {
     public PessoaDTO toDTO() {
         return new PessoaDTO(this.id, this.nome, this.nrCpf, this.dtNascimento, this.email, this.nrTelefone);
     }
+
+    public void atualizarDados(PessoaDTO pessoaDTO) {
+        this.nome = pessoaDTO.getNome();
+        this.nrCpf = pessoaDTO.getNrCpf();
+        this.dtNascimento = pessoaDTO.getDtNascimento();
+        this.email = pessoaDTO.getEmail();
+        this.nrTelefone = pessoaDTO.getNrTelefone();
+
+
+    }
 }

@@ -34,11 +34,23 @@
                             <a th:href="@{/pessoa/formulario?id={id}(id=${pessoa.id}) }">Editar</a>
                         </td>
                     </tr>
+                    <td>
+                        <br />
+                    </td>
+                    <tr>
+                        <td>
+                            <form method="get" th:action="@{/pessoa/formulario}">
+                                <input type="submit" value="Retornar" />
+                            </form>
+                        </td>
+                        <td>
+                            <form method="get" th:action="@{/}">
+                                <input type="submit" value="Tela inicial" />
+                            </form>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
-            <form method="get" th:action="@{/pessoa/formulario}">
-                <input type="submit" value="Retornar" />
-            </form>
         </div>
     </body>
 </html>
