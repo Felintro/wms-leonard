@@ -5,13 +5,12 @@
       layout:decorate="~{template.html}">
 
     <head>
-
     </head>
 
     <body>
         <div layout:fragment="conteudo">
             <h1>Cadastro de pessoas</h1>
-            <form method="post" action="/pessoa/cadastrar">
+            <form method="post" th:action="@{/pessoa/cadastrar}">
 
                 <input type="hidden" name="id" th:value="${pessoaDTO?.id}" />
                 <input type="hidden" name="_method" value="put" th:if="${pessoaDTO != null}">
