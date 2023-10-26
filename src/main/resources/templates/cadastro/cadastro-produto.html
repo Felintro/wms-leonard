@@ -5,41 +5,42 @@
       layout:decorate="~{template.html}">
 
     <head>
-
     </head>
 
     <body>
         <div layout:fragment="conteudo">
             <h1>Cadastro de produtos</h1>
-            <form method="post" th:action="@{/produto/cadastrar}">
+            <div class="form-pequeno">
+                <form method="post" th:action="@{/produto/cadastrar}">
 
-                <input type="hidden" name="id" th:value="${produtoDTO?.id}" />
-                <input type="hidden" name="_method" value="put" th:if="${produtoDTO != null}">
+                    <input type="hidden" name="id" th:value="${produtoDTO?.id}" />
+                    <input type="hidden" name="_method" value="put" th:if="${produtoDTO != null}">
 
-                <div class="mb-3">
-                    <label for="descricao" class="form-label">Descrição: </label>
-                    <input id="descricao" name="descricao" class="form-control" th:value="${produtoDTO.descricao}" />
-                </div>
+                    <div class="mb-3">
+                        <label for="descricao" class="form-label">Descrição: </label>
+                        <input id="descricao" name="descricao" class="form-control" th:value="${produtoDTO?.descricao}" />
+                    </div>
 
-                <div class="mb-3">
-                    <label for="nrEan13" class="form-label">EAN13: </label>
-                    <input id="nrEan13" name="nrEan13" class="form-control" th:value="${produtoDTO.nrEan13}" />
-                </div>
+                    <div class="mb-3">
+                        <label for="nrEan13" class="form-label">EAN13: </label>
+                        <input id="nrEan13" maxlength="13" name="nrEan13" class="form-control" th:value="${produtoDTO?.nrEan13}" />
+                    </div>
 
-                <div class="mb-3">
-                    <label for="nrDun14" class="form-label">DUN14: </label>
-                    <input id="nrDun14" name="nrDun14" class="form-control" th:value="${produtoDTO.nrDun14}" />
-                </div>
+                    <div class="mb-3">
+                        <label for="nrDun14" class="form-label">DUN14: </label>
+                        <input id="nrDun14" maxlength="14" name="nrDun14" class="form-control" th:value="${produtoDTO?.nrDun14}" />
+                    </div>
 
-                <div class="mb-3">
-                    <label for="fatorCaixa" class="form-label">Fator de Caixa: </label>
-                    <input id="fatorCaixa" name="fatorCaixa" class="form-control" th:value="${produtoDTO.fatorCaixa}" />
-                </div>
+                    <div class="mb-3">
+                        <label for="fatorCaixa" class="form-label">Fator de Caixa: </label>
+                        <input id="fatorCaixa" name="fatorCaixa" class="form-control" th:value="${produtoDTO?.fatorCaixa}" />
+                    </div>
 
-                <input type="submit" class="btn btn-primary" value="Cadastrar" th:if="${produtoDTO == null}" />
-                <input type="submit" class="btn btn-primary" value="Salvar" th:if="${produtoDTO != null}" />
+                    <input type="submit" class="btn btn-primary" value="Cadastrar" th:if="${produtoDTO == null}" />
+                    <input type="submit" class="btn btn-primary" value="Salvar" th:if="${produtoDTO != null}" />
 
-            </form>
+                </form>
+            </div>
         </div>
     </body>
 </html>
