@@ -47,7 +47,7 @@ public class EmpresaController {
     }
 
     @GetMapping("/visualizar")
-    public String listarEnderecos(Model model) {
+    public String listarEmpresas(Model model) {
         List<EmpresaDTO> listaDTO = empresaService.listarEmpresas();
         model.addAttribute("listaDTO", listaDTO);
         return "view/view-empresa";
