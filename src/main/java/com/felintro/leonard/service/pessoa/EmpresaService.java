@@ -1,8 +1,6 @@
 package com.felintro.leonard.service.pessoa;
 
-import com.felintro.leonard.dto.estoque.ProdutoDTO;
 import com.felintro.leonard.dto.pessoa.EmpresaDTO;
-import com.felintro.leonard.model.estoque.Produto;
 import com.felintro.leonard.model.pessoa.Empresa;
 import com.felintro.leonard.repository.pessoa.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +30,12 @@ public class EmpresaService {
         System.out.println("A empresa já existe!");
     }
 
+    public void alterarEmpresa(EmpresaDTO empresaDTO) {
+        var empresa = empresaRepository.getReferenceById(empresaDTO.getId());
+        empresa.atualizarDados(empresaDTO);
+        empresaRepository.save(empresa);
+    }
+
     public List<EmpresaDTO> listarEmpresas() {
         List<Empresa> empresas = empresaRepository.findAll();
         List<EmpresaDTO> retorno = new ArrayList<>();
@@ -43,4 +47,7 @@ public class EmpresaService {
         return empresaRepository.findByNrCnpj(nrCnpj).toDTO();
     }
 
+    public EmpresaDTO buscaPorId(Long id) {
+        return empresaRepository.getReferenceById(id).toDTO();
+    }
 }
