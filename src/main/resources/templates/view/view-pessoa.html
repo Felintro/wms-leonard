@@ -24,14 +24,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="pessoa : ${listaDTO}">
-                        <td th:text="${pessoa.nome}"></td>
-                        <td th:text="${pessoa.nrCpf}"></td>
-                        <td th:text="${pessoa.dtNascimento}"></td>
-                        <td th:text="${pessoa.email}"></td>
-                        <td th:text="${pessoa.nrTelefone}"></td>
+                    <tr th:each="pessoaDTO : ${listaDTO}">
+                        <td th:text="${pessoaDTO.nome}"></td>
+                        <td th:text="${pessoaDTO.nrCpf}"></td>
+                        <td th:text="${pessoaDTO.dtNascimento}"></td>
+                        <td th:text="${pessoaDTO.email}"></td>
+                        <td th:text="${pessoaDTO.nrTelefone}"></td>
                         <td>
-                            <a th:href="@{/pessoa/formulario?id={id}(id=${pessoa.id}) }">Editar</a>
+                            <a th:href="@{/pessoa/formulario?id={id}(id=${pessoaDTO.id}) }">Editar</a>
                         </td>
                     </tr>
                     <td>
