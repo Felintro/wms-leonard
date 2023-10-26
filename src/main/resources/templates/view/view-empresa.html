@@ -11,29 +11,43 @@
         <div layout:fragment="conteudo">
             <h1>Lista de empresas</h1>
             <br />
-            <form method="get" th:action="@{/empresa/formulario}">
-                <table>
-                    <thead>
+            <table>
+                <thead>
                     <tr>
                         <th>CNPJ</th>
                         <th>Razão Social</th>
                         <th>E-mail</th>
                         <th>Telefone</th>
-                        <th>Está ativa?</th>
+                        <th>Ações</th>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="empresa : ${listaDTO}">
-                        <td th:text="${empresa.nrCnpj}"></td>
-                        <td th:text="${empresa.razaoSocial}"></td>
-                        <td th:text="${empresa.email}"></td>
-                        <td th:text="${empresa.nrTelefone}"></td>
-                        <td th:text="${empresa.status}"></td>
+                </thead>
+                <tbody>
+                    <tr th:each="empresaDTO : ${listaDTO}">
+                        <td th:text="${empresaDTO.nrCnpj}"></td>
+                        <td th:text="${empresaDTO.razaoSocial}"></td>
+                        <td th:text="${empresaDTO.email}"></td>
+                        <td th:text="${empresaDTO.nrTelefone}"></td>
+                        <td>
+                            <a th:href="@{/empresa/formulario?id={id}(id=${empresaDTO.id}) }">Editar</a>
+                        </td>
                     </tr>
-                    </tbody>
-                </table>
-                <input type="submit" value="Retornar" />
-            </form>
+                    <td>
+                        <br />
+                    </td>
+                    <tr>
+                        <td>
+                            <form method="get" th:action="@{/empresa/formulario}">
+                                <input type="submit" value="Retornar" />
+                            </form>
+                        </td>
+                        <td>
+                            <form method="get" th:action="@{/}">
+                                <input type="submit" value="Tela inicial" />
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </body>
 </html>
