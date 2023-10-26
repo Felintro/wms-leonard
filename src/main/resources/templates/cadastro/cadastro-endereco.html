@@ -2,39 +2,39 @@
 <html lang="pt-br"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://wwww.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{template.html}">
+      layout:decorate="~{menu-lateral.html}">
 
-    <head>
-    </head>
+<head>
+</head>
 
-    <body>
-        <div layout:fragment="conteudo">
-            <h1>Cadastro de endereços</h1>
-            <div class="form-pequeno">
-                <form method="post" th:action="@{/endereco/cadastrar}">
+<body>
+<div layout:fragment="conteudo">
+    <h1>Cadastro de endereços</h1>
+    <div class="form-pequeno">
+        <form method="post" th:action="@{/endereco/cadastrar}">
 
-                    <input type="hidden" name="id" th:value="${enderecoDTO?.id}" />
-                    <input type="hidden" name="_method" value="put" th:if="${enderecoDTO != null}">
+            <input type="hidden" name="id" th:value="${enderecoDTO?.id}" />
+            <input type="hidden" name="_method" value="put" th:if="${enderecoDTO != null}">
 
-                    <div class="mb-3">
-                        <label for="nrRua" class="form-label">Número da rua:</label>
-                        <input id="nrRua" name="nrRua" class="form-control" th:value="${enderecoDTO?.nrRua}" />
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="nrPredio" class="form-label">Número do prédio:</label>
-                        <input id="nrPredio" name="nrPredio" class="form-control" th:value="${enderecoDTO?.nrPredio}" />
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="nrApartamento" class="form-label">Número do apartamento:</label>
-                        <input id="nrApartamento" name="nrApartamento" class="form-control" th:value="${enderecoDTO?.nrApartamento}" />
-                    </div>
-
-                    <input type="submit" class="btn btn-primary" value="Cadastrar" th:if="${enderecoDTO == null}" />
-                    <input type="submit" class="btn btn-primary" value="Salvar" th:if="${enderecoDTO != null}" />
-                </form>
+            <div class="mb-3">
+                <label for="nrRua" class="form-label">Número da rua:</label>
+                <input id="nrRua" name="nrRua" class="form-control" th:value="${enderecoDTO?.nrRua}" />
             </div>
-        </div>
-    </body>
+
+            <div class="mb-3">
+                <label for="nrPredio" class="form-label">Número do prédio:</label>
+                <input id="nrPredio" name="nrPredio" class="form-control" th:value="${enderecoDTO?.nrPredio}" />
+            </div>
+
+            <div class="mb-3">
+                <label for="nrApartamento" class="form-label">Número do apartamento:</label>
+                <input id="nrApartamento" name="nrApartamento" class="form-control" th:value="${enderecoDTO?.nrApartamento}" />
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Cadastrar" th:if="${enderecoDTO == null}" />
+            <input type="submit" class="btn btn-primary" value="Salvar" th:if="${enderecoDTO != null}" />
+        </form>
+    </div>
+</div>
+</body>
 </html>

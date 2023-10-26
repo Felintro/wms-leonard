@@ -2,51 +2,51 @@
 <html lang="pt-br"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://wwww.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{template.html}">
+      layout:decorate="~{menu-lateral.html}">
 
-    <head>
-    </head>
+<head>
+</head>
 
-    <body>
-        <div layout:fragment="conteudo">
-            <h1>Lista de endereços</h1>
-            <br />
-            <div class="lista">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Rua</th>
-                            <th scope="col">Prédio</th>
-                            <th scope="col">Apartamento</th>
-                            <th scope="col">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="enderecoDTO : ${listaDTO}">
-                            <td th:text="${enderecoDTO.id}"></td>
-                            <td th:text="${enderecoDTO.nrRua}"></td>
-                            <td th:text="${enderecoDTO.nrPredio}"></td>
-                            <td th:text="${enderecoDTO.nrApartamento}"></td>
-                            <td>
-                                <a th:href="@{/endereco/formulario?id={id}(id=${enderecoDTO.id}) }">Editar</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <form method="get" th:action="@{/endereco/formulario}">
-                                    <input type="submit" value="Cadastrar" />
-                                </form>
-                            </td>
-                            <td>
-                                <form method="get" th:action="@{/}">
-                                    <input type="submit" value="Tela inicial" />
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </body>
+<body>
+<div layout:fragment="conteudo">
+    <h1>Lista de endereços</h1>
+    <br/>
+    <div class="lista">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Rua</th>
+                <th scope="col">Prédio</th>
+                <th scope="col">Apartamento</th>
+                <th scope="col">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="enderecoDTO : ${listaDTO}">
+                <td th:text="${enderecoDTO.id}"></td>
+                <td th:text="${enderecoDTO.nrRua}"></td>
+                <td th:text="${enderecoDTO.nrPredio}"></td>
+                <td th:text="${enderecoDTO.nrApartamento}"></td>
+                <td>
+                    <a th:href="@{/endereco/formulario?id={id}(id=${enderecoDTO.id}) }">Editar</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form method="get" th:action="@{/endereco/formulario}">
+                        <input type="submit" value="Cadastrar"/>
+                    </form>
+                </td>
+                <td>
+                    <form method="get" th:action="@{/}">
+                        <input type="submit" value="Tela inicial"/>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
 </html>

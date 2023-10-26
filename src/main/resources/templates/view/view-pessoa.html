@@ -2,55 +2,55 @@
 <html lang="pt-br"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://wwww.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{template.html}">
+      layout:decorate="~{menu-lateral.html}">
 
-    <head>
-    </head>
+<head>
+</head>
 
-    <body>
-        <div layout:fragment="conteudo">
-            <h1>Pessoas cadastradas</h1>
-            <br />
-            <div class="lista">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nome completo</th>
-                            <th scope="col">CPF</th>
-                            <th scope="col">Data de Nascimento</th>
-                            <th scope="col">E-mail</th>
-                            <th scope="col">Telefone</th>
-                            <th scope="col">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="pessoaDTO : ${listaDTO}">
-                            <td th:text="${pessoaDTO.id}"></td>
-                            <td th:text="${pessoaDTO.nome}"></td>
-                            <td th:text="${pessoaDTO.nrCpf}"></td>
-                            <td th:text="${pessoaDTO.dtNascimento}"></td>
-                            <td th:text="${pessoaDTO.email}"></td>
-                            <td th:text="${pessoaDTO.nrTelefone}"></td>
-                            <td>
-                                <a th:href="@{/pessoa/formulario?id={id}(id=${pessoaDTO.id}) }">Editar</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <form method="get" th:action="@{/pessoa/formulario}">
-                                    <input type="submit" value="Retornar" />
-                                </form>
-                            </td>
-                            <td>
-                                <form method="get" th:action="@{/}">
-                                    <input type="submit" value="Tela inicial" />
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </body>
+<body>
+<div layout:fragment="conteudo">
+    <h1>Pessoas cadastradas</h1>
+    <br/>
+    <div class="lista">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome completo</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Data de Nascimento</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pessoaDTO : ${listaDTO}">
+                <td th:text="${pessoaDTO.id}"></td>
+                <td th:text="${pessoaDTO.nome}"></td>
+                <td th:text="${pessoaDTO.nrCpf}"></td>
+                <td th:text="${pessoaDTO.dtNascimento}"></td>
+                <td th:text="${pessoaDTO.email}"></td>
+                <td th:text="${pessoaDTO.nrTelefone}"></td>
+                <td>
+                    <a th:href="@{/pessoa/formulario?id={id}(id=${pessoaDTO.id}) }">Editar</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form method="get" th:action="@{/pessoa/formulario}">
+                        <input type="submit" value="Retornar"/>
+                    </form>
+                </td>
+                <td>
+                    <form method="get" th:action="@{/}">
+                        <input type="submit" value="Tela inicial"/>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
 </html>
