@@ -42,7 +42,14 @@ public class Produto {
     }
 
     public ProdutoDTO toDTO() {
-        return new ProdutoDTO(descricao, nrEan13, nrDun14, fatorCaixa);
+        return new ProdutoDTO(this.id, this.descricao, this.nrEan13, this.nrDun14, this.fatorCaixa);
+    }
+
+    public void atualizarDados(ProdutoDTO produtoDTO) {
+        this.descricao = produtoDTO.getDescricao();
+        this.nrEan13 = produtoDTO.getNrEan13();
+        this.nrDun14 = produtoDTO.getNrDun14();
+        this.fatorCaixa = produtoDTO.getFatorCaixa();
     }
 
 }
