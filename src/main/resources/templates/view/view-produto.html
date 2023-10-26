@@ -19,14 +19,35 @@
                             <th>EAN13</th>
                             <th>DUN14</th>
                             <th>Fator de caixa</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="produto : ${listaDTO}">
-                            <td th:text="${produto.descricao}"></td>
-                            <td th:text="${produto.nrEan13}"></td>
-                            <td th:text="${produto.nrDun14}"></td>
-                            <td th:text="${produto.fatorCaixa}"></td>
+                        <tr th:each="produtoDTO : ${listaDTO}">
+                            <td th:text="${produtoDTO.descricao}"></td>
+                            <td th:text="${produtoDTO.nrEan13}"></td>
+                            <td th:text="${produtoDTO.nrDun14}"></td>
+                            <td th:text="${produtoDTO.fatorCaixa}"></td>
+                            <td>
+                                <a th:href="@{/produtoDTO/formulario?id={id}(id=${produtoDTO.id}) }">Editar</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form method="get" th:action="@{/produto/formulario}">
+                                    <input type="submit" value="Retornar" />
+                                </form>
+                            </td>
+                            <td>
+                                <form method="get" th:action="@{/}">
+                                    <input type="submit" value="Tela inicial" />
+                                </form>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

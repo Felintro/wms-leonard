@@ -28,7 +28,7 @@ public class ProdutoController {
     public String carregaPaginaFormulario(Long id, Model model) {
         if(id != null) {
             var produtoDTO = produtoService.buscarPorId(id);
-            model.addAttribute("empresaDTO", produtoDTO);
+            model.addAttribute("produtoDTO", produtoDTO);
         }
         return "cadastro/cadastro-produto";
     }
