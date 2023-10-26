@@ -11,25 +11,38 @@
         <div layout:fragment="conteudo">
             <h1>Lista de endereços</h1>
             <br />
-            <form method="get" th:action="@{/endereco/formulario}">
-                <table>
+            <div class="lista">
+                <table class="table">
                     <thead>
                         <tr>
-                            <th>Rua</th>
-                            <th>Prédio</th>
-                            <th>Apartamento</th>
+                            <th scope="col">#</th>
+                            <th scope="col">Rua</th>
+                            <th scope="col">Prédio</th>
+                            <th scope="col">Apartamento</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="endereco : ${listaDTO}">
-                            <td th:text="${endereco.nrRua}"></td>
-                            <td th:text="${endereco.nrPredio}"></td>
-                            <td th:text="${endereco.nrApartamento}"></td>
+                        <tr th:each="enderecoDTO : ${listaDTO}">
+                            <td th:text="${enderecoDTO.id}"></td>
+                            <td th:text="${enderecoDTO.nrRua}"></td>
+                            <td th:text="${enderecoDTO.nrPredio}"></td>
+                            <td th:text="${enderecoDTO.nrApartamento}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form method="get" th:action="@{/endereco/formulario}">
+                                    <input type="submit" value="Cadastrar" />
+                                </form>
+                            </td>
+                            <td>
+                                <form method="get" th:action="@{/}">
+                                    <input type="submit" value="Tela inicial" />
+                                </form>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
-                <input type="submit" value="Retornar" />
-            </form>
+            </div>
         </div>
     </body>
 </html>
