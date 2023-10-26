@@ -47,7 +47,7 @@ public class PessoaService {
     }
 
 
-    public PessoaDTO buscaPorId(Long id) {
+    public PessoaDTO buscarPorId(Long id) {
         return pessoaRepository.getReferenceById(id).toDTO();
     }
 

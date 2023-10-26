@@ -37,7 +37,7 @@ public class EnderecoService {
         return retorno;
     }
 
-    public EnderecoDTO buscaPorId(Long id) {
+    public EnderecoDTO buscarPorId(Long id) {
         Endereco endereco = enderecoRepository.findById(id).get();
         return endereco.toDTO();
     }

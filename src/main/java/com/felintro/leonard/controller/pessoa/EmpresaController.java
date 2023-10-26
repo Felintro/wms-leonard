@@ -26,7 +26,7 @@ public class EmpresaController {
     @GetMapping("/formulario")
     public String carregaPaginaFormulario(Long id, Model model) {
         if(id != null) {
-            var empresaDTO = empresaService.buscaPorId(id);
+            var empresaDTO = empresaService.buscarPorId(id);
             model.addAttribute("empresaDTO", empresaDTO);
         }
         return "cadastro/cadastro-empresa";

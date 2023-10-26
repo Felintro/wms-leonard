@@ -47,7 +47,7 @@ public class EmpresaService {
         return empresaRepository.findByNrCnpj(nrCnpj).toDTO();
     }
 
-    public EmpresaDTO buscaPorId(Long id) {
+    public EmpresaDTO buscarPorId(Long id) {
         return empresaRepository.getReferenceById(id).toDTO();
     }
 }
