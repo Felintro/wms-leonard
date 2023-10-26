@@ -1,6 +1,7 @@
 package com.felintro.leonard.service.estoque;
 
 import com.felintro.leonard.dto.estoque.EnderecoDTO;
+import com.felintro.leonard.dto.estoque.ProdutoDTO;
 import com.felintro.leonard.model.estoque.Endereco;
 import com.felintro.leonard.repository.estoque.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,16 +45,19 @@ public class EnderecoService {
 
     public void cadastraVariosEnderecos(int qtdeRuas, int qtdePredios, int qtdeApartamentos) {
         List<EnderecoDTO> listaEnderecos = new ArrayList<>();
-
-        for(int i=1; i<=qtdeRuas; i++) {
-            for(int j=1; j<=qtdePredios; j++) {
-                for(int k=1; k<=qtdeApartamentos; k++) {
-                    listaEnderecos.add(new EnderecoDTO(i, j, k));
+        for(int rua=1; rua<=qtdeRuas; rua++) {
+            for(int predio=1; predio<=qtdePredios; predio++) {
+                for(int apartamento=1; apartamento<=qtdeApartamentos; apartamento++) {
+                    listaEnderecos.add(new EnderecoDTO(null, rua, predio, apartamento));
                 }
             }
         }
-
         listaEnderecos.forEach(enderecoDTO -> cadastrarEndereco(enderecoDTO));
+    }
+
+    public void alterarEndereco(EnderecoDTO enderecoDTO) {
+        var endereco = enderecoRepository.getReferenceById(enderecoDTO.getId());
+        endereco.atualizarDados(enderecoDTO);
     }
 
 }

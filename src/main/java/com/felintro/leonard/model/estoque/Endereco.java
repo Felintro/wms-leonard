@@ -64,4 +64,9 @@ public class Endereco {
         return new EnderecoDTO(this.id, this.nrRua, this.nrPredio, this.nrApartamento);
     }
 
+    public void atualizarDados(EnderecoDTO enderecoDTO) {
+        this.nrRua = enderecoDTO.getNrRua();
+        this.nrPredio = enderecoDTO.getNrPredio();
+        this.nrApartamento = enderecoDTO.getNrApartamento();
+    }
 }
