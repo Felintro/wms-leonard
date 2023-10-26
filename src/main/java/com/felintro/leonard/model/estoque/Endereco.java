@@ -61,7 +61,7 @@ public class Endereco {
     }
 
     public EnderecoDTO toDTO() {
-        return new EnderecoDTO(this.nrRua, this.nrPredio, this.nrApartamento);
+        return new EnderecoDTO(this.id, this.nrRua, this.nrPredio, this.nrApartamento);
     }
 
 }
