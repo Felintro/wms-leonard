@@ -27,7 +27,7 @@ public class PessoaController {
     @GetMapping("/formulario")
     public String carregaPaginaFormulario(Long id, Model model) {
         if(id != null) {
-            var pessoaDTO = pessoaService.buscaPorId(id);
+            var pessoaDTO = pessoaService.buscarPorId(id);
             model.addAttribute("pessoaDTO", pessoaDTO);
         }
         return "cadastro/cadastro-pessoa";
