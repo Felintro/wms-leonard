@@ -59,6 +59,7 @@ public class EnderecoService {
         var endereco = enderecoRepository.getReferenceById(enderecoDTO.getId());
         endereco.atualizarDados(enderecoDTO);
         enderecoRepository.save(endereco);
+        System.out.println("Alteração efetuada com sucesso!");
     }
 
 }

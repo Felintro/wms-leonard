@@ -34,6 +34,7 @@ public class EmpresaService {
         var empresa = empresaRepository.getReferenceById(empresaDTO.getId());
         empresa.atualizarDados(empresaDTO);
         empresaRepository.save(empresa);
+        System.out.println("Alteração efetuada com sucesso!");
     }
 
     public List<EmpresaDTO> listarEmpresas() {

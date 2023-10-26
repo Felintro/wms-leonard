@@ -33,6 +33,7 @@ public class PessoaService {
         var pessoa = pessoaRepository.getReferenceById(pessoaDTO.getId());
         pessoa.atualizarDados(pessoaDTO);
         pessoaRepository.save(pessoa);
+        System.out.println("Alteração efetuada com sucesso!");
     }
 
     public List<PessoaDTO> listarPessoas() {
