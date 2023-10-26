@@ -20,7 +20,8 @@ import java.util.List;
 @RequestMapping("/empresa")
 public class EmpresaController {
 
-    private static final String REDIRECT_VISUALIZAR = "redirect:/empresa/visualizar";
+    private static final String TELA_CADASTRO = "cadastro/cadastro-empresa";
+    private static final String REDIRECT_FORMULARIO = "redirect:/empresa/formulario";
 
     @Autowired
     private EmpresaService empresaService;
@@ -31,28 +32,30 @@ public class EmpresaController {
             var empresaDTO = empresaService.buscarPorId(id);
             model.addAttribute("empresaDTO", empresaDTO);
         }
-        return "cadastro/cadastro-empresa";
+        List<EmpresaDTO> listaDTO = empresaService.listarEmpresas();
+        model.addAttribute("listaDTO", listaDTO);
+        return TELA_CADASTRO;
     }
 
     @PostMapping("/cadastrar")
     @Transactional
     public String cadastrarEmpresa(EmpresaDTO empresaDTO) {
         empresaService.cadastrarEmpresa(empresaDTO);
-        return REDIRECT_VISUALIZAR;
+        return REDIRECT_FORMULARIO;
     }
 
     @PutMapping("/cadastrar")
     @Transactional
     public String alterarEmpresa(EmpresaDTO empresaDTO) {
         empresaService.alterarEmpresa(empresaDTO);
-        return REDIRECT_VISUALIZAR;
+        return REDIRECT_FORMULARIO;
     }
 
-    @GetMapping("/visualizar")
+/*    @GetMapping("/visualizar")
     public String listarEmpresas(Model model) {
         List<EmpresaDTO> listaDTO = empresaService.listarEmpresas();
         model.addAttribute("listaDTO", listaDTO);
         return "view/view-empresa";
-    }
+    }*/
 
 }
