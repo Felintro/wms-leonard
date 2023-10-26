@@ -21,8 +21,8 @@ public class EnderecoService {
     private EnderecoRepository enderecoRepository;
 
     public void cadastrarEndereco(EnderecoDTO enderecoDTO) {
-        var IsCadastrado = enderecoRepository.existsByNrRuaAndNrPredioAndNrApartamento(enderecoDTO.getNrRua(), enderecoDTO.getNrPredio(), enderecoDTO.getNrApartamento());
-        if(!IsCadastrado) {
+        var isCadastrado = enderecoRepository.existsByNrRuaAndNrPredioAndNrApartamento(enderecoDTO.getNrRua(), enderecoDTO.getNrPredio(), enderecoDTO.getNrApartamento());
+        if(!isCadastrado) {
             var endereco = enderecoDTO.toEntity();
             enderecoRepository.save(endereco);
             System.out.println("O endereço foi cadastrado com sucesso:");
@@ -58,6 +58,7 @@ public class EnderecoService {
     public void alterarEndereco(EnderecoDTO enderecoDTO) {
         var endereco = enderecoRepository.getReferenceById(enderecoDTO.getId());
         endereco.atualizarDados(enderecoDTO);
+        enderecoRepository.save(endereco);
     }
 
 }

@@ -34,7 +34,7 @@ public class EnderecoController {
             var enderecoDTO = enderecoService.buscarPorId(id);
             model.addAttribute("enderecoDTO", enderecoDTO);
         }
-        return "cadastro/cadastro-produto";
+        return "cadastro/cadastro-endereco";
     }
 
     @PostMapping("/cadastrar")

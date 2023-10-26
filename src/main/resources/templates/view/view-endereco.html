@@ -19,6 +19,7 @@
                             <th scope="col">Rua</th>
                             <th scope="col">Prédio</th>
                             <th scope="col">Apartamento</th>
+                            <th scope="col">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,6 +28,9 @@
                             <td th:text="${enderecoDTO.nrRua}"></td>
                             <td th:text="${enderecoDTO.nrPredio}"></td>
                             <td th:text="${enderecoDTO.nrApartamento}"></td>
+                            <td>
+                                <a th:href="@{/endereco/formulario?id={id}(id=${enderecoDTO.id}) }">Editar</a>
+                            </td>
                         </tr>
                         <tr>
                             <td>
