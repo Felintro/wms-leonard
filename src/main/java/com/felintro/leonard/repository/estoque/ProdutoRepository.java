@@ -9,4 +9,8 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     boolean existsByNrEan13AndNrDun14(String nrEan13, String nrDun14);
 
+    Produto findByNrEan13(String nrEan13);
+
+    Produto findByNrDun14(String nrDun14);
+
 }
