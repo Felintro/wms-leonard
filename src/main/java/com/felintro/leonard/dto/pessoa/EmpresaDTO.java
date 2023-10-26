@@ -18,10 +18,9 @@ public class EmpresaDTO implements Serializable {
     private final String nrTelefone;
     private final String nrCnpj;
     private final String razaoSocial;
-    private final boolean status;
 
     public Empresa toEntity() {
-        return new Empresa(razaoSocial, nrCnpj, email, nrTelefone, status);
+        return new Empresa(razaoSocial, nrCnpj, email, nrTelefone);
     }
 
 }

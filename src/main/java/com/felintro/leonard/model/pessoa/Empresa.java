@@ -34,23 +34,15 @@ public class Empresa {
     @Column(name = "nr_telefone", unique = true, nullable = false, length = 11)
     private String nrTelefone;
 
-    @Column(name = "status")
-    private boolean status;
-
-    public Empresa(String razaoSocial, String nrCnpj, String email, String nrTelefone, boolean status) {
+    public Empresa(String razaoSocial, String nrCnpj, String email, String nrTelefone) {
         this.razaoSocial = razaoSocial;
         this.nrCnpj = nrCnpj;
         this.email = email;
         this.nrTelefone = nrTelefone;
-        this.status = status;
-    }
-
-    public boolean isAtivo() {
-        return this.status;
     }
 
     public EmpresaDTO toDTO() {
-        return new EmpresaDTO(this.id, this.email, this.nrTelefone, this.nrCnpj, this.razaoSocial, this.status);
+        return new EmpresaDTO(this.id, this.email, this.nrTelefone, this.nrCnpj, this.razaoSocial);
     }
 
     public void atualizarDados(EmpresaDTO empresaDTO) {
@@ -58,7 +50,5 @@ public class Empresa {
         this.nrCnpj = empresaDTO.getNrCnpj();
         this.email = empresaDTO.getEmail();
         this.nrTelefone = empresaDTO.getNrTelefone();
-        this.status = empresaDTO.isStatus();
-
     }
 }
