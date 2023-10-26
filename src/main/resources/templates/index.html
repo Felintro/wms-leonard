@@ -1,29 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br"
-      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://wwww.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{template.html}">
+      layout:decorate="~{menu-lateral.html}">
 
-    <head>
-    </head>
+<head>
+</head>
 
-    <body>
-        <div layout:fragment="conteudo">
-            <form method="get" th:action="@{/produto/formulario}">
-                <input type="submit" class="btn btn-primary" value="Cad. Produtos" />
-            </form>
-            <br />
-            <form method="get" th:action="@{/empresa/formulario}">
-                <input type="submit" class="btn btn-primary" value="Cad. Empresas" />
-            </form>
-            <br />
-            <form method="get" th:action="@{/pessoa/formulario}">
-                <input type="submit" class="btn btn-primary" value="Cad. Pessoas" />
-            </form>
-            <br />
-            <form method="get" th:action="@{/endereco/formulario}">
-                <input type="submit" class="btn btn-primary" value="Cad. Endereços" />
-            </form>
-        </div>
-    </body>
+<body>
+    <div layout:fragment="conteudo">
+        <h1>LEONARD WMS V1.0</h1>
+        <h2>BEM VINDO!</h2>
+    </div>
+</body>
 </html>
