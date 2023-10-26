@@ -37,4 +37,14 @@ public class ProdutoService {
         System.out.println("O produto já existe!");
     }
 
+    public void alterarProduto(ProdutoDTO produtoDTO) {
+        var produto = produtoRepository.getReferenceById(produtoDTO.getId());
+        produto.atualizarDados(produtoDTO);
+        produtoRepository.save(produto);
+    }
+
+    public ProdutoDTO buscarPorId(Long id) {
+        return produtoRepository.getReferenceById(id).toDTO();
+    }
+
 }
