@@ -21,6 +21,8 @@ import java.util.List;
 @RequestMapping("/pessoa")
 public class PessoaController {
 
+    private static final String REDIRECT_VISUALIZAR = "redirect:/pessoa/visualizar";
+
     @Autowired
     private PessoaService pessoaService;
 
@@ -37,7 +39,7 @@ public class PessoaController {
     @Transactional
     public String cadastrarPessoa(PessoaDTO pessoaDTO) {
         pessoaService.cadastrarPessoa(pessoaDTO);
-        return "redirect:/pessoa/visualizar";
+        return REDIRECT_VISUALIZAR;
     }
 
     @GetMapping("/visualizar")
@@ -51,7 +53,7 @@ public class PessoaController {
     @Transactional
     public String alterarPessoa(PessoaDTO pessoaDTO) {
         pessoaService.alterarPessoa(pessoaDTO);
-        return "redirect:/pessoa/visualizar";
+        return REDIRECT_VISUALIZAR;
     }
 
 }

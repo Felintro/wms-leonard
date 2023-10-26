@@ -23,10 +23,10 @@ import java.util.List;
 @RequestMapping("/endereco")
 public class EnderecoController {
 
+    private static final String REDIRECT_VISUALIZAR = "redirect:/endereco/visualizar";
+
     @Autowired
     private EnderecoService enderecoService;
-
-    private static final String REDIRECT_VISUALIZAR = "redirect:/endereco/visualizar";
 
     @GetMapping("/formulario")
     public String carregaPaginaFormulario(Long id, Model model) {

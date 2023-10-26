@@ -20,6 +20,8 @@ import java.util.List;
 @RequestMapping("/empresa")
 public class EmpresaController {
 
+    private static final String REDIRECT_VISUALIZAR = "redirect:/empresa/visualizar";
+
     @Autowired
     private EmpresaService empresaService;
 
@@ -36,14 +38,14 @@ public class EmpresaController {
     @Transactional
     public String cadastrarEmpresa(EmpresaDTO empresaDTO) {
         empresaService.cadastrarEmpresa(empresaDTO);
-        return "redirect:/empresa/visualizar";
+        return REDIRECT_VISUALIZAR;
     }
 
     @PutMapping("/cadastrar")
     @Transactional
     public String alterarEmpresa(EmpresaDTO empresaDTO) {
         empresaService.alterarEmpresa(empresaDTO);
-        return "redirect:/empresa/visualizar";
+        return REDIRECT_VISUALIZAR;
     }
 
     @GetMapping("/visualizar")

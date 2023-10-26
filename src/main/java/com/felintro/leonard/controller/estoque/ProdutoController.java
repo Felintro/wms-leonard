@@ -21,6 +21,8 @@ import java.util.List;
 @RequestMapping("/produto")
 public class ProdutoController {
 
+    private static final String REDIRECT_VISUALIZAR = "redirect:/produto/visualizar";
+
     @Autowired
     private ProdutoService produtoService;
 
@@ -37,7 +39,7 @@ public class ProdutoController {
     @Transactional
     public String cadastrarProduto(ProdutoDTO produtoDTO) {
         produtoService.cadastrarProduto(produtoDTO);
-        return "redirect:/produto/visualizar";
+        return REDIRECT_VISUALIZAR;
     }
 
     @GetMapping("/visualizar")
@@ -49,9 +51,9 @@ public class ProdutoController {
 
     @PutMapping("/cadastrar")
     @Transactional
-    public String alterarEmpresa(ProdutoDTO produtoDTO) {
+    public String alterarProduto(ProdutoDTO produtoDTO) {
         produtoService.alterarProduto(produtoDTO);
-        return "redirect:/empresa/visualizar";
+        return REDIRECT_VISUALIZAR;
     }
 
 }
