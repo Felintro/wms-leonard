@@ -22,12 +22,12 @@ public class PedidoService {
 
     public List<PedidoDTO> listarPorTipo(TipoPedido tipoPedido) {
         List<Pedido> pedidos = pedidoRepository.findByTipoPedido(tipoPedido);
-        return getPedidoDTOS(pedidos);
+        return geraPedidoDTOS(pedidos);
     }
 
     public List<PedidoDTO> listarTodos() {
         List<Pedido> pedidos = pedidoRepository.findAll();
-        return getPedidoDTOS(pedidos);
+        return geraPedidoDTOS(pedidos);
     }
 
     public void cadastrarPedido(PedidoDTO pedidoDTO) {
@@ -41,7 +41,7 @@ public class PedidoService {
     }
 
 
-    private List<PedidoDTO> getPedidoDTOS(List<Pedido> pedidos) {
+    private List<PedidoDTO> geraPedidoDTOS(List<Pedido> pedidos) {
         List<PedidoDTO> retorno = new ArrayList<>();
         pedidos.forEach(pedido -> retorno.add(pedido.toDTO()));
         return retorno;
