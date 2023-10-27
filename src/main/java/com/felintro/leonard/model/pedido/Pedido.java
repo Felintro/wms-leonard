@@ -69,6 +69,6 @@ public class Pedido {
     public PedidoDTO toDTO() {
         List<PedidoProdutoDTO> pedidoProdutoDTOList = new ArrayList<>();
         this.produtos.forEach(produto -> pedidoProdutoDTOList.add(produto.toDTO()));
-        return new PedidoDTO(this.nrPedido, this.dtEmissao, this.empresa.toDTO(), this.produtos, this.tipoPedido);
+        return new PedidoDTO(this.nrPedido, this.dtEmissao, this.empresa.toDTO(), pedidoProdutoDTOList, this.tipoPedido);
     }
 }
