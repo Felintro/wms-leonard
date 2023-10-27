@@ -3,13 +3,12 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://wwww.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{menu-lateral.html}">
-
 <head>
 </head>
 
 <body>
 <div layout:fragment="conteudo">
-    <h1>Lista de endereços</h1>
+    <h3>Endereços cadastrados</h3>
     <br/>
     <div class="lista">
         <table class="table">
@@ -19,7 +18,7 @@
                 <th scope="col">Rua</th>
                 <th scope="col">Prédio</th>
                 <th scope="col">Apartamento</th>
-                <th scope="col">Ações</th>
+                <th colspan="2" scope="col">Ações</th>
             </tr>
             </thead>
             <tbody>

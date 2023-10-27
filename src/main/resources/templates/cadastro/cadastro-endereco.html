@@ -9,7 +9,8 @@
 
 <body>
 <div layout:fragment="conteudo">
-    <h1>Cadastro de endereços</h1>
+    <br />
+    <h3>Cadastro de endereços</h3>
     <div class="form-pequeno">
         <form method="post" th:action="@{/endereco/cadastrar}">
 
@@ -34,6 +35,35 @@
             <input type="submit" class="btn btn-primary" value="Cadastrar" th:if="${enderecoDTO == null}" />
             <input type="submit" class="btn btn-primary" value="Salvar" th:if="${enderecoDTO != null}" />
         </form>
+    </div>
+
+    <br />
+    <h3>Endereços cadastrados</h3>
+    <br />
+
+    <div class="lista endereco">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Rua</th>
+                    <th scope="col">Prédio</th>
+                    <th scope="col">Apartamento</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="endereco : ${listaDTO}">
+                    <td th:text="${endereco.id}"></td>
+                    <td th:text="${endereco.nrRua}"></td>
+                    <td th:text="${endereco.nrPredio}"></td>
+                    <td th:text="${endereco.nrApartamento}"></td>
+                    <td>
+                        <a th:href="@{/endereco/formulario?id={id}(id=${endereco.id}) }">Editar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

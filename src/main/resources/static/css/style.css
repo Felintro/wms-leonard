@@ -6,6 +6,10 @@
     width: 60%;
 }
 
+.lista.endereco {
+    width: 40%;
+}
+
 body {
     background-color: #f0f5f9;
 }

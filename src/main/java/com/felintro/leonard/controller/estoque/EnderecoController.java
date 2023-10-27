@@ -2,6 +2,7 @@ package com.felintro.leonard.controller.estoque;
 
 import com.felintro.leonard.dto.estoque.EnderecoDTO;
 import com.felintro.leonard.dto.estoque.ProdutoDTO;
+import com.felintro.leonard.dto.pessoa.EmpresaDTO;
 import com.felintro.leonard.service.estoque.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,8 @@ import java.util.List;
 @RequestMapping("/endereco")
 public class EnderecoController {
 
-    private static final String REDIRECT_VISUALIZAR = "redirect:/endereco/visualizar";
+    private static final String TELA_CADASTRO = "cadastro/cadastro-endereco";
+    private static final String REDIRECT_FORMULARIO = "redirect:/endereco/formulario";
 
     @Autowired
     private EnderecoService enderecoService;
@@ -34,14 +36,16 @@ public class EnderecoController {
             var enderecoDTO = enderecoService.buscarPorId(id);
             model.addAttribute("enderecoDTO", enderecoDTO);
         }
-        return "cadastro/cadastro-endereco";
+        List<EnderecoDTO> listaDTO = enderecoService.listarEnderecos();
+        model.addAttribute("listaDTO", listaDTO);
+        return TELA_CADASTRO;
     }
 
     @PostMapping("/cadastrar")
     @Transactional
     public String cadastrarEndereco(EnderecoDTO enderecoDTO) {
         enderecoService.cadastrarEndereco(enderecoDTO);
-        return REDIRECT_VISUALIZAR;
+        return REDIRECT_FORMULARIO;
     }
 
     @GetMapping("/visualizar")
@@ -55,14 +59,13 @@ public class EnderecoController {
     @Transactional
     public String alterarEndereco(EnderecoDTO enderecoDTO) {
         enderecoService.alterarEndereco(enderecoDTO);
-        return REDIRECT_VISUALIZAR;
+        return REDIRECT_FORMULARIO;
     }
 
     @DeleteMapping("/excluir")
     @Transactional
     public String excluirEndereco() {
-
-        return REDIRECT_VISUALIZAR;
+        return REDIRECT_FORMULARIO;
     }
 
 }
