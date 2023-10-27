@@ -1,4 +1,4 @@
-package com.felintro.leonard.dto;
+package com.felintro.leonard.dto.estoque;
 
 import com.felintro.leonard.model.estoque.Endereco;
 import lombok.AllArgsConstructor;
@@ -13,6 +13,7 @@ import java.io.Serializable;
 @Getter
 public class EnderecoDTO implements Serializable {
 
+    private final Long id;
     private final int nrRua;
     private final int nrPredio;
     private final int nrApartamento;

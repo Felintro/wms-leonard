@@ -1,6 +1,6 @@
 package com.felintro.leonard.model.estoque;
 
-import com.felintro.leonard.dto.EnderecoDTO;
+import com.felintro.leonard.dto.estoque.EnderecoDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -61,7 +61,12 @@ public class Endereco {
     }
 
     public EnderecoDTO toDTO() {
-        return new EnderecoDTO(this.nrRua, this.nrPredio, this.nrApartamento);
+        return new EnderecoDTO(this.id, this.nrRua, this.nrPredio, this.nrApartamento);
     }
 
+    public void atualizarDados(EnderecoDTO enderecoDTO) {
+        this.nrRua = enderecoDTO.getNrRua();
+        this.nrPredio = enderecoDTO.getNrPredio();
+        this.nrApartamento = enderecoDTO.getNrApartamento();
+    }
 }

@@ -1,4 +1,4 @@
-package com.felintro.leonard.service.operacao;
+package com.felintro.leonard.business.operacao;
 
 import org.springframework.stereotype.Service;
 
@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
  **/
 
 @Service
-public class SeparacaoService {
+public class RecebimentoBusiness {
 
 }

@@ -21,7 +21,7 @@ public class Permissao {
     @GeneratedValue
     private UUID uuid;
 
-    @Column(name = "ds_nome_permissao", nullable = false)
+    @Column(name = "ds_permissao", nullable = false)
     private String nome;
 
     public Permissao(UUID uuid) {

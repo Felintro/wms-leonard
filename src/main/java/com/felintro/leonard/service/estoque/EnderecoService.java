@@ -1,11 +1,11 @@
 package com.felintro.leonard.service.estoque;
 
-import com.felintro.leonard.dto.EnderecoDTO;
+import com.felintro.leonard.dto.estoque.EnderecoDTO;
+import com.felintro.leonard.dto.estoque.ProdutoDTO;
 import com.felintro.leonard.model.estoque.Endereco;
-import com.felintro.leonard.repository.EnderecoRepository;
+import com.felintro.leonard.repository.estoque.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,15 +15,14 @@ import java.util.List;
  **/
 
 @Service
-@RequestMapping("/endereco")
 public class EnderecoService {
 
     @Autowired
     private EnderecoRepository enderecoRepository;
 
     public void cadastrarEndereco(EnderecoDTO enderecoDTO) {
-        var IsCadastrado = enderecoRepository.existsByNrRuaAndNrPredioAndNrApartamento(enderecoDTO.getNrRua(), enderecoDTO.getNrPredio(), enderecoDTO.getNrApartamento());
-        if(!IsCadastrado) {
+        var isCadastrado = enderecoRepository.existsByNrRuaAndNrPredioAndNrApartamento(enderecoDTO.getNrRua(), enderecoDTO.getNrPredio(), enderecoDTO.getNrApartamento());
+        if(!isCadastrado) {
             var endereco = enderecoDTO.toEntity();
             enderecoRepository.save(endereco);
             System.out.println("O endereço foi cadastrado com sucesso:");
@@ -39,23 +38,28 @@ public class EnderecoService {
         return retorno;
     }
 
-    public EnderecoDTO buscaPorId(Long id) {
+    public EnderecoDTO buscarPorId(Long id) {
         Endereco endereco = enderecoRepository.findById(id).get();
         return endereco.toDTO();
     }
 
     public void cadastraVariosEnderecos(int qtdeRuas, int qtdePredios, int qtdeApartamentos) {
         List<EnderecoDTO> listaEnderecos = new ArrayList<>();
-
-        for(int i=1; i<=qtdeRuas; i++) {
-            for(int j=1; j<=qtdePredios; j++) {
-                for(int k=1; k<=qtdeApartamentos; k++) {
-                    listaEnderecos.add(new EnderecoDTO(i, j, k));
+        for(int rua=1; rua<=qtdeRuas; rua++) {
+            for(int predio=1; predio<=qtdePredios; predio++) {
+                for(int apartamento=1; apartamento<=qtdeApartamentos; apartamento++) {
+                    listaEnderecos.add(new EnderecoDTO(null, rua, predio, apartamento));
                 }
             }
         }
-
         listaEnderecos.forEach(enderecoDTO -> cadastrarEndereco(enderecoDTO));
+    }
+
+    public void alterarEndereco(EnderecoDTO enderecoDTO) {
+        var endereco = enderecoRepository.getReferenceById(enderecoDTO.getId());
+        endereco.atualizarDados(enderecoDTO);
+        enderecoRepository.save(endereco);
+        System.out.println("Alteração efetuada com sucesso!");
     }
 
 }

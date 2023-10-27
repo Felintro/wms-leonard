@@ -1,8 +1,10 @@
 package com.felintro.leonard.controller.operacao;
 
-import com.felintro.leonard.service.operacao.MovimentacaoService;
+import com.felintro.leonard.business.operacao.MovimentacaoBusiness;
+import com.felintro.leonard.dto.estoque.EnderecoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -10,11 +12,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
  **/
 
 @Controller
-@RequestMapping("/operacao/movimentacao")
+@RequestMapping("/movimentacao")
 public class MovimentacaoController {
 
     @Autowired
-    private MovimentacaoService movimentacaoService;
+    private MovimentacaoBusiness movimentacaoBusiness;
+
+    @PostMapping("/efetuar")
+    public String efetuarMovimentacao(Long nrContainer, EnderecoDTO enderecoDestino) {
+        boolean realizouOperacao = movimentacaoBusiness.realizaMovimentacao(nrContainer, enderecoDestino.toEntity());
+
+        if(realizouOperacao) {
+            System.out.println("");
+            return "";
+        } else
+            return "";
+    }
 
 
 }

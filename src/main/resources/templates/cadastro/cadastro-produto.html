@@ -1,39 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-br"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://wwww.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{menu-lateral.html}">
 
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-
-        <title>Leonard</title>
     </head>
 
     <body>
-        <h1>Cadastro de produtos</h1>
-        <form method="post" th:action="@{/produto/cadastrar}">
-            <div class="mb-3">
-                <label for="descricao" class="form-label">Descrição: </label>
-                <input id="descricao" name="descricao" class="form-control" />
+        <div layout:fragment="conteudo">
+            <br />
+            <h1>Cadastro de produtos</h1>
+            <div class="form-pequeno">
+                <form method="post" th:action="@{/produto/cadastrar}">
+
+                    <input type="hidden" name="id" th:value="${produtoDTO?.id}" />
+                    <input type="hidden" name="_method" value="put" th:if="${produtoDTO != null}">
+
+                    <div class="mb-3">
+                        <label for="descricao" class="form-label">Descrição: </label>
+                        <input id="descricao" name="descricao" class="form-control" th:value="${produtoDTO?.descricao}" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nrEan13" class="form-label">EAN13: </label>
+                        <input id="nrEan13" maxlength="13" name="nrEan13" class="form-control" th:value="${produtoDTO?.nrEan13}" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nrDun14" class="form-label">DUN14: </label>
+                        <input id="nrDun14" maxlength="14" name="nrDun14" class="form-control" th:value="${produtoDTO?.nrDun14}" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="fatorCaixa" class="form-label">Fator de Caixa: </label>
+                        <input id="fatorCaixa" name="fatorCaixa" class="form-control" th:value="${produtoDTO?.fatorCaixa}" />
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" value="Cadastrar" th:if="${produtoDTO == null}" />
+                    <input type="submit" class="btn btn-primary" value="Salvar" th:if="${produtoDTO != null}" />
+
+                </form>
             </div>
 
-            <div class="mb-3">
-                <label for="nrEan13" class="form-label">EAN13: </label>
-                <input id="nrEan13" name="nrEan13" class="form-control" />
-            </div>
+            <br />
+            <h3>Produtos cadastrados</h3>
+            <br/>
 
-            <div class="mb-3">
-                <label for="nrDun14" class="form-label">DUN14: </label>
-                <input id="nrDun14" name="nrDun14" class="form-control" />
+            <div class="lista">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">EAN13</th>
+                        <th scope="col">DUN14</th>
+                        <th scope="col">Fator caixa</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="produto : ${listaDTO}">
+                        <td th:text="${produto.id}"></td>
+                        <td th:text="${produto.descricao}"></td>
+                        <td th:text="${produto.nrEan13}"></td>
+                        <td th:text="${produto.nrDun14}"></td>
+                        <td th:text="${produto.fatorCaixa}"></td>
+                        <td>
+                            <a th:href="@{/produto/formulario?id={id}(id=${produto.id}) }">Editar</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-
-            <div class="mb-3">
-                <label for="fatorCaixa" class="form-label">Fator de Caixa: </label>
-                <input id="fatorCaixa" name="fatorCaixa" class="form-control" />
-            </div>
-            <input type="submit" class="btn btn-primary" value="Cadastrar" />
-        </form>
+        </div>
     </body>
 </html>

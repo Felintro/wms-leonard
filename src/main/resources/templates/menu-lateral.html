@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://wwww.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+
+<head>
+</head>
+
+<body>
+    <div layout:fragment="menu-lateral">
+        <div id="header"></div>
+        <div class="container-fluid">
+            <div class="row">
+                <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar">
+                    <div class="position-sticky">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#" th:href="@{/produto/formulario}">Cad. de Produtos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" th:href="@{/endereco/formulario}">Cad. de Endereços</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" th:href="@{/empresa/formulario}">Cad. de Empresas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" th:href="@{/pedido/compra}">Pedidos de Compra</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" th:href="@{/pedido/venda}">Pedidos de Venda</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div layout:fragment="conteudo">
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>

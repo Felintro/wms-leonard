@@ -1,8 +1,8 @@
 package com.felintro.leonard.service.estoque;
 
-import com.felintro.leonard.dto.ProdutoDTO;
+import com.felintro.leonard.dto.estoque.ProdutoDTO;
 import com.felintro.leonard.model.estoque.Produto;
-import com.felintro.leonard.repository.ProdutoRepository;
+import com.felintro.leonard.repository.estoque.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +35,17 @@ public class ProdutoService {
             return;
         }
         System.out.println("O produto já existe!");
+    }
+
+    public void alterarProduto(ProdutoDTO produtoDTO) {
+        var produto = produtoRepository.getReferenceById(produtoDTO.getId());
+        produto.atualizarDados(produtoDTO);
+        produtoRepository.save(produto);
+        System.out.println("Alteração efetuada com sucesso!");
+    }
+
+    public ProdutoDTO buscarPorId(Long id) {
+        return produtoRepository.getReferenceById(id).toDTO();
     }
 
 }

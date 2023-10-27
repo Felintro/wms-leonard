@@ -1,4 +1,4 @@
-package com.felintro.leonard.dto;
+package com.felintro.leonard.dto.estoque;
 
 import com.felintro.leonard.model.estoque.Produto;
 import lombok.AllArgsConstructor;
@@ -14,6 +14,7 @@ import java.io.Serializable;
 @Getter
 public class ProdutoDTO implements Serializable {
 
+    private final Long id;
     private final String descricao;
     private final String nrEan13;
     private final String nrDun14;

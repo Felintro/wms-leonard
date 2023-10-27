@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://wwww.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{menu-lateral.html}">
+
+<head>
+</head>
+
+<body>
+<div layout:fragment="conteudo">
+    <br />
+    <h3>Cadastro de empresas</h3>
+    <div class="form-pequeno">
+        <form method="post" th:action="@{/empresa/cadastrar}">
+
+            <input type="hidden" name="id" th:value="${empresaDTO?.id}"/>
+            <input type="hidden" name="_method" value="put" th:if="${empresaDTO != null}">
+
+            <div class="mb-3">
+                <label for="nrCnpj" class="form-label">CNPJ:</label>
+                <input id="nrCnpj" minlength="14" maxlength="14" name="nrCnpj" class="form-control"
+                       th:value="${empresaDTO?.nrCnpj}"/>
+            </div>
+
+            <div class="mb-3">
+                <label for="razaoSocial" class="form-label">Razão Social:</label>
+                <input id="razaoSocial" name="razaoSocial" class="form-control" th:value="${empresaDTO?.razaoSocial}"/>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail:</label>
+                <input id="email" name="email" class="form-control" th:value="${empresaDTO?.email}"/>
+            </div>
+
+            <div class="mb-3">
+                <label for="nrTelefone" class="form-label">Telefone:</label>
+                <input type="tel" minlength="11" maxlength="11" id="nrTelefone" name="nrTelefone" class="form-control"
+                       th:value="${empresaDTO?.nrTelefone}"/>
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Cadastrar" th:if="${empresaDTO == null}"/>
+            <input type="submit" class="btn btn-primary" value="Salvar" th:if="${empresaDTO != null}"/>
+
+        </form>
+    </div>
+
+    <br />
+    <h3>Empresas cadastradas:</h3>
+    <br />
+
+    <div class="lista">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">CNPJ</th>
+                    <th scope="col">Razão Social</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Telefone</th>
+                    <th colspan="2" scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="empresa : ${listaDTO}">
+                    <td th:text="${empresa.id}"></td>
+                    <td th:text="${empresa.nrCnpj}"></td>
+                    <td th:text="${empresa.razaoSocial}"></td>
+                    <td th:text="${empresa.email}"></td>
+                    <td th:text="${empresa.nrTelefone}"></td>
+                    <td>
+                        <a th:href="@{/empresa/formulario?id={id}(id=${empresa.id}) }">Editar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+</html>
