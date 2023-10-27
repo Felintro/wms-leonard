@@ -9,43 +9,32 @@
 
 <body>
 <div layout:fragment="conteudo">
-    <h1>Lista de produtos</h1>
+    <br />
+    <h3>Produtos cadastrados</h3>
     <br/>
     <div class="lista">
         <table class="table">
             <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Descrição</th>
-                <th scope="col">EAN13</th>
-                <th scope="col">DUN14</th>
-                <th scope="col">Fator de caixa</th>
-                <th scope="col">Ações</th>
-            </tr>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">EAN13</th>
+                    <th scope="col">DUN14</th>
+                    <th scope="col">Fator caixa</th>
+                    <th scope="col">Ações</th>
+                </tr>
             </thead>
             <tbody>
-            <tr th:each="produtoDTO : ${listaDTO}">
-                <td th:text="${produtoDTO.id}"></td>
-                <td th:text="${produtoDTO.descricao}"></td>
-                <td th:text="${produtoDTO.nrEan13}"></td>
-                <td th:text="${produtoDTO.nrDun14}"></td>
-                <td th:text="${produtoDTO.fatorCaixa}"></td>
-                <td>
-                    <a th:href="@{/produto/formulario?id={id}(id=${produtoDTO.id}) }">Editar</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <form method="get" th:action="@{/produto/formulario}">
-                        <input type="submit" value="Cadastrar"/>
-                    </form>
-                </td>
-                <td>
-                    <form method="get" th:action="@{/}">
-                        <input type="submit" value="Tela inicial"/>
-                    </form>
-                </td>
-            </tr>
+                <tr th:each="produtoDTO : ${listaDTO}">
+                    <td th:text="${produtoDTO.id}"></td>
+                    <td th:text="${produtoDTO.descricao}"></td>
+                    <td th:text="${produtoDTO.nrEan13}"></td>
+                    <td th:text="${produtoDTO.nrDun14}"></td>
+                    <td th:text="${produtoDTO.fatorCaixa}"></td>
+                    <td>
+                        <a th:href="@{/produto/formulario?id={id}(id=${produtoDTO.id}) }">Editar</a>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>

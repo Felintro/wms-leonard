@@ -1,5 +1,6 @@
 package com.felintro.leonard.controller.estoque;
 
+import com.felintro.leonard.dto.estoque.EnderecoDTO;
 import com.felintro.leonard.dto.estoque.ProdutoDTO;
 import com.felintro.leonard.service.estoque.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,8 @@ import java.util.List;
 @RequestMapping("/produto")
 public class ProdutoController {
 
-    private static final String REDIRECT_VISUALIZAR = "redirect:/produto/visualizar";
+    private static final String TELA_CADASTRO = "cadastro/cadastro-produto";
+    private static final String REDIRECT_FORMULARIO = "redirect:/produto/formulario";
 
     @Autowired
     private ProdutoService produtoService;
@@ -32,28 +34,30 @@ public class ProdutoController {
             var produtoDTO = produtoService.buscarPorId(id);
             model.addAttribute("produtoDTO", produtoDTO);
         }
-        return "cadastro/cadastro-produto";
+        List<ProdutoDTO> listaDTO = produtoService.listarProdutos();
+        model.addAttribute("listaDTO", listaDTO);
+        return TELA_CADASTRO;
     }
 
     @PostMapping("/cadastrar")
     @Transactional
     public String cadastrarProduto(ProdutoDTO produtoDTO) {
         produtoService.cadastrarProduto(produtoDTO);
-        return REDIRECT_VISUALIZAR;
-    }
-
-    @GetMapping("/visualizar")
-    public String listarProdutos(Model model) {
-        List<ProdutoDTO> listaDTO = produtoService.listarProdutos();
-        model.addAttribute("listaDTO", listaDTO);
-        return "view/view-produto";
+        return REDIRECT_FORMULARIO;
     }
 
     @PutMapping("/cadastrar")
     @Transactional
     public String alterarProduto(ProdutoDTO produtoDTO) {
         produtoService.alterarProduto(produtoDTO);
-        return REDIRECT_VISUALIZAR;
+        return REDIRECT_FORMULARIO;
     }
+
+    /*@GetMapping("/visualizar")
+    public String listarProdutos(Model model) {
+        List<ProdutoDTO> listaDTO = produtoService.listarProdutos();
+        model.addAttribute("listaDTO", listaDTO);
+        return "view/view-produto";
+    }*/
 
 }

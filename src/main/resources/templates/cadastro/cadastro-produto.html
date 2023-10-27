@@ -41,6 +41,37 @@
 
                 </form>
             </div>
+
+            <br />
+            <h3>Produtos cadastrados</h3>
+            <br/>
+
+            <div class="lista">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">EAN13</th>
+                        <th scope="col">DUN14</th>
+                        <th scope="col">Fator caixa</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="produto : ${listaDTO}">
+                        <td th:text="${produto.id}"></td>
+                        <td th:text="${produto.descricao}"></td>
+                        <td th:text="${produto.nrEan13}"></td>
+                        <td th:text="${produto.nrDun14}"></td>
+                        <td th:text="${produto.fatorCaixa}"></td>
+                        <td>
+                            <a th:href="@{/produto/formulario?id={id}(id=${produto.id}) }">Editar</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </body>
 </html>
