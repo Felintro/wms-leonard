@@ -1,5 +1,6 @@
 package com.felintro.leonard.model.pedido;
 
+import com.felintro.leonard.dto.pedido.PedidoProdutoDTO;
 import com.felintro.leonard.model.estoque.Produto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -44,4 +45,9 @@ public class PedidoProduto {
         this.produto = produto;
         this.quantidade = quantidade;
     }
+
+    public PedidoProdutoDTO toDTO() {
+        return new PedidoProdutoDTO(null, pedido.toDTO(), produto.toDTO(), this.quantidade);
+    }
+
 }
