@@ -1,6 +1,7 @@
 package com.felintro.leonard.service.pessoa;
 
 import com.felintro.leonard.dto.pessoa.EmpresaDTO;
+import com.felintro.leonard.enums.TipoEmpresa;
 import com.felintro.leonard.model.pessoa.Empresa;
 import com.felintro.leonard.repository.pessoa.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,10 @@ public class EmpresaService {
 
     public EmpresaDTO buscarPorNrCnpj(String nrCnpj) {
         return empresaRepository.findByNrCnpj(nrCnpj).toDTO();
+    }
+
+    public EmpresaDTO buscarPorTipoEmpresa(TipoEmpresa tipoEmpresa) {
+        return empresaRepository.findByTipoEmpresa(tipoEmpresa).toDTO();
     }
 
     public EmpresaDTO buscarPorId(Long id) {
