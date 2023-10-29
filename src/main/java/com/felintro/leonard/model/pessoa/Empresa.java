@@ -28,10 +28,10 @@ public class Empresa {
     @Column(name = "razao_social", nullable = false)
     private String razaoSocial;
 
-    @Column(name = "nr_cnpj", nullable = false, unique = true)
+    @Column(name = "nr_cnpj", nullable = false, unique = true, length = 14)
     private String nrCnpj;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false)
     private String email;
 
     @Column(name = "nr_telefone", unique = true, nullable = false, length = 11)
