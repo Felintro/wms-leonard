@@ -15,11 +15,11 @@ import java.io.Serializable;
 public class EmpresaDTO implements Serializable {
 
     private final Long id;
+    private final String razaoSocial;
+    private final String nrCnpj;
+    private final TipoEmpresa tipoEmpresa;
     private final String email;
     private final String nrTelefone;
-    private final String nrCnpj;
-    private final String razaoSocial;
-    private final TipoEmpresa tipoEmpresa;
 
 
     public Empresa toEntity() {

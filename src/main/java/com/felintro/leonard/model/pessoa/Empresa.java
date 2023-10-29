@@ -51,7 +51,7 @@ public class Empresa {
     }
 
     public EmpresaDTO toDTO() {
-        return new EmpresaDTO(this.id, this.email, this.nrTelefone, this.nrCnpj, this.razaoSocial, this.tipoEmpresa);
+        return new EmpresaDTO(this.id, this.razaoSocial, this.nrCnpj, this.tipoEmpresa, this.email, this.nrTelefone);
     }
 
     public void atualizarDados(EmpresaDTO empresaDTO) {

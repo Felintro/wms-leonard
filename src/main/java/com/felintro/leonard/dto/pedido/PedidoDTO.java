@@ -33,6 +33,13 @@ public class PedidoDTO {
         return new Pedido(this.dtEmissao, this.empresaDTO.toEntity(), pedidoProdutoList, tipoPedido);
     }
 
+    public PedidoDTO(EmpresaDTO empresaDTO, List<PedidoProdutoDTO> produtosDTO, TipoPedido tipoPedido) {
+        this.dtEmissao = LocalDate.now();
+        this.empresaDTO = empresaDTO;
+        this.produtosDTO = produtosDTO;
+        this.tipoPedido = tipoPedido;
+    }
+
     public void adicionarProduto(PedidoProdutoDTO pedidoProdutoDTO) {
         pedidoProdutoDTO.setPedidoDTO(this);
         this.produtosDTO.add(pedidoProdutoDTO);
