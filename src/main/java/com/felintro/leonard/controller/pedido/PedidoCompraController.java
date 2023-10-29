@@ -1,55 +1,36 @@
 package com.felintro.leonard.controller.pedido;
 
+import com.felintro.leonard.dto.pedido.RegistraPedidoDTO;
 import com.felintro.leonard.dto.pedido.PedidoDTO;
-import com.felintro.leonard.enums.TipoPedido;
-import com.felintro.leonard.service.estoque.ProdutoService;
 import com.felintro.leonard.service.pedido.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/pedido-compra")
 public class PedidoCompraController {
 
-    private static final String TELA_PEDIDO_COMPRA = "pedido/pedido-compra";
-    private static final String REDIRECT_FORMULARIO = "redirect:/pedido-compra/formulario";
+    private static final String PEDIDO_REGISTRADO = "Pedido registrado com sucesso!";
+    private static final String PEDIDO_CANCELADO = "Pedido cancelado com sucesso!";
 
     @Autowired
     private PedidoService pedidoService;
 
-    @Autowired
-    private ProdutoService produtoService;
-
-    @GetMapping("/formulario")
-    public String carregaPaginaFormulario(Long id, Model model) {
-        List<PedidoDTO> listaPedidoDTO = pedidoService.listarTodos()
-            .stream()
-            .filter(pedidoDTO -> pedidoDTO.getTipoPedido().equals(TipoPedido.COMPRA))
-            .collect(Collectors.toList());
-
-        model.addAttribute("listaPedidoDTO", listaPedidoDTO);
-        return TELA_PEDIDO_COMPRA;
+    @PostMapping("/registrar")
+    public ResponseEntity registrarPedidoCompra(@RequestBody RegistraPedidoDTO registraPedidoDTO) {
+        pedidoService.registrarPedido(registraPedidoDTO);
+        return new ResponseEntity(PEDIDO_REGISTRADO, HttpStatus.OK);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @PostMapping("/cancelar")
+    public ResponseEntity cancelarPedidoCompra(@RequestBody Long nrPedido) {
+        pedidoService.cancelarPedido(nrPedido);
+        return new ResponseEntity(PEDIDO_CANCELADO, HttpStatus.OK);
+    }
 
 }

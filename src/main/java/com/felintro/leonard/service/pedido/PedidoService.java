@@ -1,12 +1,20 @@
 package com.felintro.leonard.service.pedido;
 
+import com.felintro.leonard.dto.pedido.RegistraPedidoDTO;
 import com.felintro.leonard.dto.pedido.PedidoDTO;
+import com.felintro.leonard.enums.StatusPedido;
 import com.felintro.leonard.enums.TipoPedido;
+import com.felintro.leonard.model.estoque.Produto;
 import com.felintro.leonard.model.pedido.Pedido;
+import com.felintro.leonard.model.pedido.PedidoProduto;
+import com.felintro.leonard.model.pessoa.Empresa;
+import com.felintro.leonard.repository.estoque.ProdutoRepository;
 import com.felintro.leonard.repository.pedido.PedidoRepository;
+import com.felintro.leonard.repository.pessoa.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +27,10 @@ public class PedidoService {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+    @Autowired
+    private EmpresaRepository empresaRepository;
+    @Autowired
+    private ProdutoRepository produtoRepository;
 
     public List<PedidoDTO> listarPorTipo(TipoPedido tipoPedido) {
         List<Pedido> pedidos = pedidoRepository.findByTipoPedido(tipoPedido);
@@ -30,12 +42,6 @@ public class PedidoService {
         return geraPedidoDTOS(pedidos);
     }
 
-    public void cadastrarPedido(PedidoDTO pedidoDTO) {
-        var pedido = pedidoDTO.toEntity();
-        pedidoRepository.save(pedido);
-        System.out.println("Produto cadastrado com sucesso!");
-    }
-
     public PedidoDTO buscarPorNrPedido(Long nrPedido) {
         return pedidoRepository.getReferenceById(nrPedido).toDTO();
     }
@@ -45,6 +51,28 @@ public class PedidoService {
         List<PedidoDTO> retorno = new ArrayList<>();
         pedidos.forEach(pedido -> retorno.add(pedido.toDTO()));
         return retorno;
+    }
+
+    public PedidoDTO registrarPedido(RegistraPedidoDTO registraPedidoDTO) {
+        Empresa empresa = empresaRepository.findByNrCnpj(registraPedidoDTO.getNrCnpj());
+        Pedido pedido = new Pedido(empresa, registraPedidoDTO.getTipoPedido());
+        registraPedidoDTO.getProdutos()
+            .forEach(registraProdutoPedidoCompraDTO -> {
+                Produto produto = produtoRepository.findByNrEan13(registraProdutoPedidoCompraDTO.getNrEan13());
+                PedidoProduto pedidoProduto = new PedidoProduto(produto, registraProdutoPedidoCompraDTO.getQtde());
+                pedido.adicionarProduto(pedidoProduto);
+            }
+        );
+        pedido.setDtEmissao(LocalDate.now());
+        pedido.setStatusPedido(StatusPedido.ABERTO);
+        Pedido pedidoAtualizado = pedidoRepository.save(pedido);
+        return pedidoAtualizado.toDTO();
+    }
+
+    public PedidoDTO cancelarPedido(Long nrPedido) {
+        Pedido pedido = pedidoRepository.getReferenceById(nrPedido);
+        pedido.setStatusPedido(StatusPedido.CANCELADO);
+        return pedido.toDTO();
     }
 
 }
