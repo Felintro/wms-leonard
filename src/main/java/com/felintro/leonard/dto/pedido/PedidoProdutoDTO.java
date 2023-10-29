@@ -21,7 +21,7 @@ public class PedidoProdutoDTO {
     private int quantidade;
 
     public PedidoProduto toEntity(){
-        return new PedidoProduto(this.pedidoDTO.toEntity(), this.produtoDTO.toEntity(), quantidade);
+        return new PedidoProduto(this.pedidoDTO.toEntity(), this.produtoDTO.toEntity(), this.quantidade);
     }
 
 }

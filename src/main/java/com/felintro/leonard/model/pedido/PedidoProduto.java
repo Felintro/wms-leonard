@@ -46,6 +46,11 @@ public class PedidoProduto {
         this.quantidade = quantidade;
     }
 
+    public PedidoProduto(Produto produto, int quantidade) {
+        this.produto = produto;
+        this.quantidade = quantidade;
+    }
+
     public PedidoProdutoDTO toDTO() {
         return new PedidoProdutoDTO(null, pedido.toDTO(), produto.toDTO(), this.quantidade);
     }

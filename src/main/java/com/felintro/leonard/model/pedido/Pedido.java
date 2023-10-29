@@ -2,6 +2,7 @@ package com.felintro.leonard.model.pedido;
 
 import com.felintro.leonard.dto.pedido.PedidoDTO;
 import com.felintro.leonard.dto.pedido.PedidoProdutoDTO;
+import com.felintro.leonard.enums.StatusPedido;
 import com.felintro.leonard.enums.TipoPedido;
 import com.felintro.leonard.model.pessoa.Empresa;
 import jakarta.persistence.CascadeType;
@@ -54,16 +55,25 @@ public class Pedido {
     @Enumerated(EnumType.STRING)
     private TipoPedido tipoPedido;
 
+    @Column(name = "status_pedido")
+    @Enumerated(EnumType.STRING)
+    private StatusPedido statusPedido;
+
+    public Pedido(LocalDate dtEmissao, Empresa empresa, List<PedidoProduto> produtos, TipoPedido tipoPedido) {
+        this.dtEmissao = dtEmissao;
+        this.empresa = empresa;
+        this.produtos = produtos;
+        this.tipoPedido = tipoPedido;
+    }
+
     public void adicionarProduto(PedidoProduto produto) {
         produto.setPedido(this);
         this.produtos.add(produto);
     }
 
-    public Pedido(LocalDate dtEmissao, Empresa empresa, List<PedidoProduto> produtos, TipoPedido tipoPedido) {
-        this.dtEmissao = dtEmissao;
-        this.produtos = produtos;
-        this.tipoPedido = tipoPedido;
+    public Pedido(Empresa empresa, TipoPedido tipoPedido) {
         this.empresa = empresa;
+        this.tipoPedido = tipoPedido;
     }
 
     public PedidoDTO toDTO() {
