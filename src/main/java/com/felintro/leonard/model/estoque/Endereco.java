@@ -46,18 +46,16 @@ public class Endereco {
 
     public String getEnderecoCompleto() {
         StringBuilder sb = new StringBuilder();
-
         sb.append(this.nrRua)
             .append(".")
             .append(this.nrPredio)
             .append(".")
             .append(this.nrApartamento);
-
         return sb.toString();
     }
 
-    public boolean isVazio() {
-        return this.container == null;
+    public boolean isOcupado() {
+        return this.container != null;
     }
 
     public EnderecoDTO toDTO() {
