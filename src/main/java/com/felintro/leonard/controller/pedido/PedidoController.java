@@ -1,7 +1,6 @@
 package com.felintro.leonard.controller.pedido;
 
 import com.felintro.leonard.dto.pedido.RegistraPedidoDTO;
-import com.felintro.leonard.dto.pessoa.EmpresaDTO;
 import com.felintro.leonard.service.pedido.PedidoService;
 import com.felintro.leonard.service.pessoa.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
