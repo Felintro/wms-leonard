@@ -1,5 +1,6 @@
 package com.felintro.leonard.model.estoque;
 
+import com.felintro.leonard.dto.estoque.ContainerProdutoDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,9 +35,13 @@ public class ContainerProduto {
     @Column(name = "quantidade", nullable = false)
     private int quantidade;
 
-    public ContainerProduto(Container container, Produto produto, int quantidade) {
-        this.container = container;
+    public ContainerProduto(Produto produto, int quantidade) {
         this.produto = produto;
         this.quantidade = quantidade;
     }
+
+    public ContainerProdutoDTO toDTO() {
+        return new ContainerProdutoDTO(this.container.toDTO(), this.produto.toDTO(), this.quantidade);
+    }
+
 }

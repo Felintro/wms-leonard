@@ -13,13 +13,16 @@ import java.util.List;
  * @author allan
  **/
 
-@AllArgsConstructor
 @Getter
 @Setter
 public class ContainerDTO {
 
     private Long nrContainer;
-    private List<ContainerProdutoDTO> containerProdutosDTO;
+    private List<ContainerProdutoDTO> containerProdutosDTO = new ArrayList<>();
+
+    public ContainerDTO(Long nrContainer) {
+        this.nrContainer = nrContainer;
+    }
 
     public void adicionarProduto(ContainerProdutoDTO containerProdutoDTO) {
         containerProdutoDTO.setContainer(this);
@@ -27,9 +30,9 @@ public class ContainerDTO {
     }
 
     public Container toEntity() {
-        List<ContainerProduto> containerProdutoList = new ArrayList<>();
-        containerProdutosDTO.forEach(produtoDTO -> containerProdutoList.add(produtoDTO.toEntity()));
-        return new Container(containerProdutoList);
+        Container container = new Container(this.nrContainer);
+        containerProdutosDTO.forEach(containerProdutoDTO -> container.adicionarProduto(containerProdutoDTO.toEntity()));
+        return container;
     }
 
 }

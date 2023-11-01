@@ -19,8 +19,14 @@ public class ContainerProdutoDTO {
     private ProdutoDTO produto;
     private int quantidade;
 
+    public ContainerProdutoDTO(ContainerDTO container, ProdutoDTO produto, int quantidade) {
+        this.container = container;
+        this.produto = produto;
+        this.quantidade = quantidade;
+    }
+
     public ContainerProduto toEntity(){
-        return new ContainerProduto(container.toEntity(), produto.toEntity(), quantidade);
+        return new ContainerProduto(produto.toEntity(), quantidade);
     }
 
 }
