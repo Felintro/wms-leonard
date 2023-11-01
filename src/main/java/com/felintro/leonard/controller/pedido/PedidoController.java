@@ -37,9 +37,4 @@ public class PedidoController {
         return new ResponseEntity(PEDIDO_CANCELADO, HttpStatus.OK);
     }
 
-    @PostMapping("/teste")
-    public ResponseEntity testeEmpresa(@RequestBody EmpresaDTO empresaDTO) {
-        return new ResponseEntity(empresaDTO, HttpStatus.OK);
-    }
-
 }
