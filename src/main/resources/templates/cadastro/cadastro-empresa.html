@@ -35,9 +35,15 @@
 
             <div class="mb-3">
                 <label for="nrTelefone" class="form-label">Telefone:</label>
-                <input type="tel" minlength="11" maxlength="11" id="nrTelefone" name="nrTelefone" class="form-control"
-                       th:value="${empresaDTO?.nrTelefone}"/>
+                <input type="tel" minlength="11" maxlength="11" id="nrTelefone" name="nrTelefone" class="form-control" th:value="${empresaDTO?.nrTelefone}"/>
             </div>
+
+            <!--<div class="mb-3">
+                <label for="nrTelefone" class="form-label">Tipo empresa:</label>
+                <select class="form-select" name="tipoEmpresaTeste">
+                    <option th:each="tipoEmpresaEach : ${tiposEmpresaList}" th:value="${empresaDTO? .tipoEmpresa}" th:text="${tipoEmpresaEach}"></option>
+                </select>
+            </div>-->
 
             <input type="submit" class="btn btn-primary" value="Cadastrar" th:if="${empresaDTO == null}"/>
             <input type="submit" class="btn btn-primary" value="Salvar" th:if="${empresaDTO != null}"/>

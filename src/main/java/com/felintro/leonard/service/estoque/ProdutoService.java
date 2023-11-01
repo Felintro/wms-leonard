@@ -48,4 +48,12 @@ public class ProdutoService {
         return produtoRepository.getReferenceById(id).toDTO();
     }
 
+    public ProdutoDTO buscarPorNrEan13(String nrEan13) {
+        return produtoRepository.findByNrEan13(nrEan13).toDTO();
+    }
+
+    public ProdutoDTO buscarPorNrDun14(String nrDun14) {
+        return produtoRepository.findByNrDun14(nrDun14).toDTO();
+    }
+
 }

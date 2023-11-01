@@ -1,5 +1,6 @@
 package com.felintro.leonard.model.estoque;
 
+import com.felintro.leonard.dto.estoque.ContainerDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,6 +31,10 @@ public class Container {
     @OneToMany(mappedBy = "container", cascade = CascadeType.ALL)
     private List<ContainerProduto> produtos = new ArrayList<>();
 
+    public Container(Long nrContainer) {
+        this.nrContainer = nrContainer;
+    }
+
     public void adicionarProduto(ContainerProduto produto) {
         produto.setContainer(this);
         this.produtos.add(produto);
@@ -38,4 +43,11 @@ public class Container {
     public Container(List<ContainerProduto> produtos) {
         this.produtos = produtos;
     }
+
+    public ContainerDTO toDTO() {
+        ContainerDTO containerDTO = new ContainerDTO(this.nrContainer);
+        produtos.forEach(containerProduto -> containerDTO.adicionarProduto(containerProduto.toDTO()));
+        return containerDTO;
+    }
+
 }
