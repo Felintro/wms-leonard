@@ -20,6 +20,12 @@ public class PedidoProdutoDTO {
     private ProdutoDTO produtoDTO;
     private int quantidade;
 
+    public PedidoProdutoDTO(Long id, ProdutoDTO produtoDTO, int quantidade) {
+        this.id = id;
+        this.produtoDTO = produtoDTO;
+        this.quantidade = quantidade;
+    }
+
     public PedidoProduto toEntity(){
         return new PedidoProduto(this.pedidoDTO.toEntity(), this.produtoDTO.toEntity(), this.quantidade);
     }

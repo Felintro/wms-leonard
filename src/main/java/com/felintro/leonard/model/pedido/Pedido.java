@@ -1,7 +1,6 @@
 package com.felintro.leonard.model.pedido;
 
 import com.felintro.leonard.dto.pedido.PedidoDTO;
-import com.felintro.leonard.dto.pedido.PedidoProdutoDTO;
 import com.felintro.leonard.enums.StatusPedido;
 import com.felintro.leonard.enums.TipoPedido;
 import com.felintro.leonard.model.pessoa.Empresa;
@@ -77,8 +76,8 @@ public class Pedido {
     }
 
     public PedidoDTO toDTO() {
-        List<PedidoProdutoDTO> pedidoProdutoDTOList = new ArrayList<>();
-        this.produtos.forEach(produto -> pedidoProdutoDTOList.add(produto.toDTO()));
-        return new PedidoDTO(this.nrPedido, this.dtEmissao, this.empresa.toDTO(), pedidoProdutoDTOList, this.tipoPedido);
+        PedidoDTO pedidoDTO = new PedidoDTO(this.nrPedido, this.dtEmissao, this.empresa.toDTO(), this.tipoPedido);
+        this.produtos.forEach(produto -> pedidoDTO.adicionarProduto(produto.toDTO()));
+        return pedidoDTO;
     }
 }

@@ -52,7 +52,7 @@ public class PedidoProduto {
     }
 
     public PedidoProdutoDTO toDTO() {
-        return new PedidoProdutoDTO(null, pedido.toDTO(), produto.toDTO(), this.quantidade);
+        return new PedidoProdutoDTO(null, produto.toDTO(), this.quantidade);
     }
 
 }
