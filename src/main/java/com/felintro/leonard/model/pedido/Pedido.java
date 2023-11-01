@@ -58,10 +58,15 @@ public class Pedido {
     @Enumerated(EnumType.STRING)
     private StatusPedido statusPedido;
 
-    public Pedido(LocalDate dtEmissao, Empresa empresa, List<PedidoProduto> produtos, TipoPedido tipoPedido) {
+    public Pedido(LocalDate dtEmissao, Empresa empresa, TipoPedido tipoPedido, StatusPedido statusPedido) {
         this.dtEmissao = dtEmissao;
         this.empresa = empresa;
-        this.produtos = produtos;
+        this.tipoPedido = tipoPedido;
+        this.statusPedido = statusPedido;
+    }
+
+    public Pedido(Empresa empresa, TipoPedido tipoPedido) {
+        this.empresa = empresa;
         this.tipoPedido = tipoPedido;
     }
 
@@ -70,14 +75,10 @@ public class Pedido {
         this.produtos.add(produto);
     }
 
-    public Pedido(Empresa empresa, TipoPedido tipoPedido) {
-        this.empresa = empresa;
-        this.tipoPedido = tipoPedido;
-    }
-
     public PedidoDTO toDTO() {
         PedidoDTO pedidoDTO = new PedidoDTO(this.nrPedido, this.dtEmissao, this.empresa.toDTO(), this.tipoPedido);
-        this.produtos.forEach(produto -> pedidoDTO.adicionarProduto(produto.toDTO()));
+        produtos.forEach(pedidoProduto -> pedidoDTO.adicionarProduto(pedidoProduto.toDTO()));
         return pedidoDTO;
     }
+
 }

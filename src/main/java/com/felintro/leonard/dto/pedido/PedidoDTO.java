@@ -1,9 +1,9 @@
 package com.felintro.leonard.dto.pedido;
 
 import com.felintro.leonard.dto.pessoa.EmpresaDTO;
+import com.felintro.leonard.enums.StatusPedido;
 import com.felintro.leonard.enums.TipoPedido;
 import com.felintro.leonard.model.pedido.Pedido;
-import com.felintro.leonard.model.pedido.PedidoProduto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,12 +28,7 @@ public class PedidoDTO {
     private EmpresaDTO empresaDTO;
     private List<PedidoProdutoDTO> produtosDTO = new ArrayList<>();
     private TipoPedido tipoPedido;
-
-    public Pedido toEntity() {
-        List<PedidoProduto> pedidoProdutoList = new ArrayList<>();
-        produtosDTO.forEach(produtoDTO -> pedidoProdutoList.add(produtoDTO.toEntity()));
-        return new Pedido(this.dtEmissao, this.empresaDTO.toEntity(), pedidoProdutoList, tipoPedido);
-    }
+    private StatusPedido statusPedido;
 
     public PedidoDTO(Long nrPedido, LocalDate dtEmissao, EmpresaDTO empresaDTO, TipoPedido tipoPedido) {
         this.nrPedido = nrPedido;
@@ -45,6 +40,12 @@ public class PedidoDTO {
     public void adicionarProduto(PedidoProdutoDTO pedidoProdutoDTO) {
         pedidoProdutoDTO.setPedidoDTO(this);
         this.produtosDTO.add(pedidoProdutoDTO);
+    }
+
+    public Pedido toEntity() {
+        Pedido pedido = new Pedido(this.dtEmissao, this.empresaDTO.toEntity(), this.tipoPedido, this.statusPedido);
+        produtosDTO.forEach(pedidoProdutoDTO -> pedido.adicionarProduto(pedidoProdutoDTO.toEntity()));
+        return pedido;
     }
 
 }
