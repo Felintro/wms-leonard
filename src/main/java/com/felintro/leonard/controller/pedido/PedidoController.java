@@ -7,17 +7,14 @@ import com.felintro.leonard.service.pessoa.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/pedido")
-public class PedidoCompraController {
+public class PedidoController {
 
     private static final String PEDIDO_REGISTRADO = "Pedido registrado com sucesso!";
     private static final String PEDIDO_CANCELADO = "Pedido cancelado com sucesso!";
