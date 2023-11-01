@@ -37,7 +37,7 @@ public class Empresa {
     @Column(name = "nr_telefone", unique = true, nullable = false, length = 11)
     private String nrTelefone;
 
-    @Column(name = "tipo_empresa", nullable = false)
+    @Column(name = "tipo_empresa")
     @Enumerated(EnumType.STRING)
     private TipoEmpresa tipoEmpresa;
 
