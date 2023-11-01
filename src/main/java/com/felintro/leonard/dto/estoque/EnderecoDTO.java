@@ -23,4 +23,13 @@ public class EnderecoDTO implements Serializable {
         return new Endereco(nrRua, nrPredio, nrApartamento, containerDTO.toEntity());
     }
 
+    public String getEnderecoCompleto() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.nrRua)
+            .append(".")
+            .append(this.nrPredio)
+            .append(".")
+            .append(this.nrApartamento);
+        return sb.toString();
+    }
 }
