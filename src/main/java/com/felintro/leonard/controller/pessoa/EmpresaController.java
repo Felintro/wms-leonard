@@ -34,6 +34,7 @@ public class EmpresaController {
         }
         List<EmpresaDTO> listaDTO = empresaService.listarEmpresas();
         model.addAttribute("listaDTO", listaDTO);
+//        model.addAttribute("tiposEmpresaList", TipoEmpresa.values());
         return TELA_CADASTRO;
     }
 
@@ -50,12 +51,5 @@ public class EmpresaController {
         empresaService.alterarEmpresa(empresaDTO);
         return REDIRECT_FORMULARIO;
     }
-
-/*    @GetMapping("/visualizar")
-    public String listarEmpresas(Model model) {
-        List<EmpresaDTO> listaDTO = empresaService.listarEmpresas();
-        model.addAttribute("listaDTO", listaDTO);
-        return "view/view-empresa";
-    }*/
 
 }
