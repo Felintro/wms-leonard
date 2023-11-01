@@ -17,9 +17,10 @@ public class EnderecoDTO implements Serializable {
     private final int nrRua;
     private final int nrPredio;
     private final int nrApartamento;
+    private final ContainerDTO containerDTO;
 
     public Endereco toEntity() {
-        return new Endereco(nrRua, nrPredio, nrApartamento);
+        return new Endereco(nrRua, nrPredio, nrApartamento, containerDTO.toEntity());
     }
 
 }
