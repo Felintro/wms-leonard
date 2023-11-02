@@ -19,11 +19,10 @@ public class EnderecoDTO implements Serializable {
     private int nrRua;
     private int nrPredio;
     private int nrApartamento;
-    private ContainerDTO containerDTO;
     private PackDTO packDTO;
 
     public Endereco toEntity() {
-        return new Endereco(nrRua, nrPredio, nrApartamento, containerDTO.toEntity(), packDTO.toEntity());
+        return new Endereco(nrRua, nrPredio, nrApartamento, packDTO.toEntity());
     }
 
     public String getEnderecoCompleto() {

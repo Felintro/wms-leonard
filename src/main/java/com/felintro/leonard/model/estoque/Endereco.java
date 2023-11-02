@@ -34,18 +34,13 @@ public class Endereco {
     private int nrApartamento;
 
     @OneToOne
-    @JoinColumn(name = "nr_container")
-    private Container container;
-
-    @OneToOne
     @JoinColumn(name = "nr_pack")
     private Pack pack;
 
-    public Endereco(int numeroRua, int nrPredio, int numeroApartamento, Container container, Pack pack) {
+    public Endereco(int numeroRua, int nrPredio, int numeroApartamento, Pack pack) {
         this.nrRua = numeroRua;
         this.nrPredio = nrPredio;
         this.nrApartamento = numeroApartamento;
-        this.container = container;
         this.pack = pack;
     }
 
@@ -54,11 +49,11 @@ public class Endereco {
     }
 
     public boolean isOcupado() {
-        return this.container != null;
+        return this.pack != null;
     }
 
     public EnderecoDTO toDTO() {
-        return new EnderecoDTO(this.id, this.nrRua, this.nrPredio, this.nrApartamento, this.container.toDTO(), this.pack.toDTO());
+        return new EnderecoDTO(this.id, this.nrRua, this.nrPredio, this.nrApartamento, this.pack.toDTO());
     }
 
     public void atualizarDados(EnderecoDTO enderecoDTO) {
