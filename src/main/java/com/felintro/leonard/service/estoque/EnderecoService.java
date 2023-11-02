@@ -43,17 +43,17 @@ public class EnderecoService {
         return endereco.toDTO();
     }
 
-    public void cadastraVariosEnderecos(int qtdeRuas, int qtdePredios, int qtdeApartamentos) {
-        List<EnderecoDTO> listaEnderecos = new ArrayList<>();
-        for(int rua=1; rua<=qtdeRuas; rua++) {
-            for(int predio=1; predio<=qtdePredios; predio++) {
-                for(int apartamento=1; apartamento<=qtdeApartamentos; apartamento++) {
-                    listaEnderecos.add(new EnderecoDTO(null, rua, predio, apartamento));
-                }
-            }
-        }
-        listaEnderecos.forEach(enderecoDTO -> cadastrarEndereco(enderecoDTO));
-    }
+//    public void cadastraVariosEnderecos(int qtdeRuas, int qtdePredios, int qtdeApartamentos) {
+//        List<EnderecoDTO> listaEnderecos = new ArrayList<>();
+//        for(int rua=1; rua<=qtdeRuas; rua++) {
+//            for(int predio=1; predio<=qtdePredios; predio++) {
+//                for(int apartamento=1; apartamento<=qtdeApartamentos; apartamento++) {
+//                    listaEnderecos.add(new EnderecoDTO(null, rua, predio, apartamento));
+//                }
+//            }
+//        }
+//        listaEnderecos.forEach(enderecoDTO -> cadastrarEndereco(enderecoDTO));
+//    }
 
     public void alterarEndereco(EnderecoDTO enderecoDTO) {
         var endereco = enderecoRepository.getReferenceById(enderecoDTO.getId());
