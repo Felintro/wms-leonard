@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "pessoa")
@@ -31,7 +31,7 @@ public class Pessoa {
     private String nrCpf;
 
     @Column(name = "dt_hr_nascimento", nullable = false)
-    private LocalDateTime dtHrNascimento;
+    private LocalDate dtNascimento;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -39,22 +39,22 @@ public class Pessoa {
     @Column(name = "nr_telefone", unique = true, nullable = false, length = 11)
     private String nrTelefone;
 
-    public Pessoa(String nome, String nrCpf, LocalDateTime dtHrNascimento, String email, String nrTelefone) {
+    public Pessoa(String nome, String nrCpf, LocalDate dtNascimento, String email, String nrTelefone) {
         this.nome = nome;
         this.nrCpf = nrCpf;
-        this.dtHrNascimento = dtHrNascimento;
+        this.dtNascimento = dtNascimento;
         this.email = email;
         this.nrTelefone = nrTelefone;
     }
 
     public PessoaDTO toDTO() {
-        return new PessoaDTO(this.id, this.nome, this.nrCpf, this.dtHrNascimento, this.email, this.nrTelefone);
+        return new PessoaDTO(this.id, this.nome, this.nrCpf, this.dtNascimento, this.email, this.nrTelefone);
     }
 
     public void atualizarDados(PessoaDTO pessoaDTO) {
         this.nome = pessoaDTO.getNome();
         this.nrCpf = pessoaDTO.getNrCpf();
-        this.dtHrNascimento = pessoaDTO.getDtHrNascimento();
+        this.dtNascimento = pessoaDTO.getDtNascimento();
         this.email = pessoaDTO.getEmail();
         this.nrTelefone = pessoaDTO.getNrTelefone();
     }
