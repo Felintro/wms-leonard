@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://wwww.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{menu-lateral.html}">
+
+<head>
+</head>
+
+<body>
+<div layout:fragment="conteudo">
+    <br />
+    <h1>Movimentação</h1>
+    <div class="form-pequeno">
+        <form method="post" th:action="@{/movimentacao/efetuar}">
+
+            <div class="mb-3">
+                <label for="nrContainer" class="form-label">Número do Container: </label>
+                <input id="nrContainer" name="nrContainer" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Endereço destino: </label>
+            </div>
+
+            <div class="mb-3">
+                <label for="nrRuaDestino" class="form-label">Rua: </label>
+                <input id="nrRuaDestino" maxlength="13" name="nrRuaDestino" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label for="nrPredioDestino" class="form-label">Predio: </label>
+                <input id="nrPredioDestino" maxlength="14" name="nrPredioDestino" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label for="nrApartamentoDestino" class="form-label">Apartamento: </label>
+                <input id="nrApartamentoDestino" name="nrApartamentoDestino" class="form-control" />
+            </div>
+            <input type="submit" class="btn btn-primary" value="Efetuar" />
+        </form>
+    </div>
+
+    <br />
+    <h3>Operações Realizadas</h3>
+    <br/>
+
+    <div class="lista">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Endereço Origem</th>
+                <th scope="col">Endereço Destino</th>
+                <th scope="col">Número Container</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="movimentacaoDTO : ${listaMovimentacaoDTOS}">
+                <td th:text="${movimentacaoDTO.id}"></td>
+                <td th:text="${movimentacaoDTO.enderecoOrigem.getEnderecoCompleto()}"></td>
+                <td th:text="${movimentacaoDTO.enderecoDestino.getEnderecoCompleto()}"></td>
+                <td th:text="${movimentacaoDTO.getPack.getNrContainer()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
