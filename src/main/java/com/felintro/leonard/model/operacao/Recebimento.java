@@ -7,4 +7,6 @@ import jakarta.persistence.Table;
 @Table(name = "recebimento")
 public class Recebimento extends Operacao {
 
+
+
 }

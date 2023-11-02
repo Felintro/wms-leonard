@@ -6,4 +6,5 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "separacao")
 public class Separacao extends Operacao {
+
 }
