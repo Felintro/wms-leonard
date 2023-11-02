@@ -5,18 +5,22 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
+/**
+ * @author allan
+ **/
 
 @MappedSuperclass
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public abstract class Operacao {
 
     @Id
@@ -24,7 +28,6 @@ public abstract class Operacao {
     private Long id;
 
     @Column(name = "dt_hr_realizacao")
-    @Temporal(TemporalType.DATE)
-    private Date dataHoraRealizacao;
+    private LocalDateTime dtHrRealizacao;
 
 }
