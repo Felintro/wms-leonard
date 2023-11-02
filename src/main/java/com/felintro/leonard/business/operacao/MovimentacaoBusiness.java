@@ -5,7 +5,6 @@ import com.felintro.leonard.dto.operacao.RealizaMovimentacaoDTO;
 import com.felintro.leonard.model.estoque.Endereco;
 import com.felintro.leonard.model.estoque.Pack;
 import com.felintro.leonard.model.operacao.Movimentacao;
-import com.felintro.leonard.repository.estoque.ContainerRepository;
 import com.felintro.leonard.repository.estoque.EnderecoRepository;
 import com.felintro.leonard.repository.estoque.PackRepository;
 import com.felintro.leonard.repository.operacao.MovimentacaoRepository;
