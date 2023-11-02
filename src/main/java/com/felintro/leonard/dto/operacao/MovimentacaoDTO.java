@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * DTO for {@link com.felintro.leonard.model.operacao.Movimentacao}
@@ -23,13 +23,13 @@ public class MovimentacaoDTO implements Serializable {
     private final EnderecoDTO enderecoOrigem;
     private final EnderecoDTO enderecoDestino;
     private final PackDTO pack;
-    private final LocalDate dtRealizacao;
+    private final LocalDateTime dtHrRealizacao;
 
     public MovimentacaoDTO(Movimentacao movimentacao) {
         this.id = movimentacao.getId();
         this.enderecoOrigem = movimentacao.getEnderecoOrigem().toDTO();
         this.enderecoDestino = movimentacao.getEnderecoDestino().toDTO();
         this.pack = movimentacao.getPack().toDTO();
-        this.dtRealizacao = movimentacao.getDtRealizacao();
+        this.dtHrRealizacao = movimentacao.getDtHrRealizacao();
     }
 }
