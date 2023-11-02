@@ -3,6 +3,7 @@ package com.felintro.leonard.dto.estoque;
 import com.felintro.leonard.model.estoque.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -10,17 +11,19 @@ import java.io.Serializable;
  * DTO for {@link com.felintro.leonard.model.estoque.Endereco}
  */
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public class EnderecoDTO implements Serializable {
 
-    private final Long id;
-    private final int nrRua;
-    private final int nrPredio;
-    private final int nrApartamento;
-    private final ContainerDTO containerDTO;
+    private Long id;
+    private int nrRua;
+    private int nrPredio;
+    private int nrApartamento;
+    private ContainerDTO containerDTO;
+    private PackDTO packDTO;
 
     public Endereco toEntity() {
-        return new Endereco(nrRua, nrPredio, nrApartamento, containerDTO.toEntity());
+        return new Endereco(nrRua, nrPredio, nrApartamento, containerDTO.toEntity(), packDTO.toEntity());
     }
 
     public String getEnderecoCompleto() {
