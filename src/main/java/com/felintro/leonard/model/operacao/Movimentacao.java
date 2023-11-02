@@ -15,7 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * @author allan
@@ -44,14 +44,14 @@ public class Movimentacao extends Operacao {
     @OneToOne
     private Pack pack;
 
-    @Column(name = "dt_realizacao", nullable = false)
-    private LocalDate dtRealizacao;
+    @Column(name = "dt_hr_realizacao", nullable = false)
+    private LocalDateTime dtHrRealizacao;
 
-    public Movimentacao(Endereco enderecoOrigem, Endereco enderecoDestino, Pack pack, LocalDate dtRealizacao) {
+    public Movimentacao(Endereco enderecoOrigem, Endereco enderecoDestino, Pack pack, LocalDateTime dtHrRealizacao) {
         this.enderecoOrigem = enderecoOrigem;
         this.enderecoDestino = enderecoDestino;
         this.pack = pack;
-        this.dtRealizacao = dtRealizacao;
+        this.dtHrRealizacao = dtHrRealizacao;
     }
 
     public MovimentacaoDTO toDTO() {

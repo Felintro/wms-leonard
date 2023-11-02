@@ -20,7 +20,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +40,8 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long nrPedido;
 
-    @Column(name = "dt_emissao", nullable = false)
-    private LocalDate dtEmissao;
+    @Column(name = "dt_hr_emissao", nullable = false)
+    private LocalDateTime dtHrEmissao;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<PedidoProduto> produtos = new ArrayList<>();
@@ -58,8 +58,8 @@ public class Pedido {
     @Enumerated(EnumType.STRING)
     private StatusPedido statusPedido;
 
-    public Pedido(LocalDate dtEmissao, Empresa empresa, TipoPedido tipoPedido, StatusPedido statusPedido) {
-        this.dtEmissao = dtEmissao;
+    public Pedido(LocalDateTime dtHrEmissao, Empresa empresa, TipoPedido tipoPedido, StatusPedido statusPedido) {
+        this.dtHrEmissao = dtHrEmissao;
         this.empresa = empresa;
         this.tipoPedido = tipoPedido;
         this.statusPedido = statusPedido;
@@ -76,7 +76,7 @@ public class Pedido {
     }
 
     public PedidoDTO toDTO() {
-        PedidoDTO pedidoDTO = new PedidoDTO(this.nrPedido, this.dtEmissao, this.empresa.toDTO(), this.tipoPedido);
+        PedidoDTO pedidoDTO = new PedidoDTO(this.nrPedido, this.dtHrEmissao, this.empresa.toDTO(), this.tipoPedido);
         produtos.forEach(pedidoProduto -> pedidoDTO.adicionarProduto(pedidoProduto.toDTO()));
         return pedidoDTO;
     }

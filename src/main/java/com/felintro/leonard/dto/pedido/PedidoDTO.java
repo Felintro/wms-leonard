@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,15 +24,15 @@ import java.util.List;
 public class PedidoDTO {
 
     private Long nrPedido;
-    private LocalDate dtEmissao;
+    private LocalDateTime dtHrEmissao;
     private EmpresaDTO empresaDTO;
     private List<PedidoProdutoDTO> produtosDTO = new ArrayList<>();
     private TipoPedido tipoPedido;
     private StatusPedido statusPedido;
 
-    public PedidoDTO(Long nrPedido, LocalDate dtEmissao, EmpresaDTO empresaDTO, TipoPedido tipoPedido) {
+    public PedidoDTO(Long nrPedido, LocalDateTime dtHrEmissao, EmpresaDTO empresaDTO, TipoPedido tipoPedido) {
         this.nrPedido = nrPedido;
-        this.dtEmissao = dtEmissao;
+        this.dtHrEmissao = dtHrEmissao;
         this.empresaDTO = empresaDTO;
         this.tipoPedido = tipoPedido;
     }
@@ -43,7 +43,7 @@ public class PedidoDTO {
     }
 
     public Pedido toEntity() {
-        Pedido pedido = new Pedido(this.dtEmissao, this.empresaDTO.toEntity(), this.tipoPedido, this.statusPedido);
+        Pedido pedido = new Pedido(this.dtHrEmissao, this.empresaDTO.toEntity(), this.tipoPedido, this.statusPedido);
         produtosDTO.forEach(pedidoProdutoDTO -> pedido.adicionarProduto(pedidoProdutoDTO.toEntity()));
         return pedido;
     }
