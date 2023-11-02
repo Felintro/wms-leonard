@@ -1,7 +1,6 @@
 package com.felintro.leonard.service.estoque;
 
 import com.felintro.leonard.dto.estoque.EnderecoDTO;
-import com.felintro.leonard.dto.estoque.ProdutoDTO;
 import com.felintro.leonard.model.estoque.Endereco;
 import com.felintro.leonard.repository.estoque.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
