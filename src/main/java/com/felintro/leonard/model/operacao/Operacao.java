@@ -1,6 +1,9 @@
 package com.felintro.leonard.model.operacao;
 
+import com.felintro.leonard.enums.StatusOperacao;
 import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,5 +28,9 @@ public abstract class Operacao {
 
     @Column(name = "dt_hr_realizacao")
     protected LocalDateTime dtHrRealizacao;
+
+    @Column(name = "status_operacao")
+    @Enumerated(EnumType.STRING)
+    protected StatusOperacao statusOperacao;
 
 }

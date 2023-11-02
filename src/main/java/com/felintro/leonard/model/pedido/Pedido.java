@@ -40,15 +40,15 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long nrPedido;
 
+    @JoinColumn(name = "id_empresa", nullable = false)
+    @OneToOne
+    private Empresa empresa;
+
     @Column(name = "dt_hr_emissao", nullable = false)
     private LocalDateTime dtHrEmissao;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<PedidoProduto> produtos = new ArrayList<>();
-
-    @JoinColumn(name = "id_empresa", nullable = false)
-    @OneToOne
-    private Empresa empresa;
 
     @Column(name = "tipo_pedido")
     @Enumerated(EnumType.STRING)
