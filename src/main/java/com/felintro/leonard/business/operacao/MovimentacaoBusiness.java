@@ -31,9 +31,6 @@ public class MovimentacaoBusiness {
     private EnderecoRepository enderecoRepository;
 
     @Autowired
-    private ContainerRepository containerRepository;
-
-    @Autowired
     private PackRepository packRepository;
 
     public boolean realizaMovimentacao(RealizaMovimentacaoDTO movimentacaoDTO) {
