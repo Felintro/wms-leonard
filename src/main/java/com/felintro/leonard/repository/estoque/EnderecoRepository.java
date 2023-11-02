@@ -15,9 +15,6 @@ public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
 
     boolean existsByNrRuaAndNrPredioAndNrApartamento(int nrRua, int nrPredio, int nrApartamento);
 
-    @Query("SELECT e FROM Endereco e WHERE e.container.nrContainer = ?1")
-    Endereco findByNrContainer(Long nrContainer);
-
     @Query("SELECT e FROM Endereco e WHERE e.pack.nrPack = ?1")
     Endereco findByNrPack(Long nrPack);
 
