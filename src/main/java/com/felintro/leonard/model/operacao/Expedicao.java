@@ -26,7 +26,9 @@ public class Expedicao extends Operacao {
     private Empresa empresa;
 
     @OneToMany
-    @JoinTable(name = "expedicao_container")
+    @JoinTable(name = "expedicao_container",
+        joinColumns = {@JoinColumn(name = "id_expedicao")},
+        inverseJoinColumns = {@JoinColumn(name = "nr_container")})
     private List<Container> containerList;
 
     public void adicionarContainer(Container container) {

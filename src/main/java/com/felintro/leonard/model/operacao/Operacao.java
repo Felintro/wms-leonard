@@ -24,6 +24,7 @@ public abstract class Operacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_operacao")
     protected Long id;
 
     @Column(name = "dt_hr_realizacao")

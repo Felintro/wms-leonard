@@ -20,7 +20,9 @@ public class Recebimento extends Operacao {
     private Pedido pedido;
 
     @OneToMany
-    @JoinTable(name = "recebimento_pack")
+    @JoinTable(name = "recebimento_pack",
+        joinColumns = {@JoinColumn(name = "id_recebimento")},
+        inverseJoinColumns = {@JoinColumn(name = "nr_pack")})
     private List<Pack> packList;
 
 }

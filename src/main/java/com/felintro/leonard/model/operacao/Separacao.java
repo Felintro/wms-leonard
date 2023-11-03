@@ -27,7 +27,9 @@ public class Separacao extends Operacao {
     private Pedido pedido;
 
     @OneToMany
-    @JoinTable(name = "separacao_container")
+    @JoinTable(name = "separacao_container",
+        joinColumns = {@JoinColumn(name = "id_separacao")},
+        inverseJoinColumns = {@JoinColumn(name = "nr_container")})
     private List<Container> containerList = new ArrayList<>();
 
 }
