@@ -33,7 +33,6 @@ public class MovimentacaoController {
         List<MovimentacaoDTO> listaMovimentacaoDTOS = movimentacaoBusiness.listarMovimentacoes();
         model.addAttribute("listaMovimentacaoDTOS", listaMovimentacaoDTOS);
         model.addAttribute("nrContainer", 0);
-        model.addAttribute("enderecoDestinoDTO", new EnderecoDTO());
         return TELA_MOVIMENTACOES;
     }
 

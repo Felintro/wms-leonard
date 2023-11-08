@@ -32,4 +32,9 @@ public class MovimentacaoDTO implements Serializable {
         this.pack = movimentacao.getPack().toDTO();
         this.dtHrRealizacao = movimentacao.getDtHrRealizacao();
     }
+
+    public Movimentacao toEntity() {
+        return new Movimentacao(this.enderecoOrigem.toEntity(), this.enderecoDestino.toEntity(), this.pack.toEntity(), this.dtHrRealizacao);
+    }
+
 }

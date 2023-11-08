@@ -15,8 +15,8 @@
         <form method="post" th:action="@{/movimentacao/efetuar}">
 
             <div class="mb-3">
-                <label for="nrContainer" class="form-label">Número do Container: </label>
-                <input id="nrContainer" name="nrContainer" class="form-control" />
+                <label for="nrPack" class="form-label">Número do Pack: </label>
+                <input id="nrPack" name="nrPack" class="form-control" />
             </div>
 
             <div class="mb-3">
@@ -48,20 +48,20 @@
     <div class="lista">
         <table class="table">
             <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Endereço Origem</th>
-                <th scope="col">Endereço Destino</th>
-                <th scope="col">Número Container</th>
-            </tr>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Endereço Origem</th>
+                    <th scope="col">Endereço Destino</th>
+                    <th scope="col">Número Pack</th>
+                </tr>
             </thead>
             <tbody>
-            <tr th:each="movimentacaoDTO : ${listaMovimentacaoDTOS}">
-                <td th:text="${movimentacaoDTO.id}"></td>
-                <td th:text="${movimentacaoDTO.enderecoOrigem.getEnderecoCompleto()}"></td>
-                <td th:text="${movimentacaoDTO.enderecoDestino.getEnderecoCompleto()}"></td>
-                <td th:text="${movimentacaoDTO.getPack.getNrContainer()}"></td>
-            </tr>
+                <tr th:each="movimentacaoDTO : ${listaMovimentacaoDTOS}">
+                    <td th:text="${movimentacaoDTO.id}"></td>
+                    <td th:text="${movimentacaoDTO.enderecoOrigem.getEnderecoCompleto()}"></td>
+                    <td th:text="${movimentacaoDTO.enderecoDestino.getEnderecoCompleto()}"></td>
+                    <td th:text="${movimentacaoDTO.getPack().getNrPack()}"></td>
+                </tr>
             </tbody>
         </table>
     </div>
