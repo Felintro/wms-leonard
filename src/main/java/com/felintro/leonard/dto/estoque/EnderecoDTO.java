@@ -9,9 +9,9 @@ import java.io.Serializable;
 
 /**
  * DTO for {@link com.felintro.leonard.model.estoque.Endereco}
+ * @author Allan
  */
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 public class EnderecoDTO implements Serializable {
 
@@ -19,10 +19,9 @@ public class EnderecoDTO implements Serializable {
     private int nrRua;
     private int nrPredio;
     private int nrApartamento;
-    private PackDTO packDTO;
 
     public Endereco toEntity() {
-        return new Endereco(nrRua, nrPredio, nrApartamento, packDTO.toEntity());
+        return new Endereco(nrRua, nrPredio, nrApartamento);
     }
 
     public String getEnderecoCompleto() {
@@ -34,4 +33,5 @@ public class EnderecoDTO implements Serializable {
             .append(this.nrApartamento);
         return sb.toString();
     }
+
 }

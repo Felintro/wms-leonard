@@ -37,11 +37,10 @@ public class Endereco {
     @JoinColumn(name = "nr_pack")
     private Pack pack;
 
-    public Endereco(int numeroRua, int nrPredio, int numeroApartamento, Pack pack) {
+    public Endereco(int numeroRua, int nrPredio, int numeroApartamento) {
         this.nrRua = numeroRua;
         this.nrPredio = nrPredio;
         this.nrApartamento = numeroApartamento;
-        this.pack = pack;
     }
 
     public String getEnderecoCompleto() {
@@ -53,7 +52,7 @@ public class Endereco {
     }
 
     public EnderecoDTO toDTO() {
-        return new EnderecoDTO(this.id, this.nrRua, this.nrPredio, this.nrApartamento, this.pack.toDTO());
+        return new EnderecoDTO(this.id, this.nrRua, this.nrPredio, this.nrApartamento);
     }
 
     public void atualizarDados(EnderecoDTO enderecoDTO) {
