@@ -1,7 +1,6 @@
 package com.felintro.leonard.controller.operacao;
 
 import com.felintro.leonard.business.operacao.MovimentacaoBusiness;
-import com.felintro.leonard.dto.estoque.EnderecoDTO;
 import com.felintro.leonard.dto.operacao.MovimentacaoDTO;
 import com.felintro.leonard.dto.operacao.RealizaMovimentacaoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
