@@ -3,7 +3,6 @@ package com.felintro.leonard.dto.estoque;
 import com.felintro.leonard.model.estoque.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 

@@ -34,7 +34,7 @@ public class Endereco {
     private int nrApartamento;
 
     @OneToOne
-    @JoinColumn(name = "nr_pack")
+    @JoinColumn(name = "nr_pack", unique = true)
     private Pack pack;
 
     public Endereco(int numeroRua, int nrPredio, int numeroApartamento) {
