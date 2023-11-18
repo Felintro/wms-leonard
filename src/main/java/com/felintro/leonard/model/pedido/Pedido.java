@@ -76,7 +76,7 @@ public class Pedido {
     }
 
     public PedidoDTO toDTO() {
-        PedidoDTO pedidoDTO = new PedidoDTO(this.nrPedido, this.dtHrEmissao, this.empresa.toDTO(), this.tipoPedido);
+        PedidoDTO pedidoDTO = new PedidoDTO(this.nrPedido, this.dtHrEmissao, this.empresa.toDTO(), this.tipoPedido, this.statusPedido);
         produtos.forEach(pedidoProduto -> pedidoDTO.adicionarProduto(pedidoProduto.toDTO()));
         return pedidoDTO;
     }

@@ -31,11 +31,12 @@ public class PedidoDTO {
     private TipoPedido tipoPedido;
     private StatusPedido statusPedido;
 
-    public PedidoDTO(Long nrPedido, LocalDateTime dtHrEmissao, EmpresaDTO empresaDTO, TipoPedido tipoPedido) {
+    public PedidoDTO(Long nrPedido, LocalDateTime dtHrEmissao, EmpresaDTO empresaDTO, TipoPedido tipoPedido, StatusPedido statusPedido) {
         this.nrPedido = nrPedido;
         this.dtHrEmissao = dtHrEmissao;
         this.empresaDTO = empresaDTO;
         this.tipoPedido = tipoPedido;
+        this.statusPedido = statusPedido;
     }
 
     public void adicionarProduto(PedidoProdutoDTO pedidoProdutoDTO) {
@@ -52,6 +53,12 @@ public class PedidoDTO {
     public String getDtHrEmissaoFormatada() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return this.dtHrEmissao.format(dateTimeFormatter);
+    }
+
+    public int getQtdeVolumes() {
+        return produtosDTO.stream()
+            .mapToInt(produto -> produto.getQuantidade())
+            .sum();
     }
 
 }
