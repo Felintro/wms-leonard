@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +47,11 @@ public class PedidoDTO {
         Pedido pedido = new Pedido(this.dtHrEmissao, this.empresaDTO.toEntity(), this.tipoPedido, this.statusPedido);
         produtosDTO.forEach(pedidoProdutoDTO -> pedido.adicionarProduto(pedidoProdutoDTO.toEntity()));
         return pedido;
+    }
+
+    public String getDtHrEmissaoFormatada() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return this.dtHrEmissao.format(dateTimeFormatter);
     }
 
 }
