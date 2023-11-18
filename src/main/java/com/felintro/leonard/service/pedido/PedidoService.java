@@ -27,8 +27,10 @@ public class PedidoService {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+
     @Autowired
     private EmpresaRepository empresaRepository;
+
     @Autowired
     private ProdutoRepository produtoRepository;
 
@@ -46,11 +48,9 @@ public class PedidoService {
         return pedidoRepository.getReferenceById(nrPedido).toDTO();
     }
 
-
-    private List<PedidoDTO> geraPedidoDTOS(List<Pedido> pedidos) {
-        List<PedidoDTO> retorno = new ArrayList<>();
-        pedidos.forEach(pedido -> retorno.add(pedido.toDTO()));
-        return retorno;
+    public List<PedidoDTO> buscarPorStatusETipo(StatusPedido statusPedido, TipoPedido tipoPedido) {
+        List<Pedido> pedidos = pedidoRepository.findByStatusPedidoAndTipoPedido(statusPedido, tipoPedido);
+        return geraPedidoDTOS(pedidos);
     }
 
     public PedidoDTO registrarPedido(RegistraPedidoDTO registraPedidoDTO) {
@@ -73,6 +73,12 @@ public class PedidoService {
         Pedido pedido = pedidoRepository.getReferenceById(nrPedido);
         pedido.setStatusPedido(StatusPedido.CANCELADO);
         return pedido.toDTO();
+    }
+
+    private List<PedidoDTO> geraPedidoDTOS(List<Pedido> pedidos) {
+        List<PedidoDTO> retorno = new ArrayList<>();
+        pedidos.forEach(pedido -> retorno.add(pedido.toDTO()));
+        return retorno;
     }
 
 }
