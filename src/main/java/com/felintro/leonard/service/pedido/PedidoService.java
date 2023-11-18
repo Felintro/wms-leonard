@@ -1,6 +1,7 @@
 package com.felintro.leonard.service.pedido;
 
 import com.felintro.leonard.dto.pedido.PedidoDTO;
+import com.felintro.leonard.dto.pedido.PedidoProdutoDTO;
 import com.felintro.leonard.dto.pedido.RegistraPedidoDTO;
 import com.felintro.leonard.enums.StatusPedido;
 import com.felintro.leonard.enums.TipoPedido;
@@ -46,6 +47,10 @@ public class PedidoService {
 
     public PedidoDTO buscarPorNrPedido(Long nrPedido) {
         return pedidoRepository.getReferenceById(nrPedido).toDTO();
+    }
+
+    public List<PedidoProdutoDTO> buscarProdutosPorNrPedido(Long nrPedido) {
+        return pedidoRepository.getReferenceById(nrPedido).toDTO().getProdutosDTO();
     }
 
     public List<PedidoDTO> buscarPorStatusETipo(StatusPedido statusPedido, TipoPedido tipoPedido) {
