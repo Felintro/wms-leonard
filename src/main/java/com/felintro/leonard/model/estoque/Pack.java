@@ -27,7 +27,6 @@ import lombok.Setter;
 public class Pack {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "nr_pack")
     private Long nrPack;
 
