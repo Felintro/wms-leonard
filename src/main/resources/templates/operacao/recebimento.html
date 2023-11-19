@@ -49,7 +49,7 @@
                         <input type="text" name="nrPack" class="form-control" placeholder="Nº do Pack" />
                     </td>
                     <td>
-                        <input type="submit" class="btn btn-primary" value="Receber">
+                        <input type="submit" class="btn btn-primary" value="Receber" />
                     </td>
                 </form>
             </tr>
@@ -84,9 +84,13 @@
                 <td th:text="${packRecebido.produtoDTO.nrEan13}"></td>
                 <td th:text="${packRecebido.produtoDTO.nrDun14}"></td>
                 <td th:text="${packRecebido.quantidade}"></td>
-                <td>
-                    <a th:href="@{/recebimento/estornar}">Estornar Recebimento</a>
-                </td>
+                <form method="post" th:action="@{/recebimento/estornar}">
+                    <input type="hidden" name="nrPackEstorno" th:value="${packRecebido.nrPack}">
+                    <input type="hidden" name="nrPedidoEstorno" th:value="${recebimentoDTO.pedidoDTO.nrPedido}">
+                    <td>
+                        <input type="submit" class="btn btn-primary" value="Estornar Recebimento" />
+                    </td>
+                </form>
             </tr>
             </tbody>
         </table>

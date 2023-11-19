@@ -1,5 +1,6 @@
 package com.felintro.leonard.business.operacao;
 
+import com.felintro.leonard.dto.operacao.EstornarProdutoDTO;
 import com.felintro.leonard.dto.operacao.ReceberProdutoDTO;
 import com.felintro.leonard.enums.StatusOperacao;
 import com.felintro.leonard.enums.StatusPedido;
@@ -12,6 +13,7 @@ import com.felintro.leonard.repository.estoque.PackRepository;
 import com.felintro.leonard.repository.estoque.ProdutoRepository;
 import com.felintro.leonard.repository.operacao.RecebimentoRepository;
 import com.felintro.leonard.repository.pedido.PedidoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,8 +79,12 @@ public class RecebimentoBusiness {
 
     }
 
-    public void estornarProduto(Long nrPedido, Long nrPack, String nrEan13) {
-
+    public void estornarProduto(EstornarProdutoDTO estornarProdutoDTO) {
+        Pack pack = packRepository.findById(estornarProdutoDTO.getNrPackEstorno()).orElseThrow(EntityNotFoundException ::new);
+        Recebimento recebimento = recebimentoRepository.findRecebimentoByPedidoNrPedido(estornarProdutoDTO.getNrPedidoEstorno()).orElseThrow(EntityNotFoundException ::new);
+        recebimento.getPackList().remove(pack);
+        recebimentoRepository.save(recebimento);
+        packRepository.delete(pack);
     }
 
     public Optional<Recebimento> buscarPorNrPedido(Long nrPedido) {
