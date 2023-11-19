@@ -6,6 +6,6 @@ package com.felintro.leonard.enums;
 
 public enum StatusPedido {
     ABERTO,
-    CONCLUIDO,
+    RECEBIDO,
     CANCELADO
 }
