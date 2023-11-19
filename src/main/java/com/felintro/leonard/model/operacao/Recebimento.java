@@ -5,6 +5,7 @@ import com.felintro.leonard.dto.operacao.RecebimentoDTO;
 import com.felintro.leonard.enums.StatusOperacao;
 import com.felintro.leonard.model.estoque.Pack;
 import com.felintro.leonard.model.pedido.Pedido;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -15,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -32,11 +34,11 @@ public class Recebimento extends Operacao {
     @JoinColumn(name = "nr_pedido", nullable = false)
     private Pedido pedido;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "recebimento_pack",
         joinColumns = {@JoinColumn(name = "id_recebimento")},
         inverseJoinColumns = {@JoinColumn(name = "nr_pack")})
-    private List<Pack> packList;
+    private List<Pack> packList = new ArrayList<>();
 
     public Recebimento(Long id, LocalDateTime dtHrRealizacao, StatusOperacao statusOperacao, Pedido pedido, List<Pack> packList) {
         super(id, dtHrRealizacao, statusOperacao);

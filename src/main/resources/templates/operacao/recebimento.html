@@ -1,10 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://wwww.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{menu-lateral.html}">
 
+<head>
+</head>
+
+<body>
+<div layout:fragment="conteudo">
+    <br />
+    <h1>Recebimento</h1>
+    <br/>
+
+    <div>
+        <h5>Nº do Pedido: <label class="form-label" th:text="${nrPedido}"></label> </h5>
+        <h5>Status da operação: <label class="form-label" th:text="${recebimentoDTO?.statusOperacao} ?: 'PENDENTE'"></label> </h5>
+    </div>
+
+    <div class="lista recebimento">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">EAN13</th>
+                <th scope="col">DUN14</th>
+                <th scope="col">Qtde Pedido</th>
+                <th scope="col">Qtde Física</th>
+                <th scope="col">Pack</th>
+                <th scope="col">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pedidoProdutoDTO : ${pedidoProdutoDTOList}">
+                <td th:text="${pedidoProdutoDTO.produtoDTO.id}"></td>
+                <td th:text="${pedidoProdutoDTO.produtoDTO.descricao}"></td>
+                <td th:text="${pedidoProdutoDTO.produtoDTO.nrEan13}"></td>
+                <td th:text="${pedidoProdutoDTO.produtoDTO.nrDun14}"></td>
+                <td th:text="${pedidoProdutoDTO.quantidade}"></td>
+                <form method="post" th:action="@{/recebimento/receber}">
+                    <input type="hidden" name="nrPedido" th:value="${nrPedido}">
+                    <input type="hidden" name="nrEan13" th:value="${pedidoProdutoDTO.produtoDTO.nrEan13}">
+                    <td>
+                        <input type="text" name="qtdeRecebida" class="form-control" placeholder="Qtde Física" />
+                    </td>
+                    <td>
+                        <input type="text" name="nrPack" class="form-control" placeholder="Nº do Pack" />
+                    </td>
+                    <td>
+                        <input type="submit" class="btn btn-primary" value="Receber">
+                    </td>
+                </form>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <br />
+        <h3>Packs recebidos:</h3>
+        <br />
+    </div>
+
+    <div class="lista recebimento">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Nª do Pack</th>
+                <th scope="col">Id Produto</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">EAN13</th>
+                <th scope="col">DUN14</th>
+                <th scope="col">Qtde</th>
+                <th scope="col">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="packRecebido : ${recebimentoDTO?.getPackListDTO()}">
+                <td th:text="${packRecebido.nrPack}"></td>
+                <td th:text="${packRecebido.produtoDTO.id}"></td>
+                <td th:text="${packRecebido.produtoDTO.descricao}"></td>
+                <td th:text="${packRecebido.produtoDTO.nrEan13}"></td>
+                <td th:text="${packRecebido.produtoDTO.nrDun14}"></td>
+                <td th:text="${packRecebido.quantidade}"></td>
+                <td>
+                    <a th:href="@{/recebimento/estornar}">Estornar Recebimento</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>
