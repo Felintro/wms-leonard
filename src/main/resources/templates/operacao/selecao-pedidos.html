@@ -66,7 +66,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="pedido : ${listaPedidosRecebidosDTO}" th:if="pedido != null">
+            <tr th:each="pedido : ${listaPedidosRecebidosDTO}" th:if="${not #lists.isEmpty(listaPedidosRecebidosDTO)}">
                 <td th:text="${pedido.nrPedido}"></td>
                 <td th:text="${pedido.getDtHrEmissaoFormatada()}"></td>
                 <td th:text="${pedido.empresaDTO.razaoSocial}"></td>
@@ -74,6 +74,9 @@
                 <td th:text="${pedido.statusPedido}"></td>
                 <td th:text="${pedido.produtosDTO.size()}"></td>
                 <td th:text="${pedido.getQtdeVolumes()}"></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(listaPedidosRecebidosDTO)}">
+                <td colspan="7">Vazio.</td>
             </tr>
             </tbody>
         </table>
