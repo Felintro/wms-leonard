@@ -41,6 +41,9 @@
                 <td>
                     <a th:href="@{/recebimento/formulario?nrPedido={nrPedido} (nrPedido=${pedidoAberto.nrPedido}) }">Receber</a>
                 </td>
+                <tr th:if="${#lists.isEmpty(listaPedidosAbertosDTO)}">
+                    <td colspan="8">Vazio.</td>
+                </tr>
             </tr>
             </tbody>
         </table>

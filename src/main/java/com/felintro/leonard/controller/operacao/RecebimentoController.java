@@ -1,6 +1,7 @@
 package com.felintro.leonard.controller.operacao;
 
 import com.felintro.leonard.business.operacao.RecebimentoBusiness;
+import com.felintro.leonard.dto.estoque.PackDTO;
 import com.felintro.leonard.dto.operacao.EstornarProdutoDTO;
 import com.felintro.leonard.dto.operacao.ReceberProdutoDTO;
 import com.felintro.leonard.dto.operacao.RecebimentoDTO;
@@ -31,6 +32,8 @@ public class RecebimentoController {
     private static final String TELA_RECEBIMENTO = "operacao/recebimento";
     private static final String TELA_INICIAL = "operacao/selecao-pedidos";
     private static final String REDIRECT_FORMULARIO = "redirect:/recebimento/formulario";
+    private static final String REDIRECT_TELA_INICIAL = "redirect:/recebimento/selecao-pedido";
+
 
     @Autowired
     private RecebimentoBusiness recebimentoBusiness;
@@ -51,23 +54,33 @@ public class RecebimentoController {
 
     @GetMapping("/formulario")
     public String carregaPaginaRecebimento(Long nrPedido, Model model) {
-        List<PedidoProdutoDTO> pedidoProdutoDTOList = pedidoService.buscarProdutosPorNrPedido(nrPedido);
+        List<PedidoProdutoDTO> produtosPendentesDTOList = pedidoService.buscarProdutosPorNrPedido(nrPedido);
         Optional<Recebimento> optRecebimento = recebimentoBusiness.buscarPorNrPedido(nrPedido);
 
         if(optRecebimento.isPresent()){
             RecebimentoDTO recebimentoDTO = optRecebimento.get().toDTO();
+
+            recebimentoDTO.getPackListDTO()
+                .stream()
+                .map(PackDTO::getProdutoDTO)
+                .forEach(produtoRecebidoDTO ->
+                    produtosPendentesDTOList.removeIf(produtoPendenteDTO ->
+                        produtoPendenteDTO.getProdutoDTO().getId().equals(produtoRecebidoDTO.getId())
+                    )
+                );
+
             model.addAttribute("recebimentoDTO", recebimentoDTO);
         }
 
         model.addAttribute("nrPedido", nrPedido);
-        model.addAttribute("pedidoProdutoDTOList", pedidoProdutoDTOList);
+        model.addAttribute("produtosPendentesDTOList", produtosPendentesDTOList);
         return TELA_RECEBIMENTO;
     }
 
     @PostMapping("/receber")
     public String receberProduto(ReceberProdutoDTO receberProdutoDTO) {
         boolean isOperacaoFinalizada = recebimentoBusiness.receberProduto(receberProdutoDTO);
-        return isOperacaoFinalizada ? TELA_INICIAL : REDIRECT_FORMULARIO + "?nrPedido=" + receberProdutoDTO.getNrPedido();
+        return isOperacaoFinalizada ? REDIRECT_TELA_INICIAL : REDIRECT_FORMULARIO + "?nrPedido=" + receberProdutoDTO.getNrPedido();
     }
 
     @PostMapping("/estornar")

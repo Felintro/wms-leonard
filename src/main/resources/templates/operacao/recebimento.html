@@ -33,15 +33,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="pedidoProdutoDTO : ${pedidoProdutoDTOList}">
-                <td th:text="${pedidoProdutoDTO.produtoDTO.id}"></td>
-                <td th:text="${pedidoProdutoDTO.produtoDTO.descricao}"></td>
-                <td th:text="${pedidoProdutoDTO.produtoDTO.nrEan13}"></td>
-                <td th:text="${pedidoProdutoDTO.produtoDTO.nrDun14}"></td>
-                <td th:text="${pedidoProdutoDTO.quantidade}"></td>
+            <tr th:each="produtoPendenteDTO : ${produtosPendentesDTOList}">
+                <td th:text="${produtoPendenteDTO.produtoDTO.id}"></td>
+                <td th:text="${produtoPendenteDTO.produtoDTO.descricao}"></td>
+                <td th:text="${produtoPendenteDTO.produtoDTO.nrEan13}"></td>
+                <td th:text="${produtoPendenteDTO.produtoDTO.nrDun14}"></td>
+                <td th:text="${produtoPendenteDTO.quantidade}"></td>
                 <form method="post" th:action="@{/recebimento/receber}">
                     <input type="hidden" name="nrPedido" th:value="${nrPedido}">
-                    <input type="hidden" name="nrEan13" th:value="${pedidoProdutoDTO.produtoDTO.nrEan13}">
+                    <input type="hidden" name="nrEan13" th:value="${produtoPendenteDTO.produtoDTO.nrEan13}">
                     <td>
                         <input type="text" name="qtdeRecebida" class="form-control" placeholder="Qtde Física" />
                     </td>
