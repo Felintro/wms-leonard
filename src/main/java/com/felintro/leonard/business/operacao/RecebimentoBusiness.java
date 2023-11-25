@@ -42,7 +42,7 @@ public class RecebimentoBusiness {
         boolean isOperacaoFinalizada = false;
 
         Optional<Recebimento> optRecebimento = buscarPorNrPedido(receberProdutoDTO.getNrPedido());
-        Recebimento recebimento = optRecebimento.orElseGet(Recebimento :: new);
+        Recebimento recebimento = optRecebimento.orElseGet(Recebimento::new);
 
         Produto produto = produtoRepository.findByNrEan13(receberProdutoDTO.getNrEan13());
         Pack pack = new Pack(receberProdutoDTO.getNrPack(), produto, receberProdutoDTO.getQtdeRecebida());
@@ -59,12 +59,12 @@ public class RecebimentoBusiness {
 
         int qtdeTotalRecebida = recebimento.getPackList()
             .stream()
-            .mapToInt(Pack :: getQuantidade)
+            .mapToInt(Pack::getQuantidade)
             .sum();
 
         int qtdeTotalPedido = pedido.getProdutos()
             .stream()
-            .mapToInt(PedidoProduto :: getQuantidade)
+            .mapToInt(PedidoProduto::getQuantidade)
             .sum();
 
         if(qtdeTotalRecebida == qtdeTotalPedido) {
@@ -80,8 +80,8 @@ public class RecebimentoBusiness {
     }
 
     public void estornarProduto(EstornarProdutoDTO estornarProdutoDTO) {
-        Pack pack = packRepository.findById(estornarProdutoDTO.getNrPackEstorno()).orElseThrow(EntityNotFoundException ::new);
-        Recebimento recebimento = recebimentoRepository.findRecebimentoByPedidoNrPedido(estornarProdutoDTO.getNrPedidoEstorno()).orElseThrow(EntityNotFoundException ::new);
+        Pack pack = packRepository.findById(estornarProdutoDTO.getNrPackEstorno()).orElseThrow(EntityNotFoundException::new);
+        Recebimento recebimento = recebimentoRepository.findRecebimentoByPedidoNrPedido(estornarProdutoDTO.getNrPedidoEstorno()).orElseThrow(EntityNotFoundException::new);
         recebimento.getPackList().remove(pack);
         recebimentoRepository.save(recebimento);
         packRepository.delete(pack);
