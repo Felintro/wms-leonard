@@ -1,7 +1,6 @@
 package com.felintro.leonard.service.estoque;
 
 import com.felintro.leonard.dto.estoque.EnderecoDTO;
-import com.felintro.leonard.dto.estoque.ProdutoDTO;
 import com.felintro.leonard.model.estoque.Endereco;
 import com.felintro.leonard.repository.estoque.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +43,7 @@ public class EnderecoService {
     }
 
     public void cadastraVariosEnderecos(int qtdeRuas, int qtdePredios, int qtdeApartamentos) {
-        List<EnderecoDTO> listaEnderecos = new ArrayList<>();
-        for(int rua=1; rua<=qtdeRuas; rua++) {
-            for(int predio=1; predio<=qtdePredios; predio++) {
-                for(int apartamento=1; apartamento<=qtdeApartamentos; apartamento++) {
-                    listaEnderecos.add(new EnderecoDTO(null, rua, predio, apartamento));
-                }
-            }
-        }
+        List<EnderecoDTO> listaEnderecos = gerarEnderecosDTOEmLote(qtdeRuas, qtdePredios, qtdeApartamentos);
         listaEnderecos.forEach(enderecoDTO -> cadastrarEndereco(enderecoDTO));
     }
 
@@ -60,6 +52,30 @@ public class EnderecoService {
         endereco.atualizarDados(enderecoDTO);
         enderecoRepository.save(endereco);
         System.out.println("Alteração efetuada com sucesso!");
+    }
+
+    public List<EnderecoDTO> gerarEnderecosDTOEmLote(int qtdeRuas, int qtdePredios, int qtdeApartamentos) {
+        List<EnderecoDTO> listaEnderecos = new ArrayList<>();
+
+        for(int rua = 1; rua<= qtdeRuas; rua++) {
+            for(int predio = 1; predio<= qtdePredios; predio++) {
+                for(int apartamento = 1; apartamento<= qtdeApartamentos; apartamento++) {
+                    listaEnderecos.add(new EnderecoDTO(null, rua, predio, apartamento));
+                }
+            }
+        }
+        return listaEnderecos;
+    }
+
+    public StringBuilder geraScriptEmLote(List<EnderecoDTO> listaEnderecos) {
+        StringBuilder sb = new StringBuilder();
+        listaEnderecos.forEach(enderecoDTO -> {
+            sb.append("INSERT INTO endereco (nr_rua, nr_predio, nr_apartamento) VALUES (");
+            sb.append(enderecoDTO.getEnderecoCompleto());
+            sb.append(");\n");
+        });
+
+        return sb;
     }
 
 }

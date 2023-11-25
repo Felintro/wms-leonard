@@ -8,18 +8,29 @@ import java.io.Serializable;
 
 /**
  * DTO for {@link com.felintro.leonard.model.estoque.Endereco}
+ * @author Allan
  */
 @AllArgsConstructor
 @Getter
 public class EnderecoDTO implements Serializable {
 
-    private final Long id;
-    private final int nrRua;
-    private final int nrPredio;
-    private final int nrApartamento;
+    private Long id;
+    private int nrRua;
+    private int nrPredio;
+    private int nrApartamento;
 
     public Endereco toEntity() {
         return new Endereco(nrRua, nrPredio, nrApartamento);
+    }
+
+    public String getEnderecoCompleto() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.nrRua)
+            .append(".")
+            .append(this.nrPredio)
+            .append(".")
+            .append(this.nrApartamento);
+        return sb.toString();
     }
 
 }

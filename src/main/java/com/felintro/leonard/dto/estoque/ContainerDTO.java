@@ -1,11 +1,9 @@
 package com.felintro.leonard.dto.estoque;
 
 import com.felintro.leonard.model.estoque.Container;
-import com.felintro.leonard.model.estoque.ContainerProduto;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +12,11 @@ import java.util.List;
  **/
 
 @Getter
-@Setter
-public class ContainerDTO {
+public class ContainerDTO implements Serializable {
 
     private Long nrContainer;
     private List<ContainerProdutoDTO> containerProdutosDTO = new ArrayList<>();
+    private EnderecoDTO enderecoDTO;
 
     public ContainerDTO(Long nrContainer) {
         this.nrContainer = nrContainer;
@@ -27,6 +25,10 @@ public class ContainerDTO {
     public void adicionarProduto(ContainerProdutoDTO containerProdutoDTO) {
         containerProdutoDTO.setContainer(this);
         this.containerProdutosDTO.add(containerProdutoDTO);
+    }
+
+    public void setEnderecoDTO(EnderecoDTO enderecoDTO) {
+        this.enderecoDTO = enderecoDTO;
     }
 
     public Container toEntity() {

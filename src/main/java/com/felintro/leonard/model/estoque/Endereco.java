@@ -34,30 +34,21 @@ public class Endereco {
     private int nrApartamento;
 
     @OneToOne
-    @JoinColumn(name = "nr_container")
-    private Container container;
+    @JoinColumn(name = "nr_pack", unique = true)
+    private Pack pack;
 
     public Endereco(int numeroRua, int nrPredio, int numeroApartamento) {
         this.nrRua = numeroRua;
         this.nrPredio = nrPredio;
         this.nrApartamento = numeroApartamento;
-        this.container = null;
     }
 
     public String getEnderecoCompleto() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(this.nrRua)
-            .append(".")
-            .append(this.nrPredio)
-            .append(".")
-            .append(this.nrApartamento);
-
-        return sb.toString();
+        return this.toDTO().getEnderecoCompleto();
     }
 
-    public boolean isVazio() {
-        return this.container == null;
+    public boolean isOcupado() {
+        return this.pack != null;
     }
 
     public EnderecoDTO toDTO() {

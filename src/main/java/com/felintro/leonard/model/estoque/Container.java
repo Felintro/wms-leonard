@@ -7,7 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +32,10 @@ public class Container {
 
     @OneToMany(mappedBy = "container", cascade = CascadeType.ALL)
     private List<ContainerProduto> produtos = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "id_endereco")
+    private Endereco endereco;
 
     public Container(Long nrContainer) {
         this.nrContainer = nrContainer;

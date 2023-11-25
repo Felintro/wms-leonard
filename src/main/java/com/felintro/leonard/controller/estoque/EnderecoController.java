@@ -3,10 +3,11 @@ package com.felintro.leonard.controller.estoque;
 import com.felintro.leonard.dto.estoque.EnderecoDTO;
 import com.felintro.leonard.service.estoque.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -60,10 +61,19 @@ public class EnderecoController {
         return REDIRECT_FORMULARIO;
     }
 
-    @DeleteMapping("/excluir")
+    @PostMapping("/cadastrar-lote")
     @Transactional
-    public String excluirEndereco() {
-        return REDIRECT_FORMULARIO;
+    public ResponseEntity cadastrarEnderecosEmLote() {
+        enderecoService.cadastraVariosEnderecos(5, 20, 3);
+        return new ResponseEntity("Endereços cadastrados com sucesso!", HttpStatus.OK);
+    }
+
+    @PostMapping("/gerar-lote")
+    @Transactional
+    public ResponseEntity gerarInsertsDeVariosEnderecos() {
+        List<EnderecoDTO> listaEnderecos = enderecoService.gerarEnderecosDTOEmLote(5, 20, 3);
+        StringBuilder sb = enderecoService.geraScriptEmLote(listaEnderecos);
+        return new ResponseEntity(sb.toString(), HttpStatus.OK);
     }
 
 }

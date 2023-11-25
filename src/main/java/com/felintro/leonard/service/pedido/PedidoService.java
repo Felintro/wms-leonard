@@ -1,7 +1,8 @@
 package com.felintro.leonard.service.pedido;
 
-import com.felintro.leonard.dto.pedido.RegistraPedidoDTO;
 import com.felintro.leonard.dto.pedido.PedidoDTO;
+import com.felintro.leonard.dto.pedido.PedidoProdutoDTO;
+import com.felintro.leonard.dto.pedido.RegistraPedidoDTO;
 import com.felintro.leonard.enums.StatusPedido;
 import com.felintro.leonard.enums.TipoPedido;
 import com.felintro.leonard.model.estoque.Produto;
@@ -14,7 +15,7 @@ import com.felintro.leonard.repository.pessoa.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +28,10 @@ public class PedidoService {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+
     @Autowired
     private EmpresaRepository empresaRepository;
+
     @Autowired
     private ProdutoRepository produtoRepository;
 
@@ -46,11 +49,13 @@ public class PedidoService {
         return pedidoRepository.getReferenceById(nrPedido).toDTO();
     }
 
+    public List<PedidoProdutoDTO> buscarProdutosPorNrPedido(Long nrPedido) {
+        return pedidoRepository.getReferenceById(nrPedido).toDTO().getProdutosDTO();
+    }
 
-    private List<PedidoDTO> geraPedidoDTOS(List<Pedido> pedidos) {
-        List<PedidoDTO> retorno = new ArrayList<>();
-        pedidos.forEach(pedido -> retorno.add(pedido.toDTO()));
-        return retorno;
+    public List<PedidoDTO> buscarPorStatusETipo(StatusPedido statusPedido, TipoPedido tipoPedido) {
+        List<Pedido> pedidos = pedidoRepository.findByStatusPedidoAndTipoPedido(statusPedido, tipoPedido);
+        return geraPedidoDTOS(pedidos);
     }
 
     public PedidoDTO registrarPedido(RegistraPedidoDTO registraPedidoDTO) {
@@ -63,7 +68,7 @@ public class PedidoService {
                 pedido.adicionarProduto(pedidoProduto);
             }
         );
-        pedido.setDtEmissao(LocalDate.now());
+        pedido.setDtHrEmissao(LocalDateTime.now());
         pedido.setStatusPedido(StatusPedido.ABERTO);
         Pedido pedidoAtualizado = pedidoRepository.save(pedido);
         return pedidoAtualizado.toDTO();
@@ -73,6 +78,12 @@ public class PedidoService {
         Pedido pedido = pedidoRepository.getReferenceById(nrPedido);
         pedido.setStatusPedido(StatusPedido.CANCELADO);
         return pedido.toDTO();
+    }
+
+    private List<PedidoDTO> geraPedidoDTOS(List<Pedido> pedidos) {
+        List<PedidoDTO> retorno = new ArrayList<>();
+        pedidos.forEach(pedido -> retorno.add(pedido.toDTO()));
+        return retorno;
     }
 
 }
