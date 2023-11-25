@@ -8,6 +8,7 @@ import com.felintro.leonard.model.operacao.Movimentacao;
 import com.felintro.leonard.repository.estoque.EnderecoRepository;
 import com.felintro.leonard.repository.estoque.PackRepository;
 import com.felintro.leonard.repository.operacao.MovimentacaoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,12 +52,12 @@ public class MovimentacaoBusiness {
             return false;
         }
 
-        Endereco enderecoOrigem = enderecoRepository.findByNrPack(movimentacaoDTO.getNrPack());
+        Endereco enderecoOrigem = enderecoRepository.findByNrPack(movimentacaoDTO.getNrPack()).orElseThrow(EntityNotFoundException::new);
         enderecoOrigem.setPack(null);
-        enderecoDestino.setPack(pack.get());
+        enderecoRepository.saveAndFlush(enderecoOrigem);
 
-        enderecoRepository.save(enderecoOrigem);
-        enderecoRepository.save(enderecoDestino);
+        enderecoDestino.setPack(pack.get());
+        enderecoRepository.saveAndFlush(enderecoDestino);
 
         Movimentacao movimentacao = new Movimentacao(enderecoOrigem, enderecoDestino, pack.get(), LocalDateTime.now());
         movimentacaoRepository.save(movimentacao);

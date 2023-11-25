@@ -34,10 +34,16 @@ public class ArmazenagemBusiness {
 
     public boolean realizaArmazenagem(RealizaMovimentacaoDTO realizaMovimentacaoDTO) {
         Endereco enderecoDestino = enderecoRepository.findByNrRuaAndNrPredioAndNrApartamento(realizaMovimentacaoDTO.getNrRuaDestino(), realizaMovimentacaoDTO.getNrPredioDestino(), realizaMovimentacaoDTO.getNrApartamentoDestino());
+        Optional<Endereco> enderecoPack = enderecoRepository.findByNrPack(realizaMovimentacaoDTO.getNrPack());
         Optional<Pack> pack = packRepository.findById(realizaMovimentacaoDTO.getNrPack());
 
         if(pack.isEmpty()) {
             System.out.println("O número do pack é inválido!");
+            return false;
+        }
+
+        if(enderecoPack.isPresent()) {
+            System.out.println("Este pack já está armazenado, para movimentá-lo, utilize a Movimentação!");
             return false;
         }
 

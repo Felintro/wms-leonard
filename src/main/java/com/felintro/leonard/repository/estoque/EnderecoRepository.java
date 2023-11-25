@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * @author allan
  **/
@@ -16,6 +18,6 @@ public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
     boolean existsByNrRuaAndNrPredioAndNrApartamento(int nrRua, int nrPredio, int nrApartamento);
 
     @Query("SELECT e FROM Endereco e WHERE e.pack.nrPack = ?1")
-    Endereco findByNrPack(Long nrPack);
+    Optional<Endereco> findByNrPack(Long nrPack);
 
 }

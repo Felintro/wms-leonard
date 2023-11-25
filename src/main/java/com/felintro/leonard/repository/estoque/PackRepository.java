@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface PackRepository extends JpaRepository<Pack, Long> {
 
-    @Query("SELECT p FROM Pack p WHERE p.nrPack NOT IN (SELECT e.pack.nrPack FROM Endereco e)")
+    @Query("SELECT p FROM Pack p WHERE p.nrPack NOT IN (SELECT e.pack.nrPack FROM Endereco e WHERE e.pack.nrPack IS NOT NULL)")
     List<Pack> findAllPacksWithoutEndereco();
 
 }
