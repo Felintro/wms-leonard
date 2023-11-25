@@ -51,23 +51,16 @@ public class MovimentacaoBusiness {
             return false;
         }
 
-        Optional<Endereco> optEnderecoOrigem = enderecoRepository.findByNrPack(movimentacaoDTO.getNrPack());
-        Endereco enderecoOrigem;
-        Movimentacao movimentacao = new Movimentacao(null, enderecoDestino, pack.get(), LocalDateTime.now());
-
-        if(optEnderecoOrigem.isPresent()) { /* Caso o endereço de origem chegue nulo, quer dizer que se trata de uma armazenagem */
-            enderecoOrigem = optEnderecoOrigem.get();
-            enderecoOrigem.setPack(null);
-            movimentacao.setEnderecoOrigem(enderecoOrigem);
-            enderecoRepository.save(enderecoOrigem);
-        }
-
+        Endereco enderecoOrigem = enderecoRepository.findByNrPack(movimentacaoDTO.getNrPack());
+        enderecoOrigem.setPack(null);
         enderecoDestino.setPack(pack.get());
 
-        movimentacaoRepository.save(movimentacao);
+        enderecoRepository.save(enderecoOrigem);
         enderecoRepository.save(enderecoDestino);
 
-        System.out.println("Operação realizada com sucesso!");
+        Movimentacao movimentacao = new Movimentacao(enderecoOrigem, enderecoDestino, pack.get(), LocalDateTime.now());
+        movimentacaoRepository.save(movimentacao);
+
         return true;
     }
 

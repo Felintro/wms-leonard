@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Movimentacao extends Operacao {
 
-    @JoinColumn(name = "id_endereco_origem")
+    @JoinColumn(name = "id_endereco_origem", nullable = false)
     @OneToOne
     private Endereco enderecoOrigem;
 
