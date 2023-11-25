@@ -1,8 +1,7 @@
 package com.felintro.leonard.controller.operacao;
 
 import com.felintro.leonard.business.operacao.ArmazenagemBusiness;
-import com.felintro.leonard.dto.operacao.ArmazenagemDTO;
-import com.felintro.leonard.dto.operacao.MovimentacaoDTO;
+import com.felintro.leonard.dto.estoque.PackDTO;
 import com.felintro.leonard.dto.operacao.RealizaMovimentacaoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,8 +29,8 @@ public class ArmazenagemController {
 
     @GetMapping("/formulario")
     public String carregaPaginaFormulario(Model model) {
-        List<ArmazenagemDTO> listaArmazenagemDTO = armazenagemBusiness.listarMovimentacoes();
-        model.addAttribute("listaArmazenagemDTO", listaArmazenagemDTO);
+        List<PackDTO> packsPendentesDeArmazenagem = armazenagemBusiness.listarPacksPendentesDeArmazenagem();
+        model.addAttribute("packsPendentesDeArmazenagem", packsPendentesDeArmazenagem);
         return TELA_ARMAZENAGEM;
     }
 

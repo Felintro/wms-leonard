@@ -12,7 +12,7 @@
     <br />
     <h1>Armazenagem</h1>
     <div class="form-pequeno">
-        <form method="post" th:action="@{/movimentacao/efetuar}">
+        <form method="post" th:action="@{/armazenagem/efetuar}">
 
             <div class="mb-3">
                 <label for="nrPack" class="form-label">Número do Pack: </label>
@@ -42,25 +42,25 @@
     </div>
 
     <br />
-    <h3>Operações Realizadas</h3>
-    <br/>
+    <h3>Packs Para Armazenar</h3>
+    <br />
 
     <div class="lista">
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Endereço Origem</th>
-                <th scope="col">Endereço Destino</th>
-                <th scope="col">Número Pack</th>
+                <th scope="col">Nº Pack</th>
+                <th scope="col">Id Produto</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Qtde</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="packDTO : ${packsRecebidos}">
-                <td th:text="${packDTO.id}"></td>
-                <td th:text="${movimentacaoDTO.enderecoOrigem.getEnderecoCompleto()}"></td>
-                <td th:text="${movimentacaoDTO.enderecoDestino.getEnderecoCompleto()}"></td>
-                <td th:text="${movimentacaoDTO.getPack().getNrPack()}"></td>
+            <tr th:each="packDTO : ${packsPendentesDeArmazenagem}">
+                <td th:text="${packDTO.nrPack}"></td>
+                <td th:text="${packDTO.produtoDTO.id}"></td>
+                <td th:text="${packDTO.produtoDTO.descricao}"></td>
+                <td th:text="${packDTO.quantidade}"></td>
             </tr>
             </tbody>
         </table>

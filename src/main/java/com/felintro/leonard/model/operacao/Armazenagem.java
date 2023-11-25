@@ -33,6 +33,12 @@ public class Armazenagem extends Operacao {
     @JoinColumn(name = "nr_pack", nullable = false)
     private Pack pack;
 
+    public Armazenagem(Endereco enderecoDestino, Pack pack, LocalDateTime dtHrRealizacao) {
+        this.dtHrRealizacao = dtHrRealizacao;
+        this.enderecoDestino = enderecoDestino;
+        this.pack = pack;
+    }
+
     public Armazenagem(Long id, LocalDateTime dtHrRealizacao, StatusOperacao statusOperacao, Endereco enderecoDestino, Pack pack) {
         super(id, dtHrRealizacao, statusOperacao);
         this.enderecoDestino = enderecoDestino;
@@ -42,4 +48,5 @@ public class Armazenagem extends Operacao {
     public ArmazenagemDTO toDTO() {
         return new ArmazenagemDTO(this.id, this.dtHrRealizacao, this.statusOperacao, this.enderecoDestino.toDTO(), this.pack.toDTO());
     }
+
 }
