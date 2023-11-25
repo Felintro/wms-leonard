@@ -31,7 +31,6 @@ public class MovimentacaoController {
     public String carregaPaginaFormulario(Model model) {
         List<MovimentacaoDTO> listaMovimentacaoDTOS = movimentacaoBusiness.listarMovimentacoes();
         model.addAttribute("listaMovimentacaoDTOS", listaMovimentacaoDTOS);
-        model.addAttribute("nrContainer", 0);
         return TELA_MOVIMENTACOES;
     }
 

@@ -42,28 +42,33 @@ public class MovimentacaoBusiness {
         }
 
         if(enderecoDestino == null) {
-            System.out.println("O endereço informado está ocupado!");
-            return false;
-        }
-
-        if(enderecoDestino.isOcupado()) {
             System.out.println("O endereço informado é inválido!");
             return false;
         }
 
-        Endereco enderecoOrigem = enderecoRepository.findByNrPack(movimentacaoDTO.getNrPack());
-        Movimentacao movimentacao = new Movimentacao(enderecoOrigem, enderecoDestino, pack.get(), LocalDateTime.now());
+        if(enderecoDestino.isOcupado()) {
+            System.out.println("O endereço informado está ocupado!");
+            return false;
+        }
 
-        enderecoOrigem.setPack(null);
+        Optional<Endereco> optEnderecoOrigem = enderecoRepository.findByNrPack(movimentacaoDTO.getNrPack());
+        Endereco enderecoOrigem;
+        Movimentacao movimentacao = new Movimentacao(null, enderecoDestino, pack.get(), LocalDateTime.now());
+
+        if(optEnderecoOrigem.isPresent()) { /* Caso o endereço de origem chegue nulo, quer dizer que se trata de uma armazenagem */
+            enderecoOrigem = optEnderecoOrigem.get();
+            enderecoOrigem.setPack(null);
+            movimentacao.setEnderecoOrigem(enderecoOrigem);
+            enderecoRepository.save(enderecoOrigem);
+        }
+
         enderecoDestino.setPack(pack.get());
 
         movimentacaoRepository.save(movimentacao);
-        enderecoRepository.save(enderecoOrigem);
         enderecoRepository.save(enderecoDestino);
 
         System.out.println("Operação realizada com sucesso!");
         return true;
-
     }
 
     public List<MovimentacaoDTO> listarMovimentacoes() {
