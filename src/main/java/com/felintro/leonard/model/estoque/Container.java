@@ -1,6 +1,7 @@
 package com.felintro.leonard.model.estoque;
 
 import com.felintro.leonard.dto.estoque.ContainerDTO;
+import com.felintro.leonard.dto.operacao.SepararProdutoDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,6 +40,10 @@ public class Container {
 
     public Container(Long nrContainer) {
         this.nrContainer = nrContainer;
+    }
+
+    public Container(SepararProdutoDTO separarProdutoDTO) {
+        this.nrContainer = separarProdutoDTO.getNrContainer();
     }
 
     public void adicionarProduto(ContainerProduto produto) {
