@@ -29,8 +29,8 @@ import java.util.Optional;
 @RequestMapping("/recebimento")
 public class RecebimentoController {
 
-    private static final String TELA_RECEBIMENTO = "operacao/recebimento";
-    private static final String TELA_INICIAL = "operacao/selecao-pedidos";
+    private static final String TELA_RECEBIMENTO = "operacao/recebimento/recebimento";
+    private static final String TELA_INICIAL = "operacao/recebimento/selecao-pedidos";
     private static final String REDIRECT_FORMULARIO = "redirect:/recebimento/formulario";
     private static final String REDIRECT_TELA_INICIAL = "redirect:/recebimento/selecao-pedido";
 
