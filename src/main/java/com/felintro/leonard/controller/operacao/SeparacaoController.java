@@ -2,8 +2,8 @@ package com.felintro.leonard.controller.operacao;
 
 import com.felintro.leonard.business.operacao.SeparacaoBusiness;
 import com.felintro.leonard.dto.estoque.ContainerProdutoDTO;
-import com.felintro.leonard.dto.operacao.ReceberProdutoDTO;
 import com.felintro.leonard.dto.operacao.SeparacaoDTO;
+import com.felintro.leonard.dto.operacao.SepararProdutoDTO;
 import com.felintro.leonard.dto.pedido.PedidoDTO;
 import com.felintro.leonard.dto.pedido.PedidoProdutoDTO;
 import com.felintro.leonard.enums.StatusPedido;
@@ -58,7 +58,8 @@ public class SeparacaoController {
         if(optSeparacao.isPresent()) {
             SeparacaoDTO separacaoDTO = optSeparacao.get().toDTO();
 
-            separacaoDTO.getContainerList().stream()
+            separacaoDTO.getContainerList()
+                .stream()
                 .flatMap(containerDTO -> containerDTO.getContainerProdutosDTO().stream())
                 .map(ContainerProdutoDTO::getProdutoDTO)
                 .forEach(
@@ -77,9 +78,9 @@ public class SeparacaoController {
     }
 
     @PostMapping("/separar")
-    public String separarProduto(ReceberProdutoDTO receberProdutoDTO) {
-        boolean isOperacaoFinalizada = recebimentoBusiness.receberProduto(receberProdutoDTO);
-        return isOperacaoFinalizada ? REDIRECT_TELA_INICIAL : REDIRECT_FORMULARIO + "?nrPedido=" + receberProdutoDTO.getNrPedido();
+    public String separarProduto(SepararProdutoDTO separarProdutoDTO) {
+        boolean isOperacaoFinalizada = separacaoBusiness.separarProduto(separarProdutoDTO);
+        return isOperacaoFinalizada ? REDIRECT_TELA_INICIAL : REDIRECT_FORMULARIO + "?nrPedido=" + separarProdutoDTO.getNrPedido();
     }
 
 }
