@@ -13,7 +13,7 @@ import lombok.Getter;
 public class SepararProdutoDTO {
 
     private Long nrPedido;
-    private Long nrCotainer;
+    private Long nrContainer;
     private String nrEan13;
     private int qtdeSeparada;
 
