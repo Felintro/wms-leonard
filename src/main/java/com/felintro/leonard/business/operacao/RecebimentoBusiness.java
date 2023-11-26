@@ -77,7 +77,6 @@ public class RecebimentoBusiness {
         recebimentoRepository.save(recebimento);
 
         return isOperacaoFinalizada;
-
     }
 
     public void estornarProduto(EstornarProdutoDTO estornarProdutoDTO) {
