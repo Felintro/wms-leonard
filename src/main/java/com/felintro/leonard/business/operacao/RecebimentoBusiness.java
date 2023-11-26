@@ -69,7 +69,7 @@ public class RecebimentoBusiness {
 
         if(qtdeTotalRecebida == qtdeTotalPedido) {
             recebimento.setStatusOperacao(StatusOperacao.CONCLUIDA);
-            recebimento.getPedido().setStatusPedido(StatusPedido.RECEBIDO);
+            recebimento.getPedido().setStatusPedido(StatusPedido.CONCLUIDO);
             isOperacaoFinalizada = true;
         }
 

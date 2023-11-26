@@ -44,7 +44,7 @@ public class RecebimentoController {
     @GetMapping("/selecao-pedido")
     public String carregaPaginaInicial(Model model) {
         List<PedidoDTO> listaPedidosAbertosDTO = pedidoService.buscarPorStatusETipo(StatusPedido.ABERTO, TipoPedido.COMPRA);
-        List<PedidoDTO> listaPedidosRecebidosDTO = pedidoService.buscarPorStatusETipo(StatusPedido.RECEBIDO, TipoPedido.COMPRA);
+        List<PedidoDTO> listaPedidosRecebidosDTO = pedidoService.buscarPorStatusETipo(StatusPedido.CONCLUIDO, TipoPedido.COMPRA);
 
         model.addAttribute("listaPedidosAbertosDTO", listaPedidosAbertosDTO);
         model.addAttribute("listaPedidosRecebidosDTO", listaPedidosRecebidosDTO);
