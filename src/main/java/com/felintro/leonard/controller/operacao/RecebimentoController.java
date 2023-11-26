@@ -89,8 +89,4 @@ public class RecebimentoController {
         return REDIRECT_FORMULARIO + "?nrPedido=" + estornarProdutoDTO.getNrPedidoEstorno();
     }
 
-    public void finalizarRecebimento() {
-
-    }
-
 }
