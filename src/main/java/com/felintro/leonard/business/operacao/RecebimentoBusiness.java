@@ -35,6 +35,7 @@ public class RecebimentoBusiness {
 
     @Autowired
     private RecebimentoRepository recebimentoRepository;
+
     @Autowired
     private PedidoRepository pedidoRepository;
 
