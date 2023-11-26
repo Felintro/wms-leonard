@@ -1,7 +1,8 @@
 package com.felintro.leonard.controller.operacao;
 
 import com.felintro.leonard.business.operacao.SeparacaoBusiness;
-import com.felintro.leonard.dto.estoque.ContainerDTO;
+import com.felintro.leonard.dto.estoque.ContainerProdutoDTO;
+import com.felintro.leonard.dto.operacao.ReceberProdutoDTO;
 import com.felintro.leonard.dto.operacao.SeparacaoDTO;
 import com.felintro.leonard.dto.pedido.PedidoDTO;
 import com.felintro.leonard.dto.pedido.PedidoProdutoDTO;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -49,25 +51,35 @@ public class SeparacaoController {
     }
 
     @GetMapping("/formulario")
-    public String carregaPaginaRecebimento(Long nrPedido, Model model) {
+    public String carregaPaginaSeparacao(Long nrPedido, Model model) {
         List<PedidoProdutoDTO> produtosPendentesDTOList = pedidoService.buscarProdutosPorNrPedido(nrPedido);
         Optional<Separacao> optSeparacao = separacaoBusiness.buscarPorNrPedido(nrPedido);
 
         if(optSeparacao.isPresent()) {
             SeparacaoDTO separacaoDTO = optSeparacao.get().toDTO();
 
-            separacaoDTO.getContainerList()
-                .stream()
-                .map(ContainerDTO :: getContainerProdutosDTO)
-                .forEach(produtoRecebidoDTO ->
-                    produtosPendentesDTOList.removeIf(produtoPendenteDTO ->
-                        produtoPendenteDTO.getProdutoDTO().getId().equals(produtoRecebidoDTO.getId())
+            separacaoDTO.getContainerList().stream()
+                .flatMap(containerDTO -> containerDTO.getContainerProdutosDTO().stream())
+                .map(ContainerProdutoDTO::getProdutoDTO)
+                .forEach(
+                    produtoSeparadoDTO -> produtosPendentesDTOList.removeIf(
+                        produtoPendenteDTO -> produtoPendenteDTO.getProdutoDTO().getId().equals(produtoSeparadoDTO.getId())
                     )
                 );
-            model.addAttribute("recebimentoDTO", separacaoDTO);
+
+            model.addAttribute("separacaoDTO", separacaoDTO);
         }
 
+        model.addAttribute("nrPedido", nrPedido);
+        model.addAttribute("produtosPendentesDTOList", produtosPendentesDTOList);
+
         return TELA_SEPARACAO;
+    }
+
+    @PostMapping("/separar")
+    public String separarProduto(ReceberProdutoDTO receberProdutoDTO) {
+        boolean isOperacaoFinalizada = recebimentoBusiness.receberProduto(receberProdutoDTO);
+        return isOperacaoFinalizada ? REDIRECT_TELA_INICIAL : REDIRECT_FORMULARIO + "?nrPedido=" + receberProdutoDTO.getNrPedido();
     }
 
 }
