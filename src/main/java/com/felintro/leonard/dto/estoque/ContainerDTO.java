@@ -23,7 +23,7 @@ public class ContainerDTO implements Serializable {
     }
 
     public void adicionarProduto(ContainerProdutoDTO containerProdutoDTO) {
-        containerProdutoDTO.setContainer(this);
+        containerProdutoDTO.setContainerDTO(this);
         this.containerProdutosDTO.add(containerProdutoDTO);
     }
 

@@ -15,18 +15,18 @@ import lombok.Setter;
 public class ContainerProdutoDTO {
 
     private Long id;
-    private ContainerDTO container;
-    private ProdutoDTO produto;
+    private ContainerDTO containerDTO;
+    private ProdutoDTO produtoDTO;
     private int quantidade;
 
-    public ContainerProdutoDTO(ContainerDTO container, ProdutoDTO produto, int quantidade) {
-        this.container = container;
-        this.produto = produto;
+    public ContainerProdutoDTO(ContainerDTO containerDTO, ProdutoDTO produtoDTO, int quantidade) {
+        this.containerDTO = containerDTO;
+        this.produtoDTO = produtoDTO;
         this.quantidade = quantidade;
     }
 
     public ContainerProduto toEntity(){
-        return new ContainerProduto(produto.toEntity(), quantidade);
+        return new ContainerProduto(produtoDTO.toEntity(), quantidade);
     }
 
 }
