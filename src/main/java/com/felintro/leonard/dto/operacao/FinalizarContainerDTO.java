@@ -12,6 +12,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class FinalizarContainerDTO {
 
+    private Long nrPedidoSeparacao;
     private Long nrContainerFinalizar;
     private int nrRuaFinalizar;
     private int nrPredioFinalizar;
