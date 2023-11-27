@@ -19,8 +19,8 @@ public class ContainerProdutoDTO {
     private ProdutoDTO produtoDTO;
     private int quantidade;
 
-    public ContainerProdutoDTO(ContainerDTO containerDTO, ProdutoDTO produtoDTO, int quantidade) {
-        this.containerDTO = containerDTO;
+    public ContainerProdutoDTO(Long id, ProdutoDTO produtoDTO, int quantidade) {
+        this.id = id;
         this.produtoDTO = produtoDTO;
         this.quantidade = quantidade;
     }

@@ -41,7 +41,7 @@ public class ContainerProduto {
     }
 
     public ContainerProdutoDTO toDTO() {
-        return new ContainerProdutoDTO(this.container.toDTO(), this.produto.toDTO(), this.quantidade);
+        return new ContainerProdutoDTO(this.id, this.produto.toDTO(), this.quantidade);
     }
 
 }
