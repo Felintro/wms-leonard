@@ -1,7 +1,9 @@
 package com.felintro.leonard.controller.operacao;
 
 import com.felintro.leonard.business.operacao.SeparacaoBusiness;
+import com.felintro.leonard.dto.estoque.ContainerDTO;
 import com.felintro.leonard.dto.estoque.ContainerProdutoDTO;
+import com.felintro.leonard.dto.operacao.FinalizarContainerDTO;
 import com.felintro.leonard.dto.operacao.SeparacaoDTO;
 import com.felintro.leonard.dto.operacao.SepararProdutoDTO;
 import com.felintro.leonard.dto.pedido.PedidoDTO;
@@ -12,13 +14,18 @@ import com.felintro.leonard.model.operacao.Separacao;
 import com.felintro.leonard.service.pedido.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.ObjectStreamClass;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author allan
@@ -57,6 +64,10 @@ public class SeparacaoController {
 
         if(optSeparacao.isPresent()) {
             SeparacaoDTO separacaoDTO = optSeparacao.get().toDTO();
+            List<ContainerDTO> containerFinalizadoDTOList = separacaoDTO.getContainerList()
+                .stream()
+                .filter(containerDTO -> containerDTO.getEnderecoDTO() != null)
+                .collect(Collectors.toList());
 
             separacaoDTO.getContainerList()
                 .stream()
@@ -69,6 +80,7 @@ public class SeparacaoController {
                 );
 
             model.addAttribute("separacaoDTO", separacaoDTO);
+            model.addAttribute("containerFinalizadoDTOList", containerFinalizadoDTOList);
         }
 
         model.addAttribute("nrPedido", nrPedido);
@@ -78,9 +90,17 @@ public class SeparacaoController {
     }
 
     @PostMapping("/separar")
+    @Transactional
     public String separarProduto(SepararProdutoDTO separarProdutoDTO) {
-        boolean isOperacaoFinalizada = separacaoBusiness.separarProduto(separarProdutoDTO);
-        return isOperacaoFinalizada ? REDIRECT_TELA_INICIAL : REDIRECT_FORMULARIO + "?nrPedido=" + separarProdutoDTO.getNrPedido();
+        separacaoBusiness.separarProduto(separarProdutoDTO);
+        return REDIRECT_FORMULARIO + "?nrPedido=" + separarProdutoDTO.getNrPedido();
+    }
+
+    @PostMapping("/finalizar-container")
+    @Transactional
+    public String finalizarContainer(FinalizarContainerDTO finalizarContainerDTO) {
+        boolean isOperacaoFinalizada = separacaoBusiness.finalizarContainer(finalizarContainerDTO);
+        return isOperacaoFinalizada ? REDIRECT_TELA_INICIAL : REDIRECT_FORMULARIO + "?nrPedido=" + finalizarContainerDTO.getNrPedidoSeparacao();
     }
 
 }

@@ -39,7 +39,7 @@
                 <td th:text="${produtoPendenteDTO.produtoDTO.nrEan13}"></td>
                 <td th:text="${produtoPendenteDTO.produtoDTO.nrDun14}"></td>
                 <td th:text="${produtoPendenteDTO.quantidade}"></td>
-                <form method="post" th:action="@{/recebimento/receber}">
+                <form method="post" th:action="@{/separacao/separar}">
                     <input type="hidden" name="nrPedido" th:value="${nrPedido}">
                     <input type="hidden" name="nrEan13" th:value="${produtoPendenteDTO.produtoDTO.nrEan13}">
                     <td>
@@ -71,8 +71,8 @@
                 <th scope="col">Id Produto</th>
                 <th scope="col">Descrição</th>
                 <th scope="col">EAN13</th>
-                <th scope="col">DUN14</th>
                 <th scope="col">Qtde</th>
+                <th scope="col" colspan="3">Finalizar Container</th>
                 <th scope="col">Ações</th>
             </tr>
             </thead>
@@ -82,19 +82,53 @@
                 <td th:text="${produtoSeparado.produtoDTO.id}"></td>
                 <td th:text="${produtoSeparado.produtoDTO.descricao}"></td>
                 <td th:text="${produtoSeparado.produtoDTO.nrEan13}"></td>
-                <td th:text="${produtoSeparado.produtoDTO.nrDun14}"></td>
                 <td th:text="${produtoSeparado.quantidade}"></td>
-                <!--<form method="post" th:action="@{/recebimento/estornar}">
-                    <input type="hidden" name="nrPackEstorno" th:value="${packRecebido.nrPack}">
-                    <input type="hidden" name="nrPedidoEstorno" th:value="${recebimentoDTO.pedidoDTO.nrPedido}">
-                    <td>
-                        <input type="submit" class="btn btn-primary" value="Estornar Recebimento" />
-                    </td>
-                </form>-->
+            <form method="post" th:action="@{/separacao/finalizar-container}">
+                <td>
+                    <input type="text" name="nrRuaFinalizar" class="form-control" placeholder="Rua" />
+                </td>
+                <td>
+                    <input type="text" name="nrPredioFinalizar" class="form-control" placeholder="Predio" />
+                </td>
+                <td>
+                    <input type="text" name="nrApartamentoFinalizar" class="form-control" placeholder="Apartamento" />
+                </td>
+                <input type="hidden" name="nrPedidoSeparacao" th:value="${nrPedido}">
+                <input type="hidden" name="nrContainerFinalizar" th:value="${containerSeparado.nrContainer}" />
+                <td>
+                    <input type="submit" class="btn btn-primary" value="Finalizar Container" />
+                </td>
+            </form>
             </tr>
             </tbody>
         </table>
     </div>
+
+    <div>
+        <br />
+        <h3>Contêineres finalizados:</h3>
+        <br />
+    </div>
+
+    <div class="lista recebimento">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Nª Container</th>
+                <th scope="col">Qtde de Produtos</th>
+                <th scope="col">Qtde de Volumes</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="containerFinalizadoDTO : ${containerFinalizadoDTOList}">
+                <td th:text="${containerFinalizadoDTO.nrContainer}"></td>
+                <td th:text="${containerFinalizadoDTO.getContainerProdutosDTO().size()}"></td>
+                <td th:text="${containerFinalizadoDTO.produtoDTO.descricao}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
 </div>
 </body>
 </html>

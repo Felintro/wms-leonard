@@ -1,24 +1,27 @@
 package com.felintro.leonard.business.operacao;
 
+import com.felintro.leonard.dto.operacao.FinalizarContainerDTO;
 import com.felintro.leonard.dto.operacao.SepararProdutoDTO;
 import com.felintro.leonard.enums.StatusOperacao;
 import com.felintro.leonard.enums.StatusPedido;
 import com.felintro.leonard.model.estoque.Container;
 import com.felintro.leonard.model.estoque.ContainerProduto;
-import com.felintro.leonard.model.estoque.Pack;
+import com.felintro.leonard.model.estoque.Endereco;
 import com.felintro.leonard.model.estoque.Produto;
-import com.felintro.leonard.model.operacao.Recebimento;
 import com.felintro.leonard.model.operacao.Separacao;
 import com.felintro.leonard.model.pedido.Pedido;
 import com.felintro.leonard.model.pedido.PedidoProduto;
 import com.felintro.leonard.repository.estoque.ContainerRepository;
+import com.felintro.leonard.repository.estoque.EnderecoRepository;
 import com.felintro.leonard.repository.estoque.ProdutoRepository;
 import com.felintro.leonard.repository.operacao.SeparacaoRepository;
 import com.felintro.leonard.repository.pedido.PedidoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -40,9 +43,10 @@ public class SeparacaoBusiness {
     @Autowired
     private PedidoRepository pedidoRepository;
 
-    public boolean separarProduto(SepararProdutoDTO separarProdutoDTO) {
-        boolean isOperacaoFinalizada = false;
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
+    public void separarProduto(SepararProdutoDTO separarProdutoDTO) {
         Optional<Separacao> optSeparacao = buscarPorNrPedido(separarProdutoDTO.getNrPedido());
         Separacao separacao = optSeparacao.orElseGet(Separacao::new);
         Container container;
@@ -52,7 +56,7 @@ public class SeparacaoBusiness {
         if(optSeparacao.isEmpty()){
             separacao.setStatusOperacao(StatusOperacao.EM_ANDAMENTO);
             separacao.setPedido(pedido);
-            container = new Container();
+            container = new Container(separarProdutoDTO);
         } else {
             container = containerRepository.findById(separarProdutoDTO.getNrContainer()).get();
         }
@@ -60,26 +64,49 @@ public class SeparacaoBusiness {
         ContainerProduto containerProduto = new ContainerProduto(produto, separarProdutoDTO.getQtdeSeparada());
         container.adicionarProduto(containerProduto);
 
-        int qtdeTotalSeparada = separacao.getContainerList()
+        containerRepository.save(container);
+
+        if(!separacao.getContainerList().contains(container)) {
+            separacao.getContainerList().add(container);
+        }
+
+        separacao.setDtHrRealizacao(LocalDateTime.now());
+        separacaoRepository.save(separacao);
+    }
+
+    public boolean finalizarContainer(FinalizarContainerDTO finalizarContainerDTO) {
+        boolean isOperacaoFinalizada = false;
+        Separacao separacao = separacaoRepository.findSeparacaoByPedidoNrPedido(finalizarContainerDTO.getNrPedidoSeparacao()).orElseThrow(EntityNotFoundException::new);
+        Container containerFinalizado = containerRepository.findById(finalizarContainerDTO.getNrContainerFinalizar()).orElseThrow(EntityNotFoundException::new);
+        Pedido pedido = pedidoRepository.findById(finalizarContainerDTO.getNrPedidoSeparacao()).orElseThrow(EntityNotFoundException::new);
+        Endereco enderecoFinalizacao = enderecoRepository.findByNrRuaAndNrPredioAndNrApartamento(finalizarContainerDTO.getNrRuaFinalizar(), finalizarContainerDTO.getNrPredioFinalizar(), finalizarContainerDTO.getNrApartamentoFinalizar());
+
+        boolean isConteineresFinalizados = separacao.getContainerList()
             .stream()
-            .flatMap(containerSeparado -> containerSeparado.getProdutos().stream())
+            .map(Container::getEndereco)
+            .allMatch(Objects::nonNull);
+
+        int qtdeSeparada = separacao.getContainerList()
+            .stream()
+            .flatMap(container -> container.getProdutos().stream())
             .mapToInt(ContainerProduto::getQuantidade)
             .sum();
 
-        int qtdeTotalPedido = pedido.getProdutos()
+        int qtdePedido = pedido.getProdutos()
             .stream()
-            .mapToInt(PedidoProduto::getQuantidade)
+            .mapToInt(PedidoProduto ::getQuantidade)
             .sum();
 
-        if(qtdeTotalSeparada == qtdeTotalPedido) {
+        boolean isQtdeTotalSeparada = qtdeSeparada == qtdePedido;
+
+        if(isConteineresFinalizados && isQtdeTotalSeparada) {
             separacao.setStatusOperacao(StatusOperacao.CONCLUIDA);
             separacao.getPedido().setStatusPedido(StatusPedido.CONCLUIDO);
             isOperacaoFinalizada = true;
         }
 
-        separacao.setDtHrRealizacao(LocalDateTime.now());
-        separacao.getContainerList().add(container);
-        separacaoRepository.save(separacao);
+        containerFinalizado.setEndereco(enderecoFinalizacao);
+        containerRepository.save(containerFinalizado);
 
         return isOperacaoFinalizada;
     }
