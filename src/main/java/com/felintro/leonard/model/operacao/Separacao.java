@@ -41,7 +41,7 @@ public class Separacao extends Operacao {
 
     public SeparacaoDTO toDTO() {
         SeparacaoDTO separacaoDTO = new SeparacaoDTO(this.id, this.dtHrRealizacao, this.statusOperacao, this.pedido.toDTO());
-        containerList.forEach(container -> separacaoDTO.adicionarContainer(container.toDTO()));
+        this.containerList.forEach(container -> separacaoDTO.adicionarContainer(container.toDTO()));
         return separacaoDTO;
     }
 
