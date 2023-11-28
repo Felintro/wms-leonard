@@ -10,7 +10,6 @@ import com.felintro.leonard.model.estoque.Endereco;
 import com.felintro.leonard.model.estoque.Produto;
 import com.felintro.leonard.model.operacao.Separacao;
 import com.felintro.leonard.model.pedido.Pedido;
-import com.felintro.leonard.model.pedido.PedidoProduto;
 import com.felintro.leonard.repository.estoque.ContainerRepository;
 import com.felintro.leonard.repository.estoque.EnderecoRepository;
 import com.felintro.leonard.repository.estoque.ProdutoRepository;
