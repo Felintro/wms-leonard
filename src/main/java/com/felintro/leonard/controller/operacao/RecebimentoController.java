@@ -60,8 +60,7 @@ public class RecebimentoController {
         if(optRecebimento.isPresent()){
             RecebimentoDTO recebimentoDTO = optRecebimento.get().toDTO();
 
-            recebimentoDTO.getPackListDTO()
-                .stream()
+            recebimentoDTO.getPackListDTO().stream()
                 .map(PackDTO::getProdutoDTO)
                 .forEach(produtoRecebidoDTO ->
                     produtosPendentesDTOList.removeIf(produtoPendenteDTO ->

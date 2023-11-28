@@ -89,13 +89,11 @@ public class SeparacaoBusiness {
             .allMatch(Objects::nonNull);
 
         int qtdeSeparada = separacao.getContainerList().stream()
-            .flatMap(container -> container.getProdutos().stream())
-            .mapToInt(ContainerProduto::getQuantidade)
+            .mapToInt(Container::getQuantidadeTotal)
             .sum();
 
-        int qtdePedido = pedido.getProdutos()
-            .stream()
-            .mapToInt(PedidoProduto ::getQuantidade)
+        int qtdePedido = pedido.getProdutos().stream()
+            .mapToInt(PedidoProduto::getQuantidade)
             .sum();
 
         boolean isQtdeTotalSeparada = qtdeSeparada == qtdePedido;

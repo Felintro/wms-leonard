@@ -61,13 +61,11 @@ public class SeparacaoController {
 
         if(optSeparacao.isPresent()) {
             SeparacaoDTO separacaoDTO = optSeparacao.get().toDTO();
-            List<ContainerDTO> containerFinalizadoDTOList = separacaoDTO.getContainerList()
-                .stream()
+            List<ContainerDTO> containerFinalizadoDTOList = separacaoDTO.getContainerList().stream()
                 .filter(containerDTO -> containerDTO.getEnderecoDTO() != null)
                 .collect(Collectors.toList());
 
-            separacaoDTO.getContainerList()
-                .stream()
+            separacaoDTO.getContainerList().stream()
                 .flatMap(containerDTO -> containerDTO.getContainerProdutosDTO().stream())
                 .map(ContainerProdutoDTO::getProdutoDTO)
                 .forEach(

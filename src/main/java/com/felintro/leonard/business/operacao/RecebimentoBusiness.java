@@ -58,13 +58,11 @@ public class RecebimentoBusiness {
         recebimento.setDtHrRealizacao(LocalDateTime.now());
         recebimento.getPackList().add(pack);
 
-        int qtdeTotalRecebida = recebimento.getPackList()
-            .stream()
+        int qtdeTotalRecebida = recebimento.getPackList().stream()
             .mapToInt(Pack::getQuantidade)
             .sum();
 
-        int qtdeTotalPedido = pedido.getProdutos()
-            .stream()
+        int qtdeTotalPedido = pedido.getProdutos().stream()
             .mapToInt(PedidoProduto::getQuantidade)
             .sum();
 
