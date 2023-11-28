@@ -31,6 +31,12 @@ public class ContainerDTO implements Serializable {
         this.enderecoDTO = enderecoDTO;
     }
 
+    public int getQuantidadeTotal() {
+        return this.containerProdutosDTO.stream()
+            .mapToInt(ContainerProdutoDTO::getQuantidade)
+            .sum();
+    }
+
     public Container toEntity() {
         Container container = new Container(this.nrContainer);
         containerProdutosDTO.forEach(containerProdutoDTO -> container.adicionarProduto(containerProdutoDTO.toEntity()));
