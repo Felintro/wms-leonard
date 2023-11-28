@@ -15,13 +15,14 @@
         <br />
     </div>
 
-    <div class="lista">
+    <div class="lista operacao">
         <table class="table">
             <thead>
             <tr>
                 <th scope="col">Nº do Pedido</th>
                 <th scope="col">Data de Emissão</th>
-                <th scope="col">Fornecedor</th>
+                <th scope="col">CNPJ do Fornecedor</th>
+                <th scope="col">Nome do Fornecedor</th>
                 <th scope="col">Tipo</th>
                 <th scope="col">Status</th>
                 <th scope="col">Nº de produtos</th>
@@ -33,6 +34,7 @@
             <tr th:each="pedidoAberto : ${listaPedidosAbertosDTO}">
                 <td th:text="${pedidoAberto.nrPedido}"></td>
                 <td th:text="${pedidoAberto.getDtHrEmissaoFormatada()}"></td>
+                <td th:text="${pedidoAberto.empresaDTO.nrCnpj}"></td>
                 <td th:text="${pedidoAberto.empresaDTO.razaoSocial}"></td>
                 <td th:text="${pedidoAberto.tipoPedido}"></td>
                 <td th:text="${pedidoAberto.statusPedido}"></td>
@@ -55,13 +57,14 @@
         <br />
     </div>
 
-    <div class="lista">
+    <div class="lista operacao">
         <table class="table">
             <thead>
             <tr>
                 <th scope="col">Nº do Pedido</th>
                 <th scope="col">Data de Emissão</th>
-                <th scope="col">Fornecedor</th>
+                <th scope="col">CNPJ do Fornecedor</th>
+                <th scope="col">Nome do Fornecedor</th>
                 <th scope="col">Tipo</th>
                 <th scope="col">Status</th>
                 <th scope="col">Nº de produtos</th>
@@ -72,6 +75,7 @@
             <tr th:each="pedido : ${listaPedidosRecebidosDTO}" th:if="${not #lists.isEmpty(listaPedidosRecebidosDTO)}">
                 <td th:text="${pedido.nrPedido}"></td>
                 <td th:text="${pedido.getDtHrEmissaoFormatada()}"></td>
+                <td th:text="${pedido.empresaDTO.nrCnpj}"></td>
                 <td th:text="${pedido.empresaDTO.razaoSocial}"></td>
                 <td th:text="${pedido.tipoPedido}"></td>
                 <td th:text="${pedido.statusPedido}"></td>
