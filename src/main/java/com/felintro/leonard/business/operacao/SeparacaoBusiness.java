@@ -81,13 +81,14 @@ public class SeparacaoBusiness {
         Pedido pedido = pedidoRepository.findById(finalizarContainerDTO.getNrPedidoSeparacao()).orElseThrow(EntityNotFoundException::new);
         Endereco enderecoFinalizacao = enderecoRepository.findByNrRuaAndNrPredioAndNrApartamento(finalizarContainerDTO.getNrRuaFinalizar(), finalizarContainerDTO.getNrPredioFinalizar(), finalizarContainerDTO.getNrApartamentoFinalizar());
 
-        boolean isConteineresFinalizados = separacao.getContainerList()
-            .stream()
+        containerFinalizado.setEndereco(enderecoFinalizacao);
+        containerRepository.save(containerFinalizado);
+
+        boolean isConteineresFinalizados = separacao.getContainerList().stream()
             .map(Container::getEndereco)
             .allMatch(Objects::nonNull);
 
-        int qtdeSeparada = separacao.getContainerList()
-            .stream()
+        int qtdeSeparada = separacao.getContainerList().stream()
             .flatMap(container -> container.getProdutos().stream())
             .mapToInt(ContainerProduto::getQuantidade)
             .sum();
@@ -104,9 +105,6 @@ public class SeparacaoBusiness {
             separacao.getPedido().setStatusPedido(StatusPedido.CONCLUIDO);
             isOperacaoFinalizada = true;
         }
-
-        containerFinalizado.setEndereco(enderecoFinalizacao);
-        containerRepository.save(containerFinalizado);
 
         return isOperacaoFinalizada;
     }
