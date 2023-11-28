@@ -4,7 +4,6 @@ import com.felintro.leonard.dto.estoque.ContainerDTO;
 import com.felintro.leonard.dto.pessoa.EmpresaDTO;
 import com.felintro.leonard.enums.StatusOperacao;
 import com.felintro.leonard.model.operacao.Expedicao;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.io.Serializable;
@@ -17,7 +16,6 @@ import java.util.List;
  * @author allan
  */
 
-@AllArgsConstructor
 @Getter
 public class ExpedicaoDTO implements Serializable {
 
