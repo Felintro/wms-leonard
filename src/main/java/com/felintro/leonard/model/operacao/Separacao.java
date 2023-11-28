@@ -33,6 +33,12 @@ public class Separacao extends Operacao {
         inverseJoinColumns = {@JoinColumn(name = "nr_container")})
     private List<Container> containerList = new ArrayList<>();
 
+    public int getQtdeSeparada() {
+        return this.getContainerList().stream()
+            .mapToInt(Container::getQuantidadeTotal)
+            .sum();
+    }
+
     public SeparacaoDTO toDTO() {
         SeparacaoDTO separacaoDTO = new SeparacaoDTO(this.id, this.dtHrRealizacao, this.statusOperacao, this.pedido.toDTO());
         containerList.forEach(container -> separacaoDTO.adicionarContainer(container.toDTO()));

@@ -88,15 +88,7 @@ public class SeparacaoBusiness {
             .map(Container::getEndereco)
             .allMatch(Objects::nonNull);
 
-        int qtdeSeparada = separacao.getContainerList().stream()
-            .mapToInt(Container::getQuantidadeTotal)
-            .sum();
-
-        int qtdePedido = pedido.getProdutos().stream()
-            .mapToInt(PedidoProduto::getQuantidade)
-            .sum();
-
-        boolean isQtdeTotalSeparada = qtdeSeparada == qtdePedido;
+        boolean isQtdeTotalSeparada = separacao.getQtdeSeparada() == pedido.getQtdeVolumes();
 
         if(isConteineresFinalizados && isQtdeTotalSeparada) {
             separacao.setStatusOperacao(StatusOperacao.CONCLUIDA);
