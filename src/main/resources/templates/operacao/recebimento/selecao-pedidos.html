@@ -44,7 +44,7 @@
                     <a th:href="@{/recebimento/formulario?nrPedido={nrPedido} (nrPedido=${pedidoAberto.nrPedido}) }">Receber</a>
                 </td>
                 <tr th:if="${#lists.isEmpty(listaPedidosAbertosDTO)}">
-                    <td colspan="8">Vazio.</td>
+                    <td colspan="9">Vazio.</td>
                 </tr>
             </tr>
             </tbody>
@@ -83,7 +83,7 @@
                 <td th:text="${pedido.getQtdeVolumes()}"></td>
             </tr>
             <tr th:if="${#lists.isEmpty(listaPedidosRecebidosDTO)}">
-                <td colspan="7">Vazio.</td>
+                <td colspan="8">Vazio.</td>
             </tr>
             </tbody>
         </table>
