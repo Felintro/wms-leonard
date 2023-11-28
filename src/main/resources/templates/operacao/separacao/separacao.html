@@ -10,7 +10,7 @@
 <body>
 <div layout:fragment="conteudo">
     <br />
-    <h1>Recebimento</h1>
+    <h1>Separação</h1>
     <br/>
 
     <div>
@@ -96,7 +96,7 @@
                 <input type="hidden" name="nrPedidoSeparacao" th:value="${nrPedido}">
                 <input type="hidden" name="nrContainerFinalizar" th:value="${containerSeparado.nrContainer}" />
                 <td>
-                    <input type="submit" class="btn btn-primary" value="Finalizar Container" />
+                    <input th:if="${containerSeparado.getEnderecoDTO() == null}" type="submit" class="btn btn-primary" value="Finalizar Container" />
                 </td>
             </form>
             </tr>
@@ -115,15 +115,17 @@
             <thead>
             <tr>
                 <th scope="col">Nª Container</th>
+                <th scope="col">Endereço</th>
                 <th scope="col">Qtde de Produtos</th>
                 <th scope="col">Qtde de Volumes</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="containerFinalizadoDTO : ${containerFinalizadoDTOList}">
-                <td th:text="${containerFinalizadoDTO.nrContainer}"></td>
-                <td th:text="${containerFinalizadoDTO.getContainerProdutosDTO().size()}"></td>
-                <td th:text="${containerFinalizadoDTO.produtoDTO.descricao}"></td>
+                <td th:text="${containerFinalizadoDTO?.nrContainer}"></td>
+                <td th:text="${containerFinalizadoDTO?.getEnderecoDTO().getEnderecoCompleto()}"></td>
+                <td th:text="${containerFinalizadoDTO?.getContainerProdutosDTO().size()}"></td>
+                <td th:text="${containerFinalizadoDTO?.getQuantidadeTotal()}"></td>
             </tr>
             </tbody>
         </table>
