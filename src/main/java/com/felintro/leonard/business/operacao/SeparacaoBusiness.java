@@ -92,6 +92,7 @@ public class SeparacaoBusiness {
         if(isConteineresFinalizados && isQtdePedidoSeparada) {
             separacao.setStatusOperacao(StatusOperacao.CONCLUIDA);
             separacao.getPedido().setStatusPedido(StatusPedido.CONCLUIDO);
+            separacaoRepository.save(separacao);
             isOperacaoFinalizada = true;
         }
 
