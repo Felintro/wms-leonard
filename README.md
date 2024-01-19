@@ -41,7 +41,7 @@ O banco de dados foi produzido em cima de parâmetros do sistema e das classes d
   * Expedição;
 
 
-## 🔃 Endpoints disponibilizados:
+## ⚙️ Endpoints disponibilizados:
 
 Um dos recursos do sistema é a criação de pedidos. Este processo é feito através de dois endpoints disponibilizados pela aplicação conforme mostra a tabela abaixo:
 
@@ -60,7 +60,7 @@ Um dos recursos do sistema é a criação de pedidos. Este processo é feito atr
   <img alt="MYSQL" src="https://img.shields.io/badge/MYSQL-100000?style=for-the-badge&logo=mysql">
 </div>
 
-#### Front-end:
+####  Front-end:
 <div>
  <img alt="HTML5" src="https://img.shields.io/badge/html5-100000?style=for-the-badge&logo=html5">
  <img alt="CSS3" src="https://img.shields.io/badge/css3-100000?style=for-the-badge&logo=css3&logoColor=blue">
