@@ -2,7 +2,7 @@
 Sistema do tipo WMS (Warehouse Management System, ou [Sistema de Gerenciamento de Armazém](https://ilos.com.br/wms-no-gerenciamento-de-depositos-armazens-e-centros-de-distribuicao/)) capaz de monitorar e gerenciar as operações básicas de um centro de distribuição. 
  
 ## ? Sobre o projeto:
-Projeto desenvolvido em ambiente acadêmico, cujo objetivo foi apresentá-lo como trabalho de conclusão de curso, no curso de graduação em Engenharia da Computação, na faculdade FEITEP. A monografia completa pode ser baixada [clicando aqui]("assets/TCC-final.pdf")
+Projeto desenvolvido em ambiente acadêmico, cujo objetivo foi apresentá-lo como trabalho de conclusão de curso, no curso de graduação em Engenharia da Computação, na faculdade FEITEP. A monografia completa pode ser baixada [clicando aqui](assets/TCC-final.pdf)
 
 ## ??? Desenvolvedor:
 - [Allan Chavier Felintro](https://www.linkedin.com/in/allanfelintro/)
