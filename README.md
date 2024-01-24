@@ -70,9 +70,10 @@ Um dos recursos do sistema é a criação de pedidos. Este processo é feito atr
 
 ## 🚧 Propostas futuras (em construção):
 
-* Implementação de relatórios;
-* Melhoria na interface de usuário com a aplicação do CSS;
 * Implantação de autenticação de usuário;
 * Implementação de permissões de acesso;
 * Inclusão de validações de dados;
-
+* Transição de textos hard-coded para dicionário gravado em arquivo .properties; 
+* Implementação de relatórios;
+* Melhoria na interface de usuário com a aplicação do CSS;
+* Substituição do front-end de Thymeleaf para React ou Angular;
