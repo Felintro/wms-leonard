@@ -29,8 +29,8 @@ import java.util.Optional;
 @RequestMapping("/recebimento")
 public class RecebimentoController {
 
-    private static final String TELA_RECEBIMENTO = "operacao/recebimento";
-    private static final String TELA_INICIAL = "operacao/selecao-pedidos";
+    private static final String TELA_RECEBIMENTO = "operacao/recebimento/recebimento";
+    private static final String TELA_INICIAL = "operacao/recebimento/selecao-pedidos";
     private static final String REDIRECT_FORMULARIO = "redirect:/recebimento/formulario";
     private static final String REDIRECT_TELA_INICIAL = "redirect:/recebimento/selecao-pedido";
 
@@ -44,7 +44,7 @@ public class RecebimentoController {
     @GetMapping("/selecao-pedido")
     public String carregaPaginaInicial(Model model) {
         List<PedidoDTO> listaPedidosAbertosDTO = pedidoService.buscarPorStatusETipo(StatusPedido.ABERTO, TipoPedido.COMPRA);
-        List<PedidoDTO> listaPedidosRecebidosDTO = pedidoService.buscarPorStatusETipo(StatusPedido.RECEBIDO, TipoPedido.COMPRA);
+        List<PedidoDTO> listaPedidosRecebidosDTO = pedidoService.buscarPorStatusETipo(StatusPedido.CONCLUIDO, TipoPedido.COMPRA);
 
         model.addAttribute("listaPedidosAbertosDTO", listaPedidosAbertosDTO);
         model.addAttribute("listaPedidosRecebidosDTO", listaPedidosRecebidosDTO);
@@ -60,8 +60,7 @@ public class RecebimentoController {
         if(optRecebimento.isPresent()){
             RecebimentoDTO recebimentoDTO = optRecebimento.get().toDTO();
 
-            recebimentoDTO.getPackListDTO()
-                .stream()
+            recebimentoDTO.getPackListDTO().stream()
                 .map(PackDTO::getProdutoDTO)
                 .forEach(produtoRecebidoDTO ->
                     produtosPendentesDTOList.removeIf(produtoPendenteDTO ->
@@ -87,10 +86,6 @@ public class RecebimentoController {
     public String estornarProduto(EstornarProdutoDTO estornarProdutoDTO) {
         recebimentoBusiness.estornarProduto(estornarProdutoDTO);
         return REDIRECT_FORMULARIO + "?nrPedido=" + estornarProdutoDTO.getNrPedidoEstorno();
-    }
-
-    public void finalizarRecebimento() {
-
     }
 
 }

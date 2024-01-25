@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://wwww.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{menu-lateral.html}">
+
+<head>
+</head>
+
+<body>
+<div layout:fragment="conteudo">
+    <br />
+    <h1>Armazenagem</h1>
+    <div class="form-pequeno">
+        <form method="post" th:action="@{/armazenagem/efetuar}">
+
+            <div class="mb-3">
+                <label for="nrPack" class="form-label">Número do Pack: </label>
+                <input id="nrPack" name="nrPack" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Endereço destino: </label>
+            </div>
+
+            <div class="mb-3">
+                <label for="nrRuaDestino" class="form-label">Rua: </label>
+                <input id="nrRuaDestino" maxlength="13" name="nrRuaDestino" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label for="nrPredioDestino" class="form-label">Predio: </label>
+                <input id="nrPredioDestino" maxlength="14" name="nrPredioDestino" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label for="nrApartamentoDestino" class="form-label">Apartamento: </label>
+                <input id="nrApartamentoDestino" name="nrApartamentoDestino" class="form-control" />
+            </div>
+            <input type="submit" class="btn btn-primary" value="Efetuar" />
+        </form>
+    </div>
+
+    <br />
+    <h3>Packs Para Armazenar</h3>
+    <br />
+
+    <div class="lista">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Nº Pack</th>
+                <th scope="col">Id Produto</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Qtde</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="packDTO : ${packsPendentesDeArmazenagem}">
+                <td th:text="${packDTO.nrPack}"></td>
+                <td th:text="${packDTO.produtoDTO.id}"></td>
+                <td th:text="${packDTO.produtoDTO.descricao}"></td>
+                <td th:text="${packDTO.quantidade}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

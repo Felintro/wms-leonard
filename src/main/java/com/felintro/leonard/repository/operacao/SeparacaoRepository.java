@@ -1,6 +1,6 @@
 package com.felintro.leonard.repository.operacao;
 
-import com.felintro.leonard.model.operacao.Recebimento;
+import com.felintro.leonard.model.operacao.Separacao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,9 +9,10 @@ import java.util.Optional;
 /**
  * @author allan
  **/
-@Repository
-public interface RecebimentoRepository extends JpaRepository<Recebimento, Long> {
 
-    Optional<Recebimento> findRecebimentoByPedidoNrPedido(Long nrPedido);
+@Repository
+public interface SeparacaoRepository extends JpaRepository<Separacao, Long> {
+
+    Optional<Separacao> findSeparacaoByPedidoNrPedido(Long nrPedido);
 
 }

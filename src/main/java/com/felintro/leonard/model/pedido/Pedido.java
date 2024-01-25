@@ -1,6 +1,7 @@
 package com.felintro.leonard.model.pedido;
 
 import com.felintro.leonard.dto.pedido.PedidoDTO;
+import com.felintro.leonard.dto.pedido.PedidoProdutoDTO;
 import com.felintro.leonard.enums.StatusPedido;
 import com.felintro.leonard.enums.TipoPedido;
 import com.felintro.leonard.model.pessoa.Empresa;
@@ -73,6 +74,12 @@ public class Pedido {
     public void adicionarProduto(PedidoProduto produto) {
         produto.setPedido(this);
         this.produtos.add(produto);
+    }
+
+    public int getQtdeVolumes() {
+        return this.produtos.stream()
+            .mapToInt(PedidoProduto::getQuantidade)
+            .sum();
     }
 
     public PedidoDTO toDTO() {

@@ -1,5 +1,8 @@
 package com.felintro.leonard.model.operacao;
 
+import com.felintro.leonard.dto.operacao.ExpedicaoDTO;
+import com.felintro.leonard.dto.operacao.SeparacaoDTO;
+import com.felintro.leonard.enums.StatusOperacao;
 import com.felintro.leonard.model.estoque.Container;
 import com.felintro.leonard.model.pessoa.Empresa;
 import jakarta.persistence.Entity;
@@ -12,6 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -35,4 +39,14 @@ public class Expedicao extends Operacao {
         this.containerList.add(container);
     }
 
+    public Expedicao(Long id, LocalDateTime dtHrRealizacao, StatusOperacao statusOperacao, Empresa empresa) {
+        super(id, dtHrRealizacao, statusOperacao);
+        this.empresa = empresa;
+    }
+
+    public ExpedicaoDTO toDTO() {
+        ExpedicaoDTO expedicaoDTO = new ExpedicaoDTO(this.id, this.dtHrRealizacao, this.statusOperacao, this.empresa.toDTO());
+        this.containerList.forEach(container -> expedicaoDTO.adicionarContainer(container.toDTO()));
+        return expedicaoDTO;
+    }
 }

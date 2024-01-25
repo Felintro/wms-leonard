@@ -35,6 +35,7 @@ public class RecebimentoBusiness {
 
     @Autowired
     private RecebimentoRepository recebimentoRepository;
+
     @Autowired
     private PedidoRepository pedidoRepository;
 
@@ -42,7 +43,7 @@ public class RecebimentoBusiness {
         boolean isOperacaoFinalizada = false;
 
         Optional<Recebimento> optRecebimento = buscarPorNrPedido(receberProdutoDTO.getNrPedido());
-        Recebimento recebimento = optRecebimento.orElseGet(Recebimento :: new);
+        Recebimento recebimento = optRecebimento.orElseGet(Recebimento::new);
 
         Produto produto = produtoRepository.findByNrEan13(receberProdutoDTO.getNrEan13());
         Pack pack = new Pack(receberProdutoDTO.getNrPack(), produto, receberProdutoDTO.getQtdeRecebida());
@@ -57,31 +58,28 @@ public class RecebimentoBusiness {
         recebimento.setDtHrRealizacao(LocalDateTime.now());
         recebimento.getPackList().add(pack);
 
-        int qtdeTotalRecebida = recebimento.getPackList()
-            .stream()
-            .mapToInt(Pack :: getQuantidade)
+        int qtdeTotalRecebida = recebimento.getPackList().stream()
+            .mapToInt(Pack::getQuantidade)
             .sum();
 
-        int qtdeTotalPedido = pedido.getProdutos()
-            .stream()
-            .mapToInt(PedidoProduto :: getQuantidade)
+        int qtdeTotalPedido = pedido.getProdutos().stream()
+            .mapToInt(PedidoProduto::getQuantidade)
             .sum();
 
         if(qtdeTotalRecebida == qtdeTotalPedido) {
             recebimento.setStatusOperacao(StatusOperacao.CONCLUIDA);
-            recebimento.getPedido().setStatusPedido(StatusPedido.RECEBIDO);
+            recebimento.getPedido().setStatusPedido(StatusPedido.CONCLUIDO);
             isOperacaoFinalizada = true;
         }
 
         recebimentoRepository.save(recebimento);
 
         return isOperacaoFinalizada;
-
     }
 
     public void estornarProduto(EstornarProdutoDTO estornarProdutoDTO) {
-        Pack pack = packRepository.findById(estornarProdutoDTO.getNrPackEstorno()).orElseThrow(EntityNotFoundException ::new);
-        Recebimento recebimento = recebimentoRepository.findRecebimentoByPedidoNrPedido(estornarProdutoDTO.getNrPedidoEstorno()).orElseThrow(EntityNotFoundException ::new);
+        Pack pack = packRepository.findById(estornarProdutoDTO.getNrPackEstorno()).orElseThrow(EntityNotFoundException::new);
+        Recebimento recebimento = recebimentoRepository.findRecebimentoByPedidoNrPedido(estornarProdutoDTO.getNrPedidoEstorno()).orElseThrow(EntityNotFoundException::new);
         recebimento.getPackList().remove(pack);
         recebimentoRepository.save(recebimento);
         packRepository.delete(pack);

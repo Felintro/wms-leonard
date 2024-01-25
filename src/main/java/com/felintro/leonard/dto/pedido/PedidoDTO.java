@@ -44,12 +44,6 @@ public class PedidoDTO {
         this.produtosDTO.add(pedidoProdutoDTO);
     }
 
-    public Pedido toEntity() {
-        Pedido pedido = new Pedido(this.dtHrEmissao, this.empresaDTO.toEntity(), this.tipoPedido, this.statusPedido);
-        produtosDTO.forEach(pedidoProdutoDTO -> pedido.adicionarProduto(pedidoProdutoDTO.toEntity()));
-        return pedido;
-    }
-
     public String getDtHrEmissaoFormatada() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return this.dtHrEmissao.format(dateTimeFormatter);
@@ -57,8 +51,14 @@ public class PedidoDTO {
 
     public int getQtdeVolumes() {
         return produtosDTO.stream()
-            .mapToInt(produto -> produto.getQuantidade())
+            .mapToInt(PedidoProdutoDTO::getQuantidade)
             .sum();
+    }
+
+    public Pedido toEntity() {
+        Pedido pedido = new Pedido(this.dtHrEmissao, this.empresaDTO.toEntity(), this.tipoPedido, this.statusPedido);
+        produtosDTO.forEach(pedidoProdutoDTO -> pedido.adicionarProduto(pedidoProdutoDTO.toEntity()));
+        return pedido;
     }
 
 }

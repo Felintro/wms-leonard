@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://wwww.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{menu-lateral.html}">
+
+<head>
+</head>
+
+<body>
+<div layout:fragment="conteudo">
+    <br />
+    <h1>Separação</h1>
+    <br/>
+
+    <div>
+        <h5>Nº do Pedido: <label class="form-label" th:text="${nrPedido}"></label> </h5>
+        <h5>Status da operação: <label class="form-label" th:text="${separacaoDTO?.statusOperacao} ?: 'PENDENTE'"></label> </h5>
+    </div>
+
+    <div class="lista operacao">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">EAN13</th>
+                <th scope="col">DUN14</th>
+                <th scope="col">Qtde Pedido</th>
+                <th scope="col">Qtde Física</th>
+                <th scope="col">Pack</th>
+                <th scope="col">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="produtoPendenteDTO : ${produtosPendentesDTOList}">
+                <td th:text="${produtoPendenteDTO.produtoDTO.id}"></td>
+                <td th:text="${produtoPendenteDTO.produtoDTO.descricao}"></td>
+                <td th:text="${produtoPendenteDTO.produtoDTO.nrEan13}"></td>
+                <td th:text="${produtoPendenteDTO.produtoDTO.nrDun14}"></td>
+                <td th:text="${produtoPendenteDTO.quantidade}"></td>
+                <form method="post" th:action="@{/separacao/separar}">
+                    <input type="hidden" name="nrPedido" th:value="${nrPedido}">
+                    <input type="hidden" name="nrEan13" th:value="${produtoPendenteDTO.produtoDTO.nrEan13}">
+                    <td>
+                        <input type="text" name="qtdeSeparada" class="form-control" placeholder="Qtde Física" />
+                    </td>
+                    <td>
+                        <input type="text" name="nrContainer" class="form-control" placeholder="Nº do Container" />
+                    </td>
+                    <td>
+                        <input type="submit" class="btn btn-primary" value="Separar" />
+                    </td>
+                </form>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <br />
+        <h3>Contêineres separados:</h3>
+        <br />
+    </div>
+
+    <div class="lista operacao">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Nª Container</th>
+                <th scope="col">Id Produto</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">EAN13</th>
+                <th scope="col">Qtde</th>
+                <th scope="col" colspan="3">Finalizar Container</th>
+                <th scope="col">Ações</th>
+            </tr>
+            </thead>
+            <tbody th:each="containerSeparado : ${separacaoDTO?.getContainerList()}">
+            <tr th:each="produtoSeparado : ${containerSeparado?.getContainerProdutosDTO()}">
+                <td th:text="${containerSeparado.nrContainer}"></td>
+                <td th:text="${produtoSeparado.produtoDTO.id}"></td>
+                <td th:text="${produtoSeparado.produtoDTO.descricao}"></td>
+                <td th:text="${produtoSeparado.produtoDTO.nrEan13}"></td>
+                <td th:text="${produtoSeparado.quantidade}"></td>
+            <form method="post" th:action="@{/separacao/finalizar-container}">
+                <td>
+                    <input type="text" name="nrRuaFinalizar" class="form-control" placeholder="Rua" />
+                </td>
+                <td>
+                    <input type="text" name="nrPredioFinalizar" class="form-control" placeholder="Predio" />
+                </td>
+                <td>
+                    <input type="text" name="nrApartamentoFinalizar" class="form-control" placeholder="Apartamento" />
+                </td>
+                <input type="hidden" name="nrPedidoSeparacao" th:value="${nrPedido}">
+                <input type="hidden" name="nrContainerFinalizar" th:value="${containerSeparado.nrContainer}" />
+                <td>
+                    <input th:if="${containerSeparado.getEnderecoDTO() == null}" type="submit" class="btn btn-primary" value="Finalizar Container" />
+                </td>
+            </form>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <br />
+        <h3>Contêineres finalizados:</h3>
+        <br />
+    </div>
+
+    <div class="lista operacao">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Nª Container</th>
+                <th scope="col">Endereço</th>
+                <th scope="col">Qtde de Produtos</th>
+                <th scope="col">Qtde de Volumes</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="containerFinalizadoDTO : ${containerFinalizadoDTOList}">
+                <td th:text="${containerFinalizadoDTO?.nrContainer}"></td>
+                <td th:text="${containerFinalizadoDTO?.getEnderecoDTO().getEnderecoCompleto()}"></td>
+                <td th:text="${containerFinalizadoDTO?.getContainerProdutosDTO().size()}"></td>
+                <td th:text="${containerFinalizadoDTO?.getQuantidadeTotal()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

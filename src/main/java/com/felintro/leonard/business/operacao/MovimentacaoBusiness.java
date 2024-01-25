@@ -8,6 +8,7 @@ import com.felintro.leonard.model.operacao.Movimentacao;
 import com.felintro.leonard.repository.estoque.EnderecoRepository;
 import com.felintro.leonard.repository.estoque.PackRepository;
 import com.felintro.leonard.repository.operacao.MovimentacaoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,28 +43,26 @@ public class MovimentacaoBusiness {
         }
 
         if(enderecoDestino == null) {
-            System.out.println("O endereço informado está ocupado!");
-            return false;
-        }
-
-        if(enderecoDestino.isOcupado()) {
             System.out.println("O endereço informado é inválido!");
             return false;
         }
 
-        Endereco enderecoOrigem = enderecoRepository.findByNrPack(movimentacaoDTO.getNrPack());
-        Movimentacao movimentacao = new Movimentacao(enderecoOrigem, enderecoDestino, pack.get(), LocalDateTime.now());
+        if(enderecoDestino.isOcupado()) {
+            System.out.println("O endereço informado está ocupado!");
+            return false;
+        }
 
+        Endereco enderecoOrigem = enderecoRepository.findByNrPack(movimentacaoDTO.getNrPack()).orElseThrow(EntityNotFoundException::new);
         enderecoOrigem.setPack(null);
+        enderecoRepository.saveAndFlush(enderecoOrigem);
+
         enderecoDestino.setPack(pack.get());
+        enderecoRepository.saveAndFlush(enderecoDestino);
 
+        Movimentacao movimentacao = new Movimentacao(enderecoOrigem, enderecoDestino, pack.get(), LocalDateTime.now());
         movimentacaoRepository.save(movimentacao);
-        enderecoRepository.save(enderecoOrigem);
-        enderecoRepository.save(enderecoDestino);
 
-        System.out.println("Operação realizada com sucesso!");
         return true;
-
     }
 
     public List<MovimentacaoDTO> listarMovimentacoes() {

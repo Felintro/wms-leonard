@@ -1,7 +1,7 @@
 package com.felintro.leonard.controller.operacao;
 
-import com.felintro.leonard.business.operacao.MovimentacaoBusiness;
-import com.felintro.leonard.dto.operacao.MovimentacaoDTO;
+import com.felintro.leonard.business.operacao.ArmazenagemBusiness;
+import com.felintro.leonard.dto.estoque.PackDTO;
 import com.felintro.leonard.dto.operacao.RealizaMovimentacaoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,26 +18,26 @@ import java.util.List;
  **/
 
 @Controller
-@RequestMapping("/movimentacao")
-public class MovimentacaoController {
+@RequestMapping("/armazenagem")
+public class ArmazenagemController {
 
-    private static final String TELA_MOVIMENTACOES = "operacao/movimentacao";
-    private static final String REDIRECT_FORMULARIO = "redirect:/movimentacao/formulario";
+    private static final String TELA_ARMAZENAGEM = "operacao/armazenagem";
+    private static final String REDIRECT_FORMULARIO = "redirect:/armazenagem/formulario";
 
     @Autowired
-    private MovimentacaoBusiness movimentacaoBusiness;
+    private ArmazenagemBusiness armazenagemBusiness;
 
     @GetMapping("/formulario")
     public String carregaPaginaFormulario(Model model) {
-        List<MovimentacaoDTO> listaMovimentacaoDTOS = movimentacaoBusiness.listarMovimentacoes();
-        model.addAttribute("listaMovimentacaoDTOS", listaMovimentacaoDTOS);
-        return TELA_MOVIMENTACOES;
+        List<PackDTO> packsPendentesDeArmazenagem = armazenagemBusiness.listarPacksPendentesDeArmazenagem();
+        model.addAttribute("packsPendentesDeArmazenagem", packsPendentesDeArmazenagem);
+        return TELA_ARMAZENAGEM;
     }
 
     @PostMapping("/efetuar")
     @Transactional
-    public String efetuarMovimentacao(RealizaMovimentacaoDTO movimentacaoDTO) {
-        boolean realizouOperacao = movimentacaoBusiness.realizaMovimentacao(movimentacaoDTO);
+    public String efetuarArmazenagem(RealizaMovimentacaoDTO realizaMovimentacaoDTO) {
+        boolean realizouOperacao = armazenagemBusiness.realizaArmazenagem(realizaMovimentacaoDTO);
         System.out.println(realizouOperacao ? "A operação foi realizada com sucesso!" : "A operação não foi realizada!");
         return REDIRECT_FORMULARIO;
     }

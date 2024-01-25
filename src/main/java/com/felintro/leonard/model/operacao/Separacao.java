@@ -1,5 +1,6 @@
 package com.felintro.leonard.model.operacao;
 
+import com.felintro.leonard.dto.operacao.SeparacaoDTO;
 import com.felintro.leonard.model.estoque.Container;
 import com.felintro.leonard.model.pedido.Pedido;
 import jakarta.persistence.Entity;
@@ -31,5 +32,17 @@ public class Separacao extends Operacao {
         joinColumns = {@JoinColumn(name = "id_separacao")},
         inverseJoinColumns = {@JoinColumn(name = "nr_container")})
     private List<Container> containerList = new ArrayList<>();
+
+    public int getQtdeSeparada() {
+        return this.getContainerList().stream()
+            .mapToInt(Container::getQuantidadeTotal)
+            .sum();
+    }
+
+    public SeparacaoDTO toDTO() {
+        SeparacaoDTO separacaoDTO = new SeparacaoDTO(this.id, this.dtHrRealizacao, this.statusOperacao, this.pedido.toDTO());
+        this.containerList.forEach(container -> separacaoDTO.adicionarContainer(container.toDTO()));
+        return separacaoDTO;
+    }
 
 }

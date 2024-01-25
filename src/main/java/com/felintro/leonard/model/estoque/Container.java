@@ -1,6 +1,7 @@
 package com.felintro.leonard.model.estoque;
 
 import com.felintro.leonard.dto.estoque.ContainerDTO;
+import com.felintro.leonard.dto.operacao.SepararProdutoDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,8 +38,18 @@ public class Container {
     @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 
+    public int getQuantidadeTotal() {
+        return this.produtos.stream()
+            .mapToInt(ContainerProduto::getQuantidade)
+            .sum();
+    }
+
     public Container(Long nrContainer) {
         this.nrContainer = nrContainer;
+    }
+
+    public Container(SepararProdutoDTO separarProdutoDTO) {
+        this.nrContainer = separarProdutoDTO.getNrContainer();
     }
 
     public void adicionarProduto(ContainerProduto produto) {
@@ -52,6 +63,9 @@ public class Container {
 
     public ContainerDTO toDTO() {
         ContainerDTO containerDTO = new ContainerDTO(this.nrContainer);
+        if(this.endereco != null) {
+            containerDTO.setEnderecoDTO(endereco.toDTO());
+        }
         produtos.forEach(containerProduto -> containerDTO.adicionarProduto(containerProduto.toDTO()));
         return containerDTO;
     }
