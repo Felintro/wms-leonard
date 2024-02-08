@@ -73,6 +73,7 @@ Um dos recursos do sistema é a criação de pedidos. Este processo é feito atr
 * Implantação de autenticação de usuário;
 * Implementação de permissões de acesso;
 * Inclusão de validações de dados;
+* Inclusão de logging.
 * Transição de textos hard-coded para dicionário gravado em arquivo .properties; 
 * Implementação de relatórios;
 * Melhoria na interface de usuário com a aplicação do CSS;
